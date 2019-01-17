@@ -61,7 +61,7 @@ request.setAttribute("websites.classPK", company.getAccountId());
 
 <aui:script>
 	function <portlet:namespace />saveCompany() {
-		var form = AUI.$(document.<portlet:namespace />fm);
+		var form = document.querySelector('<portlet:namespace />fm');
 
 		form.fm('<%= Constants.CMD %>').val('<%= Constants.UPDATE %>');
 
@@ -71,7 +71,7 @@ request.setAttribute("websites.classPK", company.getAccountId());
 	}
 
 	function <portlet:namespace />saveLocales() {
-		var form = AUI.$(document.<portlet:namespace />fm);
+		var form = document.querySelector('<portlet:namespace />fm');
 
 		form.fm('<%= PropsKeys.LOCALES %>').val(Liferay.Util.listSelect(form.fm('currentLanguageIds')));
 	}

@@ -290,7 +290,7 @@ renderResponse.setTitle((ldapServerId == 0) ? LanguageUtil.get(resourceBundle, "
 
 <aui:script>
 	function <portlet:namespace />mapValues(fields, fieldValues) {
-		var form = AUI.$(document.<portlet:namespace />fm);
+		var form = document.querySelector(document.<portlet:namespace />fm);
 
 		return fields.reduce(
 			function(prev, item, index) {
@@ -310,7 +310,7 @@ renderResponse.setTitle((ldapServerId == 0) ? LanguageUtil.get(resourceBundle, "
 		var userMappingFields = ['emailAddress', 'firstName', 'fullName', 'group', 'jobTitle', 'lastName', 'middleName', 'password', 'portrait', 'screenName', 'status', 'uuid'];
 		var userMappingFieldValues = ['userMappingEmailAddress', 'userMappingFirstName', 'userMappingFullName', 'userMappingGroup', 'userMappingJobTitle', 'userMappingLastName', 'userMappingMiddleName', 'userMappingPassword', 'userMappingPortrait', 'userMappingScreenName', 'userMappingStatus', 'userMappingUuid'];
 
-		var form = AUI.$(document.<portlet:namespace />fm);
+		var form = document.querySelector(document.<portlet:namespace />fm);
 
 		var userMapping = <portlet:namespace />mapValues(userMappingFields, userMappingFieldValues);
 
@@ -354,7 +354,7 @@ renderResponse.setTitle((ldapServerId == 0) ? LanguageUtil.get(resourceBundle, "
 		var userMappingStatus = '';
 		var userMappingUuid = '';
 
-		var form = AUI.$(document.<portlet:namespace />fm);
+		var form = document.querySelector('<portlet:namespace />fm');
 
 		if (ldapType == 'apache') {
 			baseDN = 'dc=example,dc=com';

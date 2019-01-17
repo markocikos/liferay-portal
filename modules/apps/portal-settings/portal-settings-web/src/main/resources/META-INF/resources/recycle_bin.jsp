@@ -27,7 +27,7 @@ boolean trashEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKe
 </aui:fieldset>
 
 <aui:script>
-	var trashEnabledCheckbox = AUI.$('#<portlet:namespace />trashEnabled');
+	var trashEnabledCheckbox = document.querySelector('#<portlet:namespace />trashEnabled');
 
 	var trashEnabledDefault = trashEnabledCheckbox.prop('checked');
 
