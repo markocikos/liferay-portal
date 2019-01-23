@@ -104,58 +104,67 @@ renderResponse.setTitle(editSegmentsEntryDisplayContext.getTitle(locale));
 	<aui:input name="segmentsEntryId" type="hidden" value="<%= segmentsEntryId %>" />
 </aui:form>
 
-<aui:script use="liferay-item-selector-dialog,liferay-portlet-url">
-	var addSegmentsEntryOrganizations = function(event) {
-		event.preventDefault();
+<aui:script require="metal-dom/src/dom">
+	AUI().use(
+		'liferay-item-selector-dialog',
+		function(A) {
+			let dom = metalDomSrcDom.default;
 
-		var itemSelectorDialog = new A.LiferayItemSelectorDialog(
-			{
-				eventName: '<portlet:namespace />selectSegmentsEntryOrganizations',
-				on: {
-					selectedItemChange: function(event) {
-						var selectedItem = event.newVal;
+			const addSegmentsEntryOrganizations = function() {
+				const addSegmentsEntryOrganizationFm = document.querySelector('#<portlet:namespace />addSegmentsEntryOrganizationFm');
 
-						if (selectedItem) {
-							var addSegmentsEntryOrganizationFm = $(document.<portlet:namespace />addSegmentsEntryOrganizationFm);
+				const itemSelectorDialog = new A.LiferayItemSelectorDialog(
+					{
+						eventName: '<portlet:namespace />selectSegmentsEntryOrganizations',
+						on: {
+							selectedItemChange: function(event) {
+							const selectedItems = event.newVal;
 
-							addSegmentsEntryOrganizationFm.append(selectedItem);
+							if (selectedItems) {
+								selectedItems.forEach(
+									function(item) {
+										dom.append(addSegmentsEntryOrganizationFm, item);
+									}
+								);
 
-							submitForm(addSegmentsEntryOrganizationFm);
+								submitForm(addSegmentsEntryOrganizationFm);
+							}
 						}
-					}
-				},
-				'strings.add': '<liferay-ui:message key="done" />',
-				title: '<liferay-ui:message key="assign-organizations-to-this-segment" />',
-				url: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="selectSegmentsEntryOrganizations" /><portlet:param name="segmentsEntryId" value="<%= String.valueOf(segmentsEntryId) %>" /></portlet:renderURL>'
-			}
-		);
-
-		itemSelectorDialog.open();
-	}
-
-	var deleteSegmentsEntryOrganizations = function() {
-		if (confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-this") %>')) {
-			submitForm(document.querySelector('#<portlet:namespace />fmSegmentsEntryOrganizations'));
-		}
-	};
-
-	var ACTIONS = {
-		'deleteSegmentsEntryOrganizations': deleteSegmentsEntryOrganizations
-	};
-
-	Liferay.componentReady('segmentsEntryOrganizationsManagementToolbar').then(
-		function(managementToolbar) {
-			managementToolbar.on(
-				'actionItemClicked',
-				function(event) {
-					var itemData = event.data.item.data;
-
-					if (itemData && itemData.action && ACTIONS[itemData.action]) {
-						ACTIONS[itemData.action]();
-					}
+					},
+					'strings.add': '<liferay-ui:message key="done" />',
+					title: '<liferay-ui:message key="assign-organizations-to-this-segment" />',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="selectSegmentsEntryOrganizations" /><portlet:param name="segmentsEntryId" value="<%= String.valueOf(segmentsEntryId) %>" /></portlet:renderURL>'
 				}
 			);
-			managementToolbar.on('creationButtonClicked', addSegmentsEntryOrganizations);
+
+			itemSelectorDialog.open();
+		};
+
+		const deleteSegmentsEntryOrganizations = function() {
+			if (confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-this") %>')) {
+				submitForm(document.querySelector('#<portlet:namespace />fmSegmentsEntryOrganizations'));
+			}
+		};
+
+		const ACTIONS = {
+			'deleteSegmentsEntryOrganizations': deleteSegmentsEntryOrganizations
+		};
+
+		Liferay.componentReady('segmentsEntryOrganizationsManagementToolbar').then(
+			function(managementToolbar) {
+					managementToolbar.on(
+						'actionItemClicked',
+						function(event) {
+							var itemData = event.data.item.data;
+
+							if (itemData && itemData.action && ACTIONS[itemData.action]) {
+								ACTIONS[itemData.action]();
+							}
+						}
+					);
+					managementToolbar.on('creationButtonClicked', addSegmentsEntryOrganizations);
+				}
+			);
 		}
 	);
 </aui:script>

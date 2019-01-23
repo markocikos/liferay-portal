@@ -100,58 +100,67 @@ renderResponse.setTitle(editSegmentsEntryDisplayContext.getTitle(locale));
 	<aui:input name="segmentsEntryId" type="hidden" value="<%= segmentsEntryId %>" />
 </aui:form>
 
-<aui:script use="liferay-item-selector-dialog,liferay-portlet-url">
-	var addSegmentsEntryUsers = function(event) {
-		event.preventDefault();
+<aui:script require="metal-dom/src/dom">
+	AUI().use(
+		'liferay-item-selector-dialog',
+		function(A) {
+			let dom = metalDomSrcDom.default;
 
-		var itemSelectorDialog = new A.LiferayItemSelectorDialog(
-			{
-				eventName: '<portlet:namespace />selectSegmentsEntryUsers',
-				on: {
-					selectedItemChange: function(event) {
-						var selectedItem = event.newVal;
+			const addSegmentsEntryUsers = function() {
+				const addSegmentsEntryUserFm = document.querySelector('#<portlet:namespace />addSegmentsEntryUserFm');
 
-						if (selectedItem) {
-							var addSegmentsEntryUserFm = $(document.<portlet:namespace />addSegmentsEntryUserFm);
+				const itemSelectorDialog = new A.LiferayItemSelectorDialog(
+					{
+						eventName: '<portlet:namespace />selectSegmentsEntryUsers',
+						on: {
+							selectedItemChange: function(event) {
+								const selectedItems = event.newVal;
 
-							addSegmentsEntryUserFm.append(selectedItem);
+								if (selectedItems) {
+									selectedItems.forEach(
+										function(item) {
+											dom.append(addSegmentsEntryUserFm, item);
+										}
+									);
 
-							submitForm(addSegmentsEntryUserFm);
+								submitForm(addSegmentsEntryUserFm);
+							}
 						}
-					}
-				},
-				'strings.add': '<liferay-ui:message key="done" />',
-				title: '<liferay-ui:message key="assign-users-to-this-segment" />',
-				url: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="selectSegmentsEntryUsers" /><portlet:param name="segmentsEntryId" value="<%= String.valueOf(segmentsEntryId) %>" /></portlet:renderURL>'
-			}
-		);
-
-		itemSelectorDialog.open();
-	}
-
-	var deleteSegmentsEntryUsers = function() {
-		if (confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-this") %>')) {
-			submitForm(document.querySelector('#<portlet:namespace />fmSegmentsEntryUsers'));
-		}
-	};
-
-	var ACTIONS = {
-		'deleteSegmentsEntryUsers': deleteSegmentsEntryUsers
-	};
-
-	Liferay.componentReady('segmentsEntryUsersManagementToolbar').then(
-		function(managementToolbar) {
-			managementToolbar.on(
-				'actionItemClicked',
-				function(event) {
-					var itemData = event.data.item.data;
-
-					if (itemData && itemData.action && ACTIONS[itemData.action]) {
-						ACTIONS[itemData.action]();
-					}
+					},
+					'strings.add': '<liferay-ui:message key="done" />',
+					title: '<liferay-ui:message key="assign-users-to-this-segment" />',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="selectSegmentsEntryUsers" /><portlet:param name="segmentsEntryId" value="<%= String.valueOf(segmentsEntryId) %>" /></portlet:renderURL>'
 				}
 			);
-			managementToolbar.on('creationButtonClicked', addSegmentsEntryUsers);
+
+				itemSelectorDialog.open();
+			};
+
+			const deleteSegmentsEntryUsers = function() {
+				if (confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-this") %>')) {
+					submitForm(document.querySelector('#<portlet:namespace />fmSegmentsEntryUsers'));
+				}
+			};
+
+			const ACTIONS = {
+				'deleteSegmentsEntryUsers': deleteSegmentsEntryUsers
+			};
+
+			Liferay.componentReady('segmentsEntryUsersManagementToolbar').then(
+				function(managementToolbar) {
+					managementToolbar.on(
+						'actionItemClicked',
+						function(event) {
+							var itemData = event.data.item.data;
+
+							if (itemData && itemData.action && ACTIONS[itemData.action]) {
+								ACTIONS[itemData.action]();
+							}
+						}
+					);
+					managementToolbar.on('creationButtonClicked', addSegmentsEntryUsers);
+				}
+			);
 		}
 	);
 </aui:script>
