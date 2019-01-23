@@ -358,9 +358,19 @@ class ImageEditor extends Component {
 				url: this.saveURL
 			};
 
-			AUI.$.ajax(requestConfig)
-				.done(resolve)
-				.fail((jqXHR, status, error) => reject(error));
+			fetch(
+				this.saveURL,
+				{
+					contentType: false,
+					data: formData,
+					dataType: "json",
+					processData: false,
+					type: 'POST'
+				}
+			)
+			.then(response => response.json())
+			.then(resolve)
+			.catch(error => reject(error));
 		});
 
 		this.components.loading.show = true;
