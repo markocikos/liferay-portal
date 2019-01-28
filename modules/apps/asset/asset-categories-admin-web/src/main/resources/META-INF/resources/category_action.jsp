@@ -94,7 +94,7 @@ AssetCategory category = (AssetCategory)row.getObject();
 
 <c:if test="<%= assetCategoriesDisplayContext.hasPermission(category, ActionKeys.UPDATE) %>">
 	<aui:script use="liferay-item-selector-dialog">
-		$('#<portlet:namespace /><%= row.getRowId() %>moveCategory').on(
+		document.querySelector('#<portlet:namespace /><%= row.getRowId() %>moveCategory').addEventListener(
 			'click',
 			function(event) {
 				var itemSelectorDialog = new A.LiferayItemSelectorDialog(
@@ -124,7 +124,7 @@ AssetCategory category = (AssetCategory)row.getObject();
 										document.<portlet:namespace />moveCategoryFm.<portlet:namespace />parentCategoryId.value = parentCategoryId;
 										document.<portlet:namespace />moveCategoryFm.<portlet:namespace />vocabularyId.value = vocabularyId;
 
-										submitForm($(document.<portlet:namespace />moveCategoryFm));
+										submitForm(document.querySelector('#<portlet:namespace />moveCategoryFm'));
 									}
 								}
 							}
@@ -134,7 +134,6 @@ AssetCategory category = (AssetCategory)row.getObject();
 						url: '<%= assetCategoriesDisplayContext.getSelectCategoryURL() %>'
 					}
 				);
-
 				itemSelectorDialog.open();
 			}
 		);
