@@ -68,7 +68,9 @@
 
 		addParams: function(params, url) {
 			if (typeof params === 'object') {
-				params = $.param(params, true);
+				params = Object.keys(params).map(function(key) {
+					return `${key}=${encodeURIComponent(params[key])}`;
+				}).join('&');
 			}
 			else {
 				params = String(params).trim();
