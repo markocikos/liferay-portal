@@ -251,11 +251,11 @@ ruleGroupSearch.setResults(mdrRuleGroups);
 </aui:form>
 
 <aui:script>
-	$('#<portlet:namespace />deleteSelectedDeviceFamilies').on(
+	document.querySelector('#<portlet:namespace />deleteSelectedDeviceFamilies').addEventListener(
 		'click',
 		function() {
 			if (confirm('<%= UnicodeLanguageUtil.get(resourceBundle, "are-you-sure-you-want-to-delete-this") %>')) {
-				submitForm($(document.<portlet:namespace />fm));
+				submitForm(document.<portlet:namespace />fm);
 			}
 		}
 	);
