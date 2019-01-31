@@ -177,7 +177,7 @@ PortletURL portletURL = mdrActionDisplayContext.getPortletURL();
 </aui:form>
 
 <aui:script>
-	$('#<portlet:namespace />deleteActions').on(
+	document.querySelector('#<portlet:namespace />deleteActions').addEventListener(
 		'click',
 		function() {
 			if (confirm('<%= UnicodeLanguageUtil.get(resourceBundle, "are-you-sure-you-want-to-delete-this") %>')) {
