@@ -85,14 +85,14 @@
 </liferay-frontend:fieldset>
 
 <aui:script use="liferay-item-selector-dialog">
-	var assetDisplayPageIdInput = $('#<portlet:namespace />assetDisplayPageIdInput');
-	var displayPageContainer = $('#<portlet:namespace />displayPageContainer');
-	var displayPageItemContainer = $('#<portlet:namespace />displayPageItemContainer');
-	var displayPageItemRemove = $('#<portlet:namespace />displayPageItemRemove');
-	var displayPageNameInput = $('#<portlet:namespace />displayPageNameInput');
-	var pagesContainerInput = $('#<portlet:namespace />pagesContainerInput');
+	var assetDisplayPageIdInput = document.querySelector('#<portlet:namespace />assetDisplayPageIdInput');
+	var displayPageContainer = document.querySelector('#<portlet:namespace />displayPageContainer');
+	var displayPageItemContainer = document.querySelector('#<portlet:namespace />displayPageItemContainer');
+	var displayPageItemRemove = document.querySelector('#<portlet:namespace />displayPageItemRemove');
+	var displayPageNameInput = document.querySelector('#<portlet:namespace />displayPageNameInput');
+	var pagesContainerInput = document.querySelector('#<portlet:namespace />pagesContainerInput');
 
-	$('#<portlet:namespace />chooseDisplayPage').on(
+	document.querySelector('#<portlet:namespace />chooseDisplayPage').addEventListener(
 		'click',
 		function(event) {
 			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
@@ -102,16 +102,16 @@
 						selectedItemChange: function(event) {
 							var selectedItem = event.newVal;
 
-							assetDisplayPageIdInput.val('');
+							assetDisplayPageIdInput.value = '';
 
-							pagesContainerInput.val('');
+							pagesContainerInput.value = '';
 
 							if (selectedItem) {
 								if (selectedItem.type === "asset-display-page") {
-									assetDisplayPageIdInput.val(selectedItem.id);
+									assetDisplayPageIdInput.value = selectedItem.id;
 								}
 								else {
-									pagesContainerInput.val(selectedItem.id);
+									pagesContainerInput.value = selectedItem.id;
 								}
 
 								displayPageNameInput.html(selectedItem.name);
@@ -130,18 +130,18 @@
 		}
 	);
 
-	displayPageItemRemove.on(
+	displayPageItemRemove.addEventListener(
 		'click',
 		function(event) {
 			displayPageNameInput.html('<liferay-ui:message key="none" />');
 
-			pagesContainerInput.val('');
+			pagesContainerInput.value = '';
 
 			displayPageItemRemove.addClass('hide');
 		}
 	);
 
-	$('#<portlet:namespace />eventsContainer').on(
+	document.querySelector('#<portlet:namespace />eventsContainer').addEventListener(
 		'change',
 		function(event) {
 			var target = event.target;
