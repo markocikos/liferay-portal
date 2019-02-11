@@ -117,22 +117,26 @@ renderResponse.setTitle(title);
 </aui:form>
 
 <aui:script sandbox="<%= true %>">
-	var typeNode = $('#<portlet:namespace />type');
-	var typeSettings = $('#<portlet:namespace />typeSettings');
+	var typeNode = document.querySelector('#<portlet:namespace />type');
+	var typeSettings = document.querySelector('#<portlet:namespace />typeSettings');
 
 	var loadTypeFields = function() {
 		<portlet:resourceURL id="/mobile_device_rules/edit_rule" var="editorURL" />
 
-		$.ajax(
-			'<%= editorURL.toString() %>',
+		fetch(
+			'<%= editorURL %>' + '&<portlet:namespace />type=' + typeNode.value + '&<portlet:namespace />type=' + <%= ruleId %>,
 			{
-				data: {
-					<portlet:namespace />ruleId: <%= ruleId %>,
-					<portlet:namespace />type: typeNode.val()
-				},
-				success: function(responseData) {
-					typeSettings.html(responseData);
-				}
+				credentials: 'include'
+			}
+		)
+		.then(
+			function(response) {
+				return response.text();
+			}
+		)
+		.then(
+			function(response) {
+				typeSettings.innerHTML = response;
 			}
 		);
 	};
@@ -142,10 +146,9 @@ renderResponse.setTitle(title);
 			loadTypeFields();
 		</c:when>
 		<c:otherwise>
-			typeNode.on(
-				'change',
-				loadTypeFields
-			);
+			if (typeNode) {
+				typeNode.addEventListener('change', loadTypeFields);
+			}
 		</c:otherwise>
 	</c:choose>
 </aui:script>
