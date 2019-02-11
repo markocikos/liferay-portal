@@ -251,12 +251,16 @@ ruleGroupSearch.setResults(mdrRuleGroups);
 </aui:form>
 
 <aui:script>
-	$('#<portlet:namespace />deleteSelectedDeviceFamilies').on(
-		'click',
-		function() {
-			if (confirm('<%= UnicodeLanguageUtil.get(resourceBundle, "are-you-sure-you-want-to-delete-this") %>')) {
-				submitForm($(document.<portlet:namespace />fm));
+	var deleteSelectedDeviceFamiliesButton = document.querySelector('#<portlet:namespace />deleteSelectedDeviceFamilies');
+
+	if (deleteSelectedDeviceFamiliesButton) {
+		deleteSelectedDeviceFamiliesButton.addEventListener(
+			'click',
+			function() {
+				if (confirm('<%= UnicodeLanguageUtil.get(resourceBundle, "are-you-sure-you-want-to-delete-this") %>')) {
+					submitForm(document.<portlet:namespace />fm);
+				}
 			}
-		}
-	);
+		);
+	}
 </aui:script>
