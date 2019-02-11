@@ -85,73 +85,95 @@
 </liferay-frontend:fieldset>
 
 <aui:script use="liferay-item-selector-dialog">
-	var assetDisplayPageIdInput = $('#<portlet:namespace />assetDisplayPageIdInput');
-	var displayPageContainer = $('#<portlet:namespace />displayPageContainer');
-	var displayPageItemContainer = $('#<portlet:namespace />displayPageItemContainer');
-	var displayPageItemRemove = $('#<portlet:namespace />displayPageItemRemove');
-	var displayPageNameInput = $('#<portlet:namespace />displayPageNameInput');
-	var pagesContainerInput = $('#<portlet:namespace />pagesContainerInput');
+	var chooseDisplayPageButton = document.querySelector('#<portlet:namespace />chooseDisplayPage');
+	var displayPageItemRemove = document.querySelector('#<portlet:namespace />displayPageItemRemove');
 
-	$('#<portlet:namespace />chooseDisplayPage').on(
-		'click',
-		function(event) {
-			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
-				{
-					eventName: '<%= selectAssetDisplayPageDisplayContext.getEventName() %>',
-					on: {
-						selectedItemChange: function(event) {
-							var selectedItem = event.newVal;
+	if (chooseDisplayPageButton) {
+		chooseDisplayPageButton.addEventListener(
+			'click',
+			function(event) {
+				var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+					{
+						eventName: '<%= selectAssetDisplayPageDisplayContext.getEventName() %>',
+						on: {
+							selectedItemChange: function(event) {
+								var selectedItem = event.newVal;
 
-							assetDisplayPageIdInput.val('');
+								var assetDisplayPageIdInput = document.querySelector('#<portlet:namespace />assetDisplayPageIdInput');
 
-							pagesContainerInput.val('');
+								if (assetDisplayPageIdInput) {
+									assetDisplayPageIdInput.value = '';
 
-							if (selectedItem) {
-								if (selectedItem.type === "asset-display-page") {
-									assetDisplayPageIdInput.val(selectedItem.id);
+									var pagesContainerInput = document.querySelector('#<portlet:namespace />pagesContainerInput');
+
+									if (pagesContainerInput) {
+										pagesContainerInput.value = '';
+									}
+
+									if (selectedItem) {
+										if (selectedItem.type === "asset-display-page") {
+											assetDisplayPageIdInput.value = selectedItem.id;
+										}
+										else {
+											pagesContainerInput.value = selectedItem.id;
+										}
+
+										var displayPageNameInput = document.querySelector('#<portlet:namespace />displayPageNameInput');
+
+										if (displayPageNameInput) {
+											displayPageNameInput.html(selectedItem.name);
+										}
+
+										if (displayPageItemRemove) {
+											displayPageItemRemove.removeClass('hide');
+										}
+									}
 								}
-								else {
-									pagesContainerInput.val(selectedItem.id);
-								}
-
-								displayPageNameInput.html(selectedItem.name);
-
-								displayPageItemRemove.removeClass('hide');
 							}
-						}
-					},
-					'strings.add': '<liferay-ui:message key="done" />',
-					title: '<liferay-ui:message key="select-page" />',
-					url: '<%= selectAssetDisplayPageDisplayContext.getAssetDisplayPageItemSelectorURL() %>'
+						},
+						'strings.add': '<liferay-ui:message key="done" />',
+						title: '<liferay-ui:message key="select-page" />',
+						url: '<%= selectAssetDisplayPageDisplayContext.getAssetDisplayPageItemSelectorURL() %>'
+					}
+				);
+
+				itemSelectorDialog.open();
+			}
+		);
+	}
+
+	if (displayPageItemRemove) {
+		displayPageItemRemove.addEventListener(
+			'click',
+			function(event) {
+				displayPageNameInput.html('<liferay-ui:message key="none" />');
+
+				pagesContainerInput.value = '';
+
+				displayPageItemRemove.addClass('hide');
+			}
+		);
+	}
+
+	var eventsContainer = document.querySelector('#<portlet:namespace />eventsContainer');
+
+	if (eventsContainer) {
+		eventsContainer.addEventListener(
+			'change',
+			function(event) {
+				var target = event.target;
+
+				var displayPageContainer = document.querySelector('#<portlet:namespace />displayPageContainer');
+
+				if (displayPageContainer) {
+					if (target && target.value === '<%= AssetDisplayPageConstants.TYPE_SPECIFIC %>') {
+						displayPageContainer.removeClass('hide');
+					}
+					else {
+						displayPageContainer.addClass('hide');
+					}
 				}
-			);
-
-			itemSelectorDialog.open();
-		}
-	);
-
-	displayPageItemRemove.on(
-		'click',
-		function(event) {
-			displayPageNameInput.html('<liferay-ui:message key="none" />');
-
-			pagesContainerInput.val('');
-
-			displayPageItemRemove.addClass('hide');
-		}
-	);
-
-	$('#<portlet:namespace />eventsContainer').on(
-		'change',
-		function(event) {
-			var target = event.target;
-
-			if (target && target.value === '<%= AssetDisplayPageConstants.TYPE_SPECIFIC %>') {
-				displayPageContainer.removeClass('hide');
 			}
-			else {
-				displayPageContainer.addClass('hide');
-			}
-		}
-	);
+		);
+	}
 </aui:script>
