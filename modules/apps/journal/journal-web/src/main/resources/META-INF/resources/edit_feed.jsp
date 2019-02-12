@@ -389,29 +389,33 @@ renderResponse.setTitle((feed == null) ? LanguageUtil.get(request, "new-feed") :
 </aui:script>
 
 <aui:script sandbox="<%= true %>">
-	var form = $(document.<portlet:namespace />fm);
+	var form = document.<portlet:namespace />fm;
 
-	var contentFieldSelector = form.fm('contentFieldSelector');
+	var contentFieldSelector = Liferay.Util.getFormElement(form, 'contentFieldSelector');
 
-	contentFieldSelector.on(
-		'change',
-		function() {
-			var ddmRendererTemplateKeyValue = '';
+	if (contentFieldSelector) {
+		contentFieldSelector.addEventListener(
+			'change',
+			function() {
+				var ddmRendererTemplateKeyValue = '';
 
-			var selectedFeedItemOption = contentFieldSelector.find(':selected');
+				var selectedFeedItemOption = contentFieldSelector.querySelector('option:checked');
 
-			var contentFieldValue = selectedFeedItemOption.val();
+				if (selectedFeedItemOption) {
+					var contentFieldValue = selectedFeedItemOption.value;
 
-			var renderedWebContent = '<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>';
+					var renderedWebContent = '<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>';
 
-			if (selectedFeedItemOption.data('contentfield') === renderedWebContent) {
-				ddmRendererTemplateKeyValue = contentFieldValue;
+					if (selectedFeedItemOption.dataset['contentfield'] === renderedWebContent) {
+						ddmRendererTemplateKeyValue = contentFieldValue;
 
-				contentFieldValue = renderedWebContent;
+						contentFieldValue = renderedWebContent;
+					}
+				}
+
+				Liferay.Util.setFormValues(form, {'contentField': contentFieldValue});
+				Liferay.Util.setFormValues(form, {'ddmRendererTemplateKey': ddmRendererTemplateKeyValue});
 			}
-
-			form.fm('contentField').val(contentFieldValue);
-			form.fm('ddmRendererTemplateKey').val(ddmRendererTemplateKeyValue);
-		}
-	);
+		);
+	}
 </aui:script>

@@ -192,15 +192,21 @@ JournalArticle article = journalDisplayContext.getArticle();
 			module="js/ElementsDefaultEventHandler.es"
 		/>
 
+		<portlet:actionURL name="deleteArticles" var="deleteArticlesURL">
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</portlet:actionURL>
+
+		<portlet:actionURL name="expireArticles" var="expireArticlesURL">
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</portlet:actionURL>
+
 		<aui:script>
 			var ACTIONS = {};
 
 			<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
 				ACTIONS.deleteArticles = function() {
 					if (confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-delete-the-selected-version") %>')) {
-						var form = AUI.$(document.<portlet:namespace />fm);
-
-						submitForm(form, '<portlet:actionURL name="deleteArticles"><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>');
+						submitForm(document.<portlet:namespace />fm, '<%= deleteArticlesURL %>');
 					}
 				};
 			</c:if>
@@ -208,9 +214,7 @@ JournalArticle article = journalDisplayContext.getArticle();
 			<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
 				ACTIONS.expireArticles = function() {
 					if (confirm('<%= UnicodeLanguageUtil.get(request, "are-you-sure-you-want-to-expire-the-selected-version") %>')) {
-						var form = AUI.$(document.<portlet:namespace />fm);
-
-						submitForm(form, '<portlet:actionURL name="expireArticles"><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>');
+						submitForm(document.<portlet:namespace />fm, '<%= expireArticlesURL %>');
 					}
 				};
 			</c:if>
