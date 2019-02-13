@@ -257,43 +257,68 @@ UnitConverter unitConverter = UnitConverterUtil.getUnitConverter(type, fromId, t
 		oldBox.append(options.join(''));
 	};
 
-	var form = $(document.<portlet:namespace />fm);
+	var form = document.<portlet:namespace />fm;
 
-	var fromUnit = form.fm('fromUnit');
-	var toUnit = form.fm('toUnit');
+	var fromUnit = Liferay.Util.getFormElement(form, 'fromUnit');
+	var toUnit = Liferay.Util.getFormElement(form, 'toUnit');
 
-	var typeSelect = form.fm('type');
+	var typeSelect = Liferay.Util.getFormElement(form, 'type');
 
-	typeSelect.on(
-		'change',
-		function(event) {
-			var value = typeSelect.val();
+	if (fromUnit && toUnit && typeSelect) {
+		typeSelect.addEventListener(
+			'change',
+			function(event) {
+				var value = typeSelect.val();
 
-			var unitConverterType = unitConverterTypes[value];
+				var unitConverterType = unitConverterTypes[value];
 
-			if (unitConverterType) {
-				setBox(fromUnit, unitConverterType);
-				setBox(toUnit, unitConverterType);
+				if (unitConverterType) {
+					setBox(fromUnit, unitConverterType);
+					setBox(toUnit, unitConverterType);
+				}
 			}
-		}
-	);
+		);
+	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(form.fm('fromValue'));
+		var fromValue = Liferay.Util.getFormElement(form, 'fromValue');
+
+		if (fromValue) {
+			Liferay.Util.focusFormField(fromValue);
+		}
 	</c:if>
 
-	$('#<portlet:namespace />convertButton').on(
-		'click',
-		function(event) {
-			event.preventDefault();
+	var convertButton = document.querySelector('#<portlet:namespace />convertButton');
 
-			form.ajaxSubmit(
-				{
-					success: function(responseData) {
-						form.replaceWith(responseData);
+	if (convertButton) {
+		convertButton.addEventListener(
+			'click',
+			function(event) {
+				event.preventDefault();
+
+				fetch(
+					'<%= unitURL.toString() %>',
+					{
+						body: new FormData(form),
+						credentials: 'include',
+						method: 'POST'
 					}
-				}
-			);
-		}
-	);
+				)
+				.then(
+					function(response) {
+						if (!response.ok) {
+							throw defaultError;
+						}
+
+						return response.text();
+					}
+				)
+				.then(
+					function(response) {
+						form.outerHTML = response;
+					}
+				);
+			}
+		);
+	}
 </aui:script>
