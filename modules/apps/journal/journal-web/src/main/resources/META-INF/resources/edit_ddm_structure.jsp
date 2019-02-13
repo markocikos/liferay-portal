@@ -208,31 +208,53 @@ renderResponse.setTitle((ddmStructure != null) ? LanguageUtil.format(request, "e
 				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/select_ddm_structure.jsp" /><portlet:param name="classPK" value="<%= String.valueOf(journalEditDDMStructuresDisplayContext.getDDMStructureId()) %>" /></portlet:renderURL>'
 			},
 			function(event) {
-				var form = AUI.$('#<portlet:namespace />fm');
+				var form = document.<portlet:namespace />fm;
 
-				form.fm('parentDDMStructureId').val(event.ddmstructureid);
+				Liferay.Util.setFormValues(
+					form, 
+					{
+						parentDDMStructureId: event.ddmstructureid,
+						parentDDMStructureName: Liferay.Util.unescape(event.name)
+					}
+				);
 
-				form.fm('parentDDMStructureName').val(Liferay.Util.unescape(event.name));
+				var removeParentDDMStructureButton = Liferay.Util.getFormElement(form, 'removeParentDDMStructureButton');
 
-				form.fm('removeParentDDMStructureButton').attr('disabled', false).removeClass('disabled');
+				if (removeParentDDMStructureButton && removeParentDDMStructureButton.getAttribute('disabled')) {
+					removeParentDDMStructureButton.classList.remove('disabled');
+				};
 			}
 		);
 	}
 
 	function <portlet:namespace />removeParentDDMStructure() {
-		var form = AUI.$('#<portlet:namespace />fm');
+		var form = document.<portlet:namespace />fm;
 
-		form.fm('parentDDMStructureId').val('');
-		form.fm('parentDDMStructureName').val('');
+		Liferay.Util.setFormValues(
+			form, 
+			{
+				parentDDMStructureId: '',
+				parentDDMStructureName: ''
+			}
+		);
 
-		form.fm('removeParentDDMStructureButton').attr('disabled', true).addClass('disabled');
+		var removeParentDDMStructureButton = Liferay.Util.getFormElement(form, 'removeParentDDMStructureButton');
+
+		if (removeParentDDMStructureButton && removeParentDDMStructureButton.getAttribute('disabled')) {
+			removeParentDDMStructureButton.classList.add('disabled');
+		};
 	}
 
 	function <portlet:namespace />saveDDMStructure() {
-		var form = AUI.$('#<portlet:namespace />fm');
+		var form = document.<portlet:namespace />fm;
 
-		form.fm('definition').val(<portlet:namespace />formBuilder.getContentValue());
-
-		submitForm(form);
+		Liferay.Util.postForm(
+			form,
+			{
+				data: {
+					definition: <portlet:namespace />formBuilder.getContentValue()
+				}
+			}
+		);
 	}
 </aui:script>
