@@ -97,40 +97,41 @@
 							/>
 
 							<aui:script sandbox="<%= true %>">
-								$('body').on(
+								document.body.addEventListener(
 									'click',
-									'.compare-to-link a',
 									function(event) {
-										var currentTarget = $(event.currentTarget);
+										var currentTarget = event.target;
 
-										Liferay.Util.selectEntity(
-											{
-												dialog: {
-													constrain: true,
-													destroyOnHide: true,
-													modal: true
+										if (currentTarget.parentNode.matches('.compare-to-link')) {
+											Liferay.Util.selectEntity(
+												{
+													dialog: {
+														constrain: true,
+														destroyOnHide: true,
+														modal: true
+													},
+													eventName: '<portlet:namespace />selectVersionFm',
+													id: '<portlet:namespace />compareVersions' + currentTarget.id,
+													title: '<liferay-ui:message key="compare-versions" />',
+													uri: currentTarget.dataset['uri']
 												},
-												eventName: '<portlet:namespace />selectVersionFm',
-												id: '<portlet:namespace />compareVersions' + currentTarget.attr('id'),
-												title: '<liferay-ui:message key="compare-versions" />',
-												uri: currentTarget.data('uri')
-											},
-											function(event) {
-												<portlet:renderURL var="compareVersionURL">
-													<portlet:param name="mvcPath" value="/admin/common/compare_versions.jsp" />
-													<portlet:param name="<%= Constants.CMD %>" value="compareVersions" />
-													<portlet:param name="backURL" value="<%= currentURL %>" />
-													<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
-												</portlet:renderURL>
+												function(event) {
+													<portlet:renderURL var="compareVersionURL">
+														<portlet:param name="mvcPath" value="/admin/common/compare_versions.jsp" />
+														<portlet:param name="<%= Constants.CMD %>" value="compareVersions" />
+														<portlet:param name="backURL" value="<%= currentURL %>" />
+														<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
+													</portlet:renderURL>
 
-												var uri = '<%= HtmlUtil.escapeJS(compareVersionURL) %>';
+													var uri = '<%= HtmlUtil.escapeJS(compareVersionURL) %>';
 
-												uri = Liferay.Util.addParams('<portlet:namespace />sourceVersion=' + event.sourceversion, uri);
-												uri = Liferay.Util.addParams('<portlet:namespace />targetVersion=' + event.targetversion, uri);
+													uri = Liferay.Util.addParams('<portlet:namespace />sourceVersion=' + event.sourceversion, uri);
+													uri = Liferay.Util.addParams('<portlet:namespace />targetVersion=' + event.targetversion, uri);
 
-												location.href = uri;
-											}
-										);
+													location.href = uri;
+												}
+											);
+										}
 									}
 								);
 							</aui:script>
