@@ -179,7 +179,7 @@ UnitConverter unitConverter = UnitConverterUtil.getUnitConverter(type, fromId, t
 	<aui:button id="convertButton" type="submit" value="convert" />
 </aui:form>
 
-<aui:script sandbox="<%= true %>">
+<aui:script require="metal-dom/src/dom as dom" sandbox="<%= true %>">
 	var lengthArray = [
 		'<liferay-ui:message key="meter" />',
 		'<liferay-ui:message key="millimeter" />',
@@ -245,55 +245,77 @@ UnitConverter unitConverter = UnitConverterUtil.getUnitConverter(type, fromId, t
 
 	var unitConverterTypes = [lengthArray, areaArray, volumeArray, massArray, temperatureArray];
 
-	var setBox = function(oldBox, newBox) {
-		oldBox.empty();
+	var changeUnitType = function(unitTypeSelect, newUnitTypes) {
+		var newUnitTypesOptions = [];
 
-		var options = newBox.map(
-			function(item, index) {
-				return '<option value="' + index + '">' + item + '</option>';
+		newUnitTypes.forEach(
+			function(unitType, index) {
+				newUnitTypesOptions.push('<option value="' + index + '">' + unitType + '</option>');
 			}
 		);
 
-		oldBox.append(options.join(''));
+		unitTypeSelect.innerHTML = newUnitTypesOptions.join('');
 	};
 
-	var form = $(document.<portlet:namespace />fm);
+	var form = document.<portlet:namespace />fm;
 
-	var fromUnit = form.fm('fromUnit');
-	var toUnit = form.fm('toUnit');
+	var fromUnit = Liferay.Util.getFormElement(form, 'fromUnit');
+	var toUnit = Liferay.Util.getFormElement(form, 'toUnit');
+	var typeSelect = Liferay.Util.getFormElement(form, 'type');
 
-	var typeSelect = form.fm('type');
+	if (fromUnit && toUnit && typeSelect) {
+		typeSelect.addEventListener(
+			'change',
+			function(event) {
+				var value = typeSelect.value;
 
-	typeSelect.on(
-		'change',
-		function(event) {
-			var value = typeSelect.val();
+				var unitConverterType = unitConverterTypes[value];
 
-			var unitConverterType = unitConverterTypes[value];
-
-			if (unitConverterType) {
-				setBox(fromUnit, unitConverterType);
-				setBox(toUnit, unitConverterType);
+				if (unitConverterType) {
+					changeUnitType(fromUnit, unitConverterType);
+					changeUnitType(toUnit, unitConverterType);
+				}
 			}
-		}
-	);
+		);
+	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(form.fm('fromValue'));
+		var fromValue = Liferay.Util.getFormElement(form, 'fromValue');
+
+		if (fromValue) {
+			Liferay.Util.focusFormField(fromValue);
+		}
 	</c:if>
 
-	$('#<portlet:namespace />convertButton').on(
-		'click',
-		function(event) {
-			event.preventDefault();
+	var unitConverterPortlet = document.querySelector('#p_p_id<portlet:namespace />');
 
-			form.ajaxSubmit(
-				{
-					success: function(responseData) {
-						form.replaceWith(responseData);
+	if(unitConverterPortlet) {
+		dom.delegate(
+			unitConverterPortlet,
+			'click',
+			'#<portlet:namespace />convertButton',
+			function(event) {
+				event.preventDefault();
+
+				fetch(
+					'<%= unitURL.toString() %>',
+					{
+						body: new FormData(form),
+						credentials: 'include',
+						method: 'POST'
 					}
-				}
-			);
-		}
-	);
+				)
+				.then(
+					function(response) {
+						return response.text();
+					}
+				)
+				.then(
+					function(response) {
+						form.innerHTML = response;
+					}
+				);
+			}
+		);
+	}
 </aui:script>
