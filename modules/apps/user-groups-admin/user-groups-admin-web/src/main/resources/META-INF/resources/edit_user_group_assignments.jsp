@@ -139,7 +139,7 @@ PortletURL portletURL = editUserGroupAssignmentsManagementToolbarDisplayContext.
 </aui:form>
 
 <aui:script use="liferay-item-selector-dialog">
-	var form = AUI.$(document.<portlet:namespace />fm);
+	var form = document.<portlet:namespace />fm;
 
 	<portlet:renderURL var="selectUsersURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="mvcPath" value="/select_user_group_users.jsp" />
@@ -155,7 +155,7 @@ PortletURL portletURL = editUserGroupAssignmentsManagementToolbarDisplayContext.
 						var selectedItem = event.newVal;
 
 						if (selectedItem) {
-							form.fm('addUserIds').val(selectedItem);
+							Liferay.Util.setFormValues(form, {'addUserIds': selectedItem});
 
 							submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
 						}
@@ -170,8 +170,8 @@ PortletURL portletURL = editUserGroupAssignmentsManagementToolbarDisplayContext.
 	}
 
 	function <portlet:namespace />removeUsers() {
-		form.fm('redirect').val('<%= portletURL.toString() %>');
-		form.fm('removeUserIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+		Liferay.Util.setFormValues(form, {'redirect': '<%= portletURL.toString() %>'});
+		Liferay.Util.setFormValues(form, {'removeUserIds': Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds')});
 
 		submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
 	}
