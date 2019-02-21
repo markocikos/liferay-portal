@@ -59,13 +59,17 @@ MBBreadcrumbUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
 
 <aui:script>
 	function <portlet:namespace />addReplyToMessage(messageId, quote) {
-		var addQuickReplyContainer = AUI.$('#<portlet:namespace />addReplyToMessage' + messageId);
+		var addQuickReplyContainer = document.getElementById('<portlet:namespace />addReplyToMessage' + messageId);
 
-		addQuickReplyContainer.removeClass('hide');
+		if (addQuickReplyContainer) {
+			addQuickReplyContainer.classList.remove('hide');
 
-		addQuickReplyContainer.find('#<portlet:namespace />parentMessageId').val(messageId);
+			var parentMessageIdInput = addQuickReplyContainer.querySelector('#<portlet:namespace />parentMessageId');
 
-		addQuickReplyContainer.scrollTop();
+			if (parentMessageIdInput) {
+				parentMessageIdInput.value = messageId;
+			}
+		}
 
 		var editorName = '<portlet:namespace />replyMessageBody' + messageId;
 
@@ -84,7 +88,11 @@ MBBreadcrumbUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
 	}
 
 	function <portlet:namespace />hideReplyMessage(messageId) {
-		AUI.$('#<portlet:namespace />addReplyToMessage' + messageId).addClass('hide');
+		var addQuickReplyContainer = document.getElementById('<portlet:namespace />addReplyToMessage' + messageId);
+
+		if (addQuickReplyContainer) {
+			addQuickReplyContainer.classList.add('hide');
+		}
 
 		var editorName = '<portlet:namespace />replyMessageBody' + messageId;
 

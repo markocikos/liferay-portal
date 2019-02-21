@@ -315,37 +315,58 @@ if (portletTitleBasedNavigation) {
 	</c:if>
 </div>
 
-<aui:script sandbox="<%= true %>">
-	$('#<portlet:namespace />moreMessages').on(
-		'click',
-		function(event) {
-			var form = $('#<portlet:namespace />fm');
+<aui:script require="metal-dom/src/all/dom as dom">
+	var moreMessagesButton = document.getElementById('<portlet:namespace />moreMessages');
 
-			var data = Liferay.Util.ns(
-				'<portlet:namespace />',
-				{
-					index: form.fm('index').val(),
-					rootIndexPage: form.fm('rootIndexPage').val()
-				}
-			);
+	if (moreMessagesButton) {
+		moreMessagesButton.addEventListener(
+			'click',
+			function(event) {
+				var form = document.<portlet:namespace />fm;
 
-			<portlet:resourceURL id="/message_boards/get_messages" var="getMessagesURL">
-				<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-			</portlet:resourceURL>
+				var formData = new FormData();
 
-			$.ajax(
-				'<%= getMessagesURL.toString() %>',
-				{
-					data: data,
-					success: function(data) {
-						var messageContainer = $('#<portlet:namespace />messageContainer');
+				formData.append('<portlet:namespace />index', Liferay.Util.getFormElement(form, 'index').value);
+				formData.append('<portlet:namespace />rootIndexPage', Liferay.Util.getFormElement(form, 'rootIndexPage').value);
 
-						messageContainer.append(data);
+				<portlet:resourceURL id="/message_boards/get_messages" var="getMessagesURL">
+					<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+				</portlet:resourceURL>
 
-						messageContainer.append($('#<portlet:namespace />messageContainer > .reply-container'));
+				fetch(
+					'<%= getMessagesURL.toString() %>',
+					{
+						body: formData,
+						credentials: 'include',
+						method: 'POST'
 					}
-				}
-			);
-		}
-	);
+				)
+				.then(
+					function(response) {
+						return response.text();
+					}
+				)
+				.then(
+					function(response) {
+						var messageContainer = document.getElementById('<portlet:namespace />messageContainer');
+
+						if (messageContainer) {
+							dom.append(messageContainer, response);
+
+							moreMessagesButton.classList.add('hide');
+
+							Array.prototype.forEach.call(
+								messageContainer,
+								function(message, index) {
+									if (message.classList.contains('message-container')) {
+										dom.globalEval.runScriptsInElement(message);
+									}
+								}
+							);
+						}
+					}
+				);
+			}
+		);
+	}
 </aui:script>

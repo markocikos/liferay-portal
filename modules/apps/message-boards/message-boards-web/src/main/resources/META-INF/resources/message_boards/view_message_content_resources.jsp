@@ -62,16 +62,16 @@ if (mbMessageIterator != null) {
 }
 %>
 
-<aui:script sandbox="<%= true %>">
-	var rootIndexPage = $('#<portlet:namespace />rootIndexPage');
-	var index = $('#<portlet:namespace />index');
+<script>
+	var index = document.getElementById('<portlet:namespace />index');
+	var rootIndexPage = document.getElementById('<portlet:namespace />rootIndexPage');
 
-	rootIndexPage.val('<%= String.valueOf(rootIndexPage) %>');
-	index.val('<%= String.valueOf(index) %>');
+	index.value = '<%= String.valueOf(index) %>';
+	rootIndexPage.value = '<%= String.valueOf(rootIndexPage) %>';
 
-	<c:if test="<%= treeWalker.getMessages().size() <= (index + 1) %>">
-		var moreMessagesLink = $('#<portlet:namespace />moreMessages');
+	<c:if test="<%= true %>">
+		var moreMessagesLink = document.getElementById('<portlet:namespace />moreMessages');
 
-		moreMessagesLink.hide();
+		moreMessagesLink.classList.add('hide');
 	</c:if>
-</aui:script>
+</script>
