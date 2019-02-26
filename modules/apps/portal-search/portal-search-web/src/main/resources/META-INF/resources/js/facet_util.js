@@ -20,12 +20,12 @@ AUI.add(
 
 				var selections = [];
 
-				var formCheckboxes = $('#' + form.id + ' input.facet-term');
+				var formCheckboxes = document.querySelectorAll('#' + form.id + ' input.facet-term');
 
-				formCheckboxes.each(
-					function(index, value) {
-						if (value.checked) {
-							selections.push(value.getAttribute('data-term-id'));
+				formCheckboxes.forEach(
+					function(checkbox) {
+						if (checkbox.checked) {
+							selections.push(checkbox.getAttribute('data-term-id'));
 						}
 					}
 				);
@@ -34,7 +34,7 @@ AUI.add(
 			},
 
 			clearSelections: function(event) {
-				var form = $(event.currentTarget).closest('form')[0];
+				var form = event.target.parentElement.parentElement;
 
 				if (!form) {
 					return;
@@ -64,11 +64,9 @@ AUI.add(
 			},
 
 			selectTerms: function(form, selections) {
-				var formParameterName = $('#' + form.id + ' input.facet-parameter-name');
+				var formParameterName = document.querySelector('#' + form.id + ' input.facet-parameter-name');
 
-				var key = formParameterName[0].value;
-
-				document.location.search = FacetUtil.updateQueryString(key, selections, document.location.search);
+				document.location.search = FacetUtil.updateQueryString(formParameterName.value, selections, document.location.search);
 			},
 
 			setURLParameter: function(url, name, value) {

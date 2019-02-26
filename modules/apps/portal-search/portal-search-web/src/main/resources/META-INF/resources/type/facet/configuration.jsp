@@ -76,17 +76,24 @@ TypeFacetPortletPreferences typeFacetPortletPreferences = new com.liferay.portal
 	</liferay-frontend:edit-form-footer>
 </liferay-frontend:edit-form>
 
-<aui:script>
-	var form = AUI.$(document.<portlet:namespace />fm);
+<script>
+	var form = document.<portlet:namespace />fm;
 
-	$('#<portlet:namespace />fm').on(
+	var currentAssetTypes = Liferay.Util.getFormElement(form, 'currentAssetTypes');
+
+	form.addEventListener(
 		'submit',
 		function(event) {
 			event.preventDefault();
 
-			form.fm('<%= PortletPreferencesJspUtil.getInputName(TypeFacetPortletPreferences.PREFERENCE_KEY_ASSET_TYPES) %>').val(Liferay.Util.listSelect(form.fm('currentAssetTypes')));
-
-			submitForm(form);
+			Liferay.Util.postForm(
+				form,
+				{
+					data: {
+						'<%= PortletPreferencesJspUtil.getInputName(TypeFacetPortletPreferences.PREFERENCE_KEY_ASSET_TYPES) %>': Liferay.Util.listSelect(currentAssetTypes)
+					}
+				}
+			);
 		}
 	);
-</aui:script>
+</script>
