@@ -24,7 +24,6 @@ String redirect = (String)request.getAttribute("edit_layout_set_prototype.jsp-re
 
 int mergeFailCount = SitesUtil.getMergeFailCount(layoutSetPrototype);
 %>
-
 <c:if test="<%= mergeFailCount > PropsValues.LAYOUT_SET_PROTOTYPE_MERGE_FAIL_THRESHOLD %>">
 	<div class="alert alert-warning">
 		<liferay-ui:message arguments='<%= new Object[] {mergeFailCount, LanguageUtil.get(request, "site-template")} %>' key="the-propagation-of-changes-from-the-x-has-been-disabled-temporarily-after-x-errors" translateArguments="<%= false %>" />
@@ -38,21 +37,25 @@ int mergeFailCount = SitesUtil.getMergeFailCount(layoutSetPrototype);
 		<aui:button id='<%= randomNamespace + "resetButton" %>' useNamespace="<%= false %>" value="reset-and-propagate" />
 	</div>
 
-	<aui:script>
-		AUI.$('#<%= randomNamespace %>resetButton').on(
-			'click',
-			function(event) {
-				<portlet:actionURL name="resetMergeFailCountAndMerge" var="portletURL">
-					<portlet:param name="redirect" value="<%= redirect %>" />
-					<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()) %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-					<portlet:param name="privateLayoutSet" value="<%= String.valueOf(layoutSet.isPrivateLayout()) %>" />
-				</portlet:actionURL>
+	<script>
+		var resetButton = document.getElementById('<%= randomNamespace %>resetButton');
 
-				submitForm(document.hrefFm, '<%= portletURL.toString() %>');
-			}
-		);
-	</aui:script>
+		if (resetButton) {
+			resetButton.addEventListener(
+				'click',
+				function(event) {
+					<portlet:actionURL name="resetMergeFailCountAndMerge" var="portletURL">
+						<portlet:param name="redirect" value="<%= redirect %>" />
+						<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="privateLayoutSet" value="<%= String.valueOf(layoutSet.isPrivateLayout()) %>" />
+					</portlet:actionURL>
+
+					submitForm(document.hrefFm, '<%= portletURL.toString() %>');
+				}
+			);
+		}
+	</script>
 </c:if>
 
 <%
