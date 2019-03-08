@@ -142,24 +142,35 @@ if (organization != null) {
 </aui:script>
 
 <c:if test="<%= organization == null %>">
-	<aui:script sandbox="<%= true %>">
-		$('#<portlet:namespace />type').on(
-			'change',
-			function(event) {
+	<script>
+		var typeSelect = document.getElementById('<portlet:namespace />type');
 
-				<%
-				for (String curType : organizationsTypes) {
-				%>
+		if (typeSelect) {
+			typeSelect.addEventListener(
+				'click',
+				function(event) {
 
-					if ($(event.currentTarget).val() == '<%= curType %>') {
-						$('#<portlet:namespace />countryDiv').toggleClass('hide', !<%= OrganizationLocalServiceUtil.isCountryEnabled(curType) %>);
+					<%
+					for (String curType : organizationsTypes) {
+					%>
+
+						var countryDiv = document.getElementById('<portlet:namespace />countryDiv');
+
+						if (event.target.value == '<%= curType %>' && countryDiv) {
+							if (!<%= OrganizationLocalServiceUtil.isCountryEnabled(curType) %>) {
+								countryDiv.classList.add('hide');
+							}
+							else {
+								countryDiv.classList.remove('hide');
+							}
+						}
+
+					<%
 					}
+					%>
 
-				<%
 				}
-				%>
-
-			}
-		);
-	</aui:script>
+			);
+		}
+	</script>
 </c:if>

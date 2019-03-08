@@ -175,28 +175,38 @@ if (organization != null) {
 	</c:otherwise>
 </c:choose>
 
-<aui:script>
+<script>
 	function <portlet:namespace />delete(organizationsRedirect) {
 		<portlet:namespace />deleteOrganizations(organizationsRedirect);
 	}
 
 	<portlet:namespace />doDeleteOrganizations = function(organizationIds, organizationsRedirect) {
-		var form = AUI.$(document.<portlet:namespace />fm);
-
-		form.attr('method', 'post');
-		form.fm('deleteOrganizationIds').val(organizationIds);
-		form.fm('deleteUserIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds', '<portlet:namespace />rowIdsUser'));
+		var form = document.<portlet:namespace />fm;
 
 		if (organizationsRedirect) {
-			form.fm('redirect').val(organizationsRedirect);
+			Liferay.Util.setFormValues(
+				form,
+				{
+					redirect: organizationsRedirect
+				}
+			);
 		}
 
-		submitForm(form, '<portlet:actionURL name="/users_admin/delete_organizations_and_users" />');
+		Liferay.Util.postForm(
+			form,
+			{
+				data: {
+					deleteOrganizationIds: organizationIds,
+					deleteUserIds: Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds', '<portlet:namespace />rowIdsUser')
+				},
+				url: '<portlet:actionURL name="/users_admin/delete_organizations_and_users" />'
+			}
+		);
 	};
 
 	var selectUsers = function(organizationId) {
 		<portlet:namespace />openSelectUsersDialog(organizationId);
-	}
+	};
 
 	var ACTIONS = {
 		'selectUsers': selectUsers
@@ -216,4 +226,4 @@ if (organization != null) {
 			);
 		}
 	);
-</aui:script>
+</script>
