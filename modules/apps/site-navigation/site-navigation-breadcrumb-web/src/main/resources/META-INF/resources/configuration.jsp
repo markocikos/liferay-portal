@@ -76,7 +76,7 @@
 	</liferay-frontend:edit-form-footer>
 </liferay-frontend:edit-form>
 
-<aui:script sandbox="<%= true %>">
+<aui:script require="metal-dom/src/dom as dom">
 	var data = {
 		'_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_displayStyle': '<%= siteNavigationBreadcrumbDisplayContext.getDisplayStyle() %>',
 		'_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_showCurrentGroup': <%= siteNavigationBreadcrumbDisplayContext.isShowCurrentGroup() %>,
@@ -86,30 +86,37 @@
 		'_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_showPortletBreadcrumb': <%= siteNavigationBreadcrumbDisplayContext.isShowPortletBreadcrumb() %>
 	};
 
-	var selectDisplayStyle = $('#<portlet:namespace />displayStyle');
+	var selectDisplayStyle = document.getElementById('<portlet:namespace />displayStyle');
 
-	selectDisplayStyle.on(
-		'change',
-		function(event) {
-			if (selectDisplayStyle.prop('selectedIndex') > -1) {
-				data['_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_displayStyle'] = selectDisplayStyle.val();
+	if (selectDisplayStyle) {
+		selectDisplayStyle.addEventListener(
+			'change',
+			function(event) {
+				if (selectDisplayStyle.selectedIndex > -1) {
+					data['_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_displayStyle'] = selectDisplayStyle.value;
+
+					Liferay.Portlet.refresh('#p_p_id_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_', data);
+				}
+			}
+		);
+	}
+
+	var checkBoxes = document.getElementById('<portlet:namespace />checkBoxes');
+
+	if (checkBoxes) {
+		dom.delegate(
+			checkBoxes,
+			'change',
+			'input[type="checkbox"]',
+			function(event) {
+				var currentTarget = event.currentTarget;
+
+				data[currentTarget.dataset.key] = currentTarget.checked;
 
 				Liferay.Portlet.refresh('#p_p_id_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_', data);
 			}
-		}
-	);
-
-	$('#<portlet:namespace />checkBoxes').on(
-		'change',
-		'input[type="checkbox"]',
-		function(event) {
-			var currentTarget = $(event.currentTarget);
-
-			data[currentTarget.data('key')] = currentTarget.prop('checked');
-
-			Liferay.Portlet.refresh('#p_p_id_<%= HtmlUtil.escapeJS(siteNavigationBreadcrumbDisplayContext.getPortletResource()) %>_', data);
-		}
-	);
+		);
+	}
 
 	var handler = Liferay.on(
 		'portletReady',

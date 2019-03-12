@@ -75,26 +75,32 @@
 </liferay-frontend:edit-form>
 
 <aui:script sandbox="<%= true %>">
-	var form = $('#<portlet:namespace />fm');
+	var form = document.<portlet:namespace />fm;
 
-	var selectDisplayStyle = form.fm('displayStyle');
-	var selectSites = form.fm('sites');
+	var selectDisplayStyle = Liferay.Util.getFormElement(form, 'displayStyle');
+	var selectSites = Liferay.Util.getFormElement(form, 'sites');
 
-	var curPortletBoundaryId = '#p_p_id_<%= HtmlUtil.escapeJS(portletResource) %>_';
-
-	form.on(
-		'change',
-		'select',
-		function() {
+	if (selectDisplayStyle && selectSites) {
+		function refreshPreview() {
 			var data = Liferay.Util.ns(
 				'_<%= HtmlUtil.escapeJS(portletResource) %>_',
 				{
-					displayStyle: selectDisplayStyle.val(),
-					sites: selectSites.val()
+					displayStyle: selectDisplayStyle.value,
+					sites: selectSites.value
 				}
 			);
 
-			Liferay.Portlet.refresh(curPortletBoundaryId, data);
+			Liferay.Portlet.refresh('#p_p_id_<%= HtmlUtil.escapeJS(portletResource) %>_', data);
 		}
-	);
+
+		form.addEventListener(
+			'change',
+			refreshPreview
+		);
+
+		form.addEventListener(
+			'select',
+			refreshPreview
+		);
+	}
 </aui:script>

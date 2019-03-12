@@ -63,8 +63,6 @@ PortletURL portletURL = currentURLObj;
 />
 
 <aui:script>
-	var layoutUuid = $('#<portlet:namespace />layoutUuid');
-
 	Liferay.componentReady('<portlet:namespace />selectLayout').then(
 		function(selectLayout) {
 			selectLayout.on(
@@ -80,7 +78,11 @@ PortletURL portletURL = currentURLObj;
 							[]
 						);
 
-						layoutUuid.val(layoutUuids.join());
+						var layoutUuid = document.getElementById('<portlet:namespace />layoutUuid');
+
+						if (layoutUuid) {
+							layoutUuid.value = layoutUuids.join();
+						}
 					}
 				}
 			);
