@@ -43,7 +43,11 @@
 
 	<@liferay_aui["script"]>
 		function ${namespace}changeLanguage() {
-			var languageId = AUI.$(document.${namespace + formName}.${name}).val();
+			var languageSelect = Liferay.Util.getFormElement(document.${namespace + formName}, 'languageId');
+
+			if (languageSelect) {
+				var languageId = languageSelect.value;
+			}
 
 			submitForm(document.${namespace + formName});
 		}
