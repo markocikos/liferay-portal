@@ -162,23 +162,35 @@ StringBuilder friendlyURLBase = new StringBuilder();
 	</liferay-util:include>
 </div>
 
-<aui:script>
-	Liferay.Util.toggleBoxes('<portlet:namespace />layoutPrototypeLinkEnabled', '<portlet:namespace />layoutPrototypeMergeAlert');
-	Liferay.Util.toggleBoxes('<portlet:namespace />layoutPrototypeLinkEnabled', '<portlet:namespace />typeOptions', true);
-</aui:script>
+<aui:script require="metal-dom/src/dom as dom">
+	var layoutPrototypeLinkEnabled = document.getElementById('<portlet:namespace />layoutPrototypeLinkEnabled');
 
-<aui:script sandbox="<%= true %>">
-	$('#<portlet:namespace />layoutPrototypeLinkEnabled').on(
-		'change',
-		function(event) {
-			var layoutPrototypeLinkChecked = event.currentTarget.checked;
+	if (layoutPrototypeLinkEnabled) {
+		layoutPrototypeLinkEnabled.addEventListener(
+			'change',
+			function(event) {
+				var layoutPrototypeLinkChecked = event.currentTarget.checked;
 
-			$('.layout-prototype-info-message').toggleClass('hide', !layoutPrototypeLinkChecked);
+				var layoutPrototypeInfoMessage = document.querySelector('.layout-prototype-info-message');
 
-			var propagatableFields = $('#<portlet:namespace />editLayoutFm .propagatable-field');
+				if (layoutPrototypeInfoMessage) {
+					if (layoutPrototypeLinkChecked) {
+						layoutPrototypeInfoMessage.classList.remove('hide');
+					}
+					else {
+						layoutPrototypeInfoMessage.classList.add('hide');
+					}
+				}
 
-			propagatableFields.prop('disabled', layoutPrototypeLinkChecked);
-			propagatableFields.toggleClass('disabled', layoutPrototypeLinkChecked);
-		}
-	);
+				var propagatableFields = document.querySelectorAll('#<portlet:namespace />editLayoutFm .propagatable-field');
+
+				Array.prototype.forEach.call(
+					propagatableFields,
+					function(field, index) {
+						Liferay.Util.toggleDisabled(field, layoutPrototypeLinkChecked);
+					}
+				);
+			}
+		);
+	}
 </aui:script>

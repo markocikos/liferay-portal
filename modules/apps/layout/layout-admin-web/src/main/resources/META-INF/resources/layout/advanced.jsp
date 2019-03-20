@@ -64,18 +64,33 @@ String curTarget = GetterUtil.getString(layoutTypeSettings.getProperty("target")
 	/>
 </aui:field-wrapper>
 
-<aui:script>
+<script>
 	function <portlet:namespace />editLayoutLogo(logoURL, deleteLogo) {
-		var $ = AUI.$;
-
-		var layoutLogo = $('.layout-logo-<%= selLayout.getPlid() %>');
+		var layoutLogo = document.querySelectorAll('.layout-logo-<%= selLayout.getPlid() %>');
 
 		if (!layoutLogo.length) {
-			layoutLogo = $('<img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="logo" />" class="layout-logo-<%= selLayout.getPlid() %>" src="' + logoURL + '" />');
+			var logoImage = document.createElement('img');
 
-			$('#layout_<%= selLayout.getLayoutId() %> span').prepend(layoutLogo);
+			logoImage.alt = '<liferay-ui:message escapeAttribute="<%= true %>" key="logo" />';
+			logoImage.classList.add('layout-logo-<%= selLayout.getPlid() %>');
+			logoImage.src = logoURL;
+
+			layoutLogo = logoImage;
+
+			if (layoutLogo) {
+				var layoutSpan = document.querySelector('#layout_<%= selLayout.getLayoutId() %> span');
+
+				if (layoutSpan) {
+					layoutSpan.insertBefore(layoutLogo, layoutSpan.firstChild);
+				}
+
+				if (deleteLogo) {
+					layoutLogo.classList.add('hide');
+				}
+				else {
+					layoutLogo.classList.remove('hide');
+				}
+			}
 		}
-
-		layoutLogo.toggleClass('hide', deleteLogo);
 	}
-</aui:script>
+</script>

@@ -56,11 +56,17 @@ String portletNamespace = PortalUtil.getPortletNamespace(ContentPageEditorPortle
 	</span>
 </label>
 
-<aui:script>
-	$('#<%= portletNamespace %>mode').on(
-		'change',
-		function(event) {
-			Liferay.Util.navigate('<%= HtmlUtil.escapeJS(redirect) %>');
+<script>
+	(function() {
+		var modeInput = document.getElementById('<%= portletNamespace %>mode');
+
+		if (modeInput) {
+			modeInput.addEventListener(
+				'change',
+				function(event) {
+					Liferay.Util.navigate('<%= HtmlUtil.escapeJS(redirect) %>');
+				}
+			);
 		}
-	);
-</aui:script>
+	})();
+</script>

@@ -80,7 +80,7 @@ List<SiteNavigationMenu> autoSiteNavigationMenus = layoutsAdminDisplayContext.ge
 
 	var Uri = metalUriSrcUri.default;
 
-	$(form).on(
+	form.addEventListener(
 		'submit',
 		function(event) {
 			var formData = new FormData();

@@ -204,13 +204,28 @@ data.put("qa-id", "customizations");
 					</div>
 				</li>
 
-				<aui:script>
-					$('#<%= portletNamespace %>customizationButton, #<%= portletNamespace %>closeCustomizationOptions').on(
-						'click',
-						function(event) {
-							$('#<%= portletNamespace %>customizationBar .control-menu-level-2').toggleClass('open');
-						}
-					);
+				<aui:script require="metal-dom/src/dom as dom">
+					var closeCustomizationOptions = document.getElementById('<%= portletNamespace %>closeCustomizationOptions');
+					var controlMenu = document.querySelector('#<%= portletNamespace %>customizationBar .control-menu-level-2');
+					var customizationButton = document.getElementById('<%= portletNamespace %>customizationButton');
+
+					if (closeCustomizationOptions && controlMenu) {
+						closeCustomizationOptions.addEventListener(
+							'click',
+							function(event) {
+								dom.toggleClasses(controlMenu, 'open');
+							}
+						);
+					}
+
+					if (customizationButton && controlMenu) {
+						customizationButton.addEventListener(
+							'click',
+							function(event) {
+								dom.toggleClasses(controlMenu, 'open');
+							}
+						);
+					}
 				</aui:script>
 			</ul>
 		</div>
