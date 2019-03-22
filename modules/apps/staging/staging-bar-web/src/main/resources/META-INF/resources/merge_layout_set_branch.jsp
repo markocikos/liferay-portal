@@ -104,17 +104,19 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 
 <aui:script>
 	function <portlet:namespace />selectLayoutSetBranch(layoutSetBranchId) {
-		var layoutSetBranch = AUI.$('#<portlet:namespace />' + layoutSetBranchId);
+		var layoutSetBranch = document.getElementById('<portlet:namespace />' + layoutSetBranchId);
 
-		var mergeLayoutSetBranchId = layoutSetBranch.attr('data-layoutSetBranchId');
-		var mergeLayoutSetBranchMessage = layoutSetBranch.attr('data-layoutSetBranchMessage');
+		if (layoutSetBranch) {
+			var mergeLayoutSetBranchId = layoutSetBranch.setAttribute('data-layoutSetBranchId');
+			var mergeLayoutSetBranchMessage = layoutSetBranch.setAttribute('data-layoutSetBranchMessage');
 
-		if (confirm(mergeLayoutSetBranchMessage)) {
-			var form = document.<portlet:namespace />fm4;
+			if (confirm(mergeLayoutSetBranchMessage)) {
+				var form = document.<portlet:namespace />fm4;
 
-			form.<portlet:namespace />mergeLayoutSetBranchId.value = mergeLayoutSetBranchId;
+				form.<portlet:namespace />mergeLayoutSetBranchId.value = mergeLayoutSetBranchId;
 
-			submitForm(form);
+				submitForm(form);
+			}
 		}
 	}
 </aui:script>

@@ -271,26 +271,35 @@ if (liveLayout != null) {
 	</c:if>
 
 	<aui:script use="aui-base">
-		$('#viewPageStagingOptions').on(
-			'click',
-			function(event) {
-				event.preventDefault();
+		var viewPageStagingOptions = document.getElementById('viewPageStagingOptions');
 
-				$('.control-menu-level-2').addClass('open');
-			}
-		);
+		if (viewPageStagingOptions) {
+			viewPageStagingOptions.addEventListener(
+				'click',
+				function(event) {
+					event.preventDefault();
 
-		$('#closeStagingOptions').on(
-			'click',
-			function(event) {
-				event.preventDefault();
+					document.querySelectorAll('.control-menu-level-2').addClass('open');
+				}
+			);
+		}
 
-				$('.control-menu-level-2').removeClass('open');
-			}
-		);
+		var closeStagingOptions = document.getElementById('closeStagingOptions');
 
-		var stagingLink = A.one('#<portlet:namespace />stagingLink');
-		var warningMessage = A.one('#<portlet:namespace />warningMessage');
+		if (closeStagingOptions) {
+			closeStagingOptions.addEventListener(
+				'click',
+				function(event) {
+					event.preventDefault();
+
+					document.querySelectorAll('.control-menu-level-2').removeClass('open');
+				}
+			);
+		}
+
+
+		var stagingLink = document.getElementById('<portlet:namespace />stagingLink');
+		var warningMessage = document.getElementById('<portlet:namespace />warningMessage');
 
 		var checkBackgroundTasks = function() {
 			Liferay.Service(

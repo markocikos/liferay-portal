@@ -82,12 +82,16 @@ else {
 						%>
 
 						<aui:script>
-							AUI.$('.submit-link').on(
-								'mouseenter',
-								function(event) {
-									Liferay.Portal.ToolTip.show(event.currentTarget, '<liferay-ui:message key="<%= submitMessage %>" />');
-								}
-							);
+							var submitLink = document.querySelectorAll('.submit-link');
+
+							if (submitLink) {
+								submitLink.addEventListener(
+									'mouseenter',
+									function(event) {
+										Liferay.Portal.ToolTip.show(event.currentTarget, '<liferay-ui:message key="<%= submitMessage %>" />');
+									}
+								);
+							}
 						</aui:script>
 					</c:when>
 					<c:when test="<%= !workflowEnabled && !layoutRevision.isIncomplete() %>">

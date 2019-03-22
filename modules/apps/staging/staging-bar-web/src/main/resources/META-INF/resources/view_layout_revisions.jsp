@@ -196,23 +196,25 @@ List<LayoutRevision> rootLayoutRevisions = LayoutRevisionLocalServiceUtil.getChi
 </aui:script>
 
 <aui:script sandbox="<%= true %>">
-	var variationsSelector = $('#<portlet:namespace />variationsSelector');
+	var variationsSelector = document.getElementById('<portlet:namespace />variationsSelector');
 
-	var layoutBranchesContainer = $('.layout-variation-container');
+	var layoutBranchesContainer = document.querySelectorAll('.layout-variation-container');
 
-	variationsSelector.on(
-		'change',
-		function() {
-			var variation = variationsSelector.val();
+	if (variationsSelector) {
+		variationsSelector.addEventListener(
+			'change',
+			function() {
+				var variation = variationsSelector.val();
 
-			if (variation == 'all') {
-				layoutBranchesContainer.removeClass('hide');
+				if (variation == 'all') {
+					layoutBranchesContainer.removeClass('hide');
+				}
+				else {
+					layoutBranchesContainer.addClass('hide');
+
+					document.getElementById('<portlet:namespace />' + variation).removeClass('hide');
+				}
 			}
-			else {
-				layoutBranchesContainer.addClass('hide');
-
-				$('#<portlet:namespace />' + variation).removeClass('hide');
-			}
-		}
-	);
+		);
+	}
 </aui:script>
