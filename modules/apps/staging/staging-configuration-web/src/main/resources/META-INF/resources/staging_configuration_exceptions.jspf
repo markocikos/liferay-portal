@@ -69,18 +69,22 @@
 			<portlet:param name="localPublishing" value="<%= String.valueOf(stagedLocally) %>" />
 		</liferay-portlet:renderURL>
 
-		AUI.$('#<portlet:namespace />publishProcessesLink').on(
-			'click',
-			function(event) {
-				Liferay.Util.openWindow(
-					{
-						id: 'publishProcesses',
-						title: '<liferay-ui:message key="initial-publication" />',
-						uri: '<%= HtmlUtil.escapeJS(publishProcessesURL.toString()) %>'
-					}
-				);
-			}
-		);
+		var publishProcessesLink = document.getElementById('<portlet:namespace />publishProcessesLink');
+
+		if (publishProcessesLink) {
+			publishProcessesLink.addEventListener(
+				'click',
+				function(event) {
+					Liferay.Util.openWindow(
+						{
+							id: 'publishProcesses',
+							title: '<liferay-ui:message key="initial-publication" />',
+							uri: '<%= HtmlUtil.escapeJS(publishProcessesURL.toString()) %>'
+						}
+					);
+				}
+			);
+		}
 	</aui:script>
 </c:if>
 
