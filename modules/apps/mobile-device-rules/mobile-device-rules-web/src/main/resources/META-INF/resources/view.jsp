@@ -249,13 +249,18 @@ ruleGroupSearch.setResults(mdrRuleGroups);
 	</liferay-ui:search-container>
 </aui:form>
 
-<aui:script>
-	$('#<portlet:namespace />deleteSelectedDeviceFamilies').on(
-		'click',
-		function() {
-			if (confirm('<%= UnicodeLanguageUtil.get(resourceBundle, "are-you-sure-you-want-to-delete-this") %>')) {
-				submitForm($(document.<portlet:namespace />fm));
+<script>
+	var deleteSelectedDeviceFamiliesButton = document.getElementById('<portlet:namespace />deleteSelectedDeviceFamilies');
+
+	if (deleteSelectedDeviceFamiliesButton) {
+		deleteSelectedDeviceFamiliesButton.addEventListener(
+			'click',
+			function() {
+				if (confirm('<%= UnicodeLanguageUtil.get(resourceBundle, "are-you-sure-you-want-to-delete-this") %>')) {
+					Liferay.Util.postForm(document.<portlet:namespace />fm);
+				}
 			}
-		}
-	);
-</aui:script>
+		);
+	}
+
+</script>

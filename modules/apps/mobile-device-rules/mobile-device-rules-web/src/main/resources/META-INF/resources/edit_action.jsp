@@ -93,44 +93,48 @@ MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.get
 
 <aui:script>
 	function <portlet:namespace />changeDisplay() {
-		var $ = AUI.$;
-
-		var form = $(document.<portlet:namespace />fm);
-
 		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="/mobile_device_rules/site_url_layouts" var="siteURLLayoutsURL" />
 
-		$.ajax(
-			'<%= siteURLLayoutsURL.toString() %>',
+		fetch(
+			'<%= HtmlUtil.escapeJS(siteURLLayoutsURL.toString()) %>',
 			{
-				data: {
-					<portlet:namespace />actionGroupId: form.fm('groupId').val(),
-					<portlet:namespace />actionPlid: form.fm('actionPlid').val()
-				},
-				success: function(responseData) {
-					$('#<portlet:namespace />layouts').html(responseData);
+				credentials: 'include'
+			}
+		).then(
+			function(response) {
+				return response.text();
+			}
+		).then(
+			function(response) {
+				var layouts = document.getElementById('<portlet:namespace />layouts');
+
+				if (layouts) {
+					layouts.innerHTML = response;
 				}
 			}
 		);
 	}
 
 	function <portlet:namespace />changeType() {
-		var $ = AUI.$;
-
-		var form = $(document.<portlet:namespace />fm);
-
 		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="/mobile_device_rules/edit_action" var="editorURL">
 			<portlet:param name="ajax" value="<%= Boolean.TRUE.toString() %>" />
 		</liferay-portlet:resourceURL>
 
-		$.ajax(
-			'<%= editorURL.toString() %>',
+		fetch(
+			'<%= HtmlUtil.escapeJS(editorURL.toString()) %>',
 			{
-				data: {
-					<portlet:namespace />type: form.fm('type').val(),
-					<portlet:namespace /><%= "actionId" %>: <%= actionId %>
-				},
-				success: function(responseData) {
-					$('#<portlet:namespace />typeSettings').html(responseData);
+				credentials: 'include'
+			}
+		).then(
+			function(response) {
+				return response.text();
+			}
+		).then(
+			function(response) {
+				var typeSettings = document.getElementById('<portlet:namespace />typeSettings');
+
+				if (typeSettings) {
+					typeSettings.innerHTML = response;
 				}
 			}
 		);
