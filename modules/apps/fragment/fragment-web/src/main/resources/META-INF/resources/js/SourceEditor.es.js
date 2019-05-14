@@ -1,4 +1,4 @@
-import 'frontend-js-web/liferay/compat/tooltip/Tooltip.es';
+import 'clay-tooltip';
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 import {Config} from 'metal-state';
