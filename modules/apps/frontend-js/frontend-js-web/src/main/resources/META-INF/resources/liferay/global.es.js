@@ -8,6 +8,7 @@ import {
 	initComponentCache
 } from './component.es';
 import escape from 'lodash.escape';
+import formatXMLToString from './util/xmlformatter/format_xml_to_string.es';
 import getCountries from './util/address/get_countries.es';
 import getRegions from './util/address/get_regions.es';
 import getFormElement from './util/form/get_form_element.es';
@@ -36,6 +37,7 @@ Liferay.Address = {
 };
 
 Liferay.Util.escape = escape;
+Liferay.Util.formatXMLToString = formatXMLToString;
 Liferay.Util.getFormElement = getFormElement;
 Liferay.Util.groupBy = groupBy;
 Liferay.Util.isEqual = isEqual;
