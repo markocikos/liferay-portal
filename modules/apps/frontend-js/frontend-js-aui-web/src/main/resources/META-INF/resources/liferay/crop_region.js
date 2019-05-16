@@ -8,25 +8,30 @@ AUI.add(
 
 		CropRegion.prototype = {
 			_getCropRegion: function(imagePreview, region) {
-				var instance = this;
+				if (Liferay.Util.getCropRegion) {
+					Liferay.Util.getCropRegion(imagePreview, region);
+				}
+				else {
+					var instance = this;
 
-				var naturalSize = instance._getImgNaturalSize(imagePreview);
+					var naturalSize = instance._getImgNaturalSize(imagePreview);
 
-				var scaleX = naturalSize.width / imagePreview.width();
-				var scaleY = naturalSize.height / imagePreview.height();
+					var scaleX = naturalSize.width / imagePreview.width();
+					var scaleY = naturalSize.height / imagePreview.height();
 
-				var regionHeight = region.height ? (region.height * scaleY) : naturalSize.height;
-				var regionWidth = region.width ? (region.width * scaleX) : naturalSize.width;
+					var regionHeight = region.height ? (region.height * scaleY) : naturalSize.height;
+					var regionWidth = region.width ? (region.width * scaleX) : naturalSize.width;
 
-				var regionX = region.x ? Math.max(region.x * scaleX, 0) : 0;
-				var regionY = region.y ? Math.max(region.y * scaleY, 0) : 0;
+					var regionX = region.x ? Math.max(region.x * scaleX, 0) : 0;
+					var regionY = region.y ? Math.max(region.y * scaleY, 0) : 0;
 
-				return {
-					height: regionHeight,
-					width: regionWidth,
-					x: regionX,
-					y: regionY
-				};
+					return {
+						height: regionHeight,
+						width: regionWidth,
+						x: regionX,
+						y: regionY
+					};
+				}
 			},
 
 			_getImgNaturalSize: function(img) {
