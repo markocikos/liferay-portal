@@ -1,8 +1,8 @@
 import 'clay-progress-bar';
+import 'clay-tooltip';
 import Ajax from 'metal-ajax';
 import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 import Soy from 'metal-soy';
-import Tooltip from 'frontend-js-web/liferay/compat/tooltip/Tooltip.es';
 import core from 'metal';
 
 import templates from './AdaptiveMediaProgress.soy';
@@ -257,17 +257,6 @@ AdaptiveMediaProgress.STATE = {
 	 */
 	tooltip: {
 		validator: core.isString
-	},
-
-	/**
-	 * The tooltip position in the progress bar.
-	 *
-	 * @instance
-	 * @memberof AdaptiveMediaProgress
-	 * @type {Object}
-	 */
-	tooltipPosition: {
-		value: Tooltip.Align.Top
 	},
 
 	/**
