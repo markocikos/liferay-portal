@@ -1,9 +1,12 @@
 AUI.add(
 	'liferay-address',
 	function(A) {
-		if (!Liferay.Address) {
-			Liferay.Address = {
-				getCountries: function(callback) {
+		Liferay.Address = {
+			getCountries: function(callback) {
+				if (Liferay.Address.getCountries) {
+					Liferay.Address.getCountries(callback);
+				}
+				else {
 					Liferay.Service(
 						'/country/get-countries',
 						{
@@ -11,9 +14,14 @@ AUI.add(
 						},
 						callback
 					);
-				},
+				}
+			},
 
-				getRegions: function(callback, selectKey) {
+			getRegions: function(callback, selectKey) {
+				if (Liferay.Address.getRegions) {
+					Liferay.Address.getRegions(callback, selectKey);
+				}
+				else {
 					Liferay.Service(
 						'/region/get-regions',
 						{
@@ -23,8 +31,8 @@ AUI.add(
 						callback
 					);
 				}
-			};
-		}
+			}
+		};
 	},
 	'',
 	{
