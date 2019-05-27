@@ -307,7 +307,7 @@ renderResponse.setTitle((workflowDefinition == null) ? LanguageUtil.get(request,
 	</c:if>
 </div>
 
-<aui:script use="aui-ace-editor,liferay-xml-formatter,liferay-workflow-web">
+<aui:script use="aui-ace-editor,liferay-workflow-web">
 	var STR_VALUE = 'value';
 
 	var contentEditor = new A.AceEditor(
@@ -320,9 +320,7 @@ renderResponse.setTitle((workflowDefinition == null) ? LanguageUtil.get(request,
 		}
 	).render();
 
-	var xmlFormatter = new Liferay.XMLFormatter();
-
-	var content = xmlFormatter.format('<%= HtmlUtil.escapeJS(content) %>');
+	var content = Liferay.Util.formatXML('<%= HtmlUtil.escapeJS(content) %>');
 
 	if (content) {
 		content = content.trim();
