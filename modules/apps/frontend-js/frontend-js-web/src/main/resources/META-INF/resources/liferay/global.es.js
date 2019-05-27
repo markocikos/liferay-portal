@@ -8,6 +8,7 @@ import {
 	initComponentCache
 } from './component.es';
 import escape from 'lodash.escape';
+import formatXML from './util/format_xml.es';
 import getCountries from './util/address/get_countries.es';
 import getCropRegion from './util/get_crop_region.es';
 import getRegions from './util/address/get_regions.es';
@@ -37,6 +38,7 @@ Liferay.Address = {
 };
 
 Liferay.Util.escape = escape;
+Liferay.Util.formatXML = formatXML;
 Liferay.Util.getCropRegion = getCropRegion;
 Liferay.Util.getFormElement = getFormElement;
 Liferay.Util.groupBy = groupBy;
