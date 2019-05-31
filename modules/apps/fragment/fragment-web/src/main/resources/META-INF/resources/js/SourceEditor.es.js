@@ -1,4 +1,4 @@
-import 'frontend-js-web/liferay/compat/tooltip/Tooltip.es';
+import ClayTooltip from 'clay-tooltip';
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 import {Config} from 'metal-state';
@@ -11,6 +11,17 @@ import './SourceEditorToolbar.es';
  * Creates a Source Editor component to use for source code editing.
  */
 class SourceEditor extends Component {
+	attached() {
+		this._instanceClayTooltip = ClayTooltip.init({});
+
+		this._instanceClayTooltip.elementClasses = 'source-editor__fixed-text__help__tooltip';
+		this._instanceClayTooltip.position = 'BottomCenter';
+		this._instanceClayTooltip.selectors = ['.source-editor__fixed-text__help'];
+	}
+
+	disposed() {
+		this._instanceClayTooltip.dispose();
+	}
 
 	/**
 	 * Callback that propagates the <code>contentChanged</code> event when the
