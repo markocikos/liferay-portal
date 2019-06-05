@@ -45,33 +45,42 @@ AUI.add(
 
 		StorageFormatter.prototype = {
 			formatStorage: function(size) {
-				var instance = this;
+				let formattedNumber;
 
-				var suffix = instance.get(STR_SUFFIX_KB);
+				if (Liferay.Util.formatStorage) {
+					formattedNumber = Liferay.Util.formatStorage(size)
+				}
+				else {
+					var instance = this;
 
-				var denominator = instance.get('denominator');
+					var suffix = instance.get(STR_SUFFIX_KB);
 
-				size /= denominator;
-
-				if (size >= denominator) {
-					suffix = instance.get('suffixMB');
+					var denominator = instance.get('denominator');
 
 					size /= denominator;
+
+					if (size >= denominator) {
+						suffix = instance.get('suffixMB');
+
+						size /= denominator;
+					}
+
+					if (size >= denominator) {
+						suffix = instance.get('suffixGB');
+
+						size /= denominator;
+					}
+
+					formattedNumber = A.Number.format(size, {
+						decimalPlaces: instance._getDecimalPlaces(size, suffix),
+						decimalSeparator: instance.get('decimalSeparator'),
+						suffix: instance.get('addSpaceBeforeSuffix')
+							? STR_SPACE + suffix
+							: suffix
+					});
 				}
 
-				if (size >= denominator) {
-					suffix = instance.get('suffixGB');
-
-					size /= denominator;
-				}
-
-				return A.Number.format(size, {
-					decimalPlaces: instance._getDecimalPlaces(size, suffix),
-					decimalSeparator: instance.get('decimalSeparator'),
-					suffix: instance.get('addSpaceBeforeSuffix')
-						? STR_SPACE + suffix
-						: suffix
-				});
+				return formattedNumber;
 			},
 
 			_getDecimalPlaces: function(size, suffix) {
