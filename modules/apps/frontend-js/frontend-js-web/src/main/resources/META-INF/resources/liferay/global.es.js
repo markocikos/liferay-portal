@@ -7,6 +7,7 @@ import {
 	getComponentCache,
 	initComponentCache
 } from './component.es';
+import createPortletURL from './util/portleturl/create_portlet_url.es';
 import escape from 'lodash.escape';
 import fetch from './util/fetch.es';
 import formatXML from './util/format_xml.es';
@@ -41,6 +42,7 @@ Liferay.Address = {
 
 Liferay.SideNavigation = SideNavigation;
 
+Liferay.Util.createPortletURL = createPortletURL;
 Liferay.Util.escape = escape;
 Liferay.Util.fetch = fetch;
 Liferay.Util.formatXML = formatXML;
