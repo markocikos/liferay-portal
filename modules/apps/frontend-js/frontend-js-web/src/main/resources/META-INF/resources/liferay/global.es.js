@@ -9,6 +9,7 @@ import {
 } from './component.es';
 import escape from 'lodash.escape';
 import fetch from './util/fetch.es';
+import formatStorage from './util/format_storage.es';
 import formatXML from './util/format_xml.es';
 import getCountries from './util/address/get_countries.es';
 import getCropRegion from './util/get_crop_region.es';
@@ -23,6 +24,7 @@ import objectToFormData from './util/form/object_to_form_data.es';
 import postForm from './util/form/post_form.es';
 import setFormValues from './util/form/set_form_values.es';
 import SideNavigation from './side_navigation.es';
+import Store from './util/store.es';
 import toCharCode from './util/to_char_code.es';
 import unescape from 'lodash.unescape';
 
@@ -43,6 +45,7 @@ Liferay.SideNavigation = SideNavigation;
 
 Liferay.Util.escape = escape;
 Liferay.Util.fetch = fetch;
+Liferay.Util.formatStorage = formatStorage;
 Liferay.Util.formatXML = formatXML;
 Liferay.Util.getCropRegion = getCropRegion;
 Liferay.Util.getFormElement = getFormElement;
@@ -53,6 +56,7 @@ Liferay.Util.ns = ns;
 Liferay.Util.objectToFormData = objectToFormData;
 Liferay.Util.postForm = postForm;
 Liferay.Util.setFormValues = setFormValues;
+Liferay.Util.Store = Store;
 Liferay.Util.toCharCode = toCharCode;
 
 Liferay.Util.openToast = (...args) => {
