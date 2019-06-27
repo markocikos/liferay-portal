@@ -21,6 +21,8 @@ import {
 	getComponentCache,
 	initComponentCache
 } from './component.es';
+import createURL from './util/portlet_url/create_url.es';
+import createActionURL from './util/portlet_url/create_action_url.es';
 import escape from 'lodash.escape';
 import fetch from './util/fetch.es';
 import formatXML from './util/format_xml.es';
@@ -51,6 +53,11 @@ Liferay.initComponentCache = initComponentCache;
 Liferay.Address = {
 	getCountries,
 	getRegions
+};
+
+Liferay.Util.PortletURL = {
+	createURL: createURL,
+	createActionURL: createActionURL
 };
 
 Liferay.SideNavigation = SideNavigation;
