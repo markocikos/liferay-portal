@@ -71,6 +71,8 @@ renderResponse.setTitle(role.getTitle(locale));
 	viewTypeItems="<%= editRoleAssignmentsManagementToolbarDisplayContext.getViewTypeItems() %>"
 />
 
+<h1>EDIT ROLE ASSIGNMENTS</h1>
+
 <aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid container-fluid-max-xl container-form-view" method="post" name="fm">
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="tabs3" type="hidden" value="current" />
@@ -119,12 +121,10 @@ renderResponse.setTitle(role.getTitle(locale));
 						var selectedItem = event.newVal;
 
 						if (selectedItem) {
-							var assignmentsRedirect = Liferay.PortletURL.createURL('<%= portletURL.toString() %>');
-
-							assignmentsRedirect.setParameter('tabs2', selectedItem.type);
+							var assignmentsRedirect = Liferay.Util.PortletURL.createURL('<%= portletURL.toString() %>', {tabs2: selectedItem.type});
 
 							var data = {
-								redirect: assignmentsRedirect.toString()
+								redirect: assignmentsRedirect
 							};
 
 							if (selectedItem.type === 'users') {
