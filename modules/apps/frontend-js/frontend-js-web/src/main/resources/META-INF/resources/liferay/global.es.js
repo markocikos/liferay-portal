@@ -23,11 +23,14 @@ import {
 } from './component.es';
 import escape from 'lodash.escape';
 import fetch from './util/fetch.es';
+import formatStorage from './util/format_storage.es';
 import formatXML from './util/format_xml.es';
 import getCountries from './util/address/get_countries.es';
 import getCropRegion from './util/get_crop_region.es';
 import getRegions from './util/address/get_regions.es';
 import getFormElement from './util/form/get_form_element.es';
+import getStoreValue from './util/store/get_store_value.es';
+import getStoreValues from './util/store/get_store_values.es';
 import groupBy from 'lodash.groupby';
 import isEqual from 'lodash.isequal';
 import portlet from './portlet/portlet.es';
@@ -36,6 +39,8 @@ import ns from './util/ns.es';
 import objectToFormData from './util/form/object_to_form_data.es';
 import postForm from './util/form/post_form.es';
 import setFormValues from './util/form/set_form_values.es';
+import setStoreValue from './util/store/set_store_value.es';
+import setStoreValues from './util/store/set_store_values.es';
 import SideNavigation from './side_navigation.es';
 import toCharCode from './util/to_char_code.es';
 import unescape from 'lodash.unescape';
@@ -55,8 +60,16 @@ Liferay.Address = {
 
 Liferay.SideNavigation = SideNavigation;
 
+Liferay.Store = {
+	get: getStoreValue,
+	getAll: getStoreValues,
+	set: setStoreValue,
+	setAll: setStoreValues
+};
+
 Liferay.Util.escape = escape;
 Liferay.Util.fetch = fetch;
+Liferay.Util.formatStorage = formatStorage;
 Liferay.Util.formatXML = formatXML;
 Liferay.Util.getCropRegion = getCropRegion;
 Liferay.Util.getFormElement = getFormElement;
