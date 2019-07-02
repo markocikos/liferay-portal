@@ -240,43 +240,16 @@ AUI.add(
 			toString: function() {
 				var instance = this;
 
-				var options = instance.options;
+				var parameters = Object.assign(
+					{},
+					instance.reservedParams,
+					instance.params
+				);
 
-				var reservedParams = instance.reservedParams;
-
-				var resultURL = new A.Url(options.basePortletURL);
-
-				var portletId = reservedParams.p_p_id;
-
-				if (!portletId) {
-					portletId = resultURL.getParameter('p_p_id');
-				}
-
-				var namespacePrefix = Util.getPortletNamespace(portletId);
-
-				A.each(reservedParams, function(item, index) {
-					if (Lang.isValue(item)) {
-						resultURL.setParameter(index, item);
-					}
-				});
-
-				A.each(instance.params, function(item, index) {
-					if (Lang.isValue(item)) {
-						resultURL.setParameter(namespacePrefix + index, item);
-					}
-				});
-
-				if (options.secure) {
-					resultURL.setProtocol('https');
-				}
-
-				var value = resultURL.toString();
-
-				if (options.escapeXML) {
-					value = Lang.String.escapeHTML(value);
-				}
-
-				return value;
+				return Liferay.Util.PortletURL.createURL(
+					instance.options.basePortletURL,
+					parameters
+				);
 			},
 
 			_isReservedParam: function(paramName) {
