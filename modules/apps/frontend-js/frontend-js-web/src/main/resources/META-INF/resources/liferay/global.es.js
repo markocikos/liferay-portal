@@ -21,9 +21,12 @@ import {
 	getComponentCache,
 	initComponentCache
 } from './component.es';
+import createURL from './util/portlet_url/create_url.es';
+import createActionURL from './util/portlet_url/create_action_url.es';
+import createRenderURL from './util/portlet_url/create_render_url.es';
+import createResourceURL from './util/portlet_url/create_resource_url.es';
 import escape from 'lodash.escape';
 import fetch from './util/fetch.es';
-import formatStorage from './util/format_storage.es';
 import formatXML from './util/format_xml.es';
 import getCountries from './util/address/get_countries.es';
 import getCropRegion from './util/get_crop_region.es';
@@ -54,11 +57,17 @@ Liferay.Address = {
 	getRegions
 };
 
+Liferay.Util.PortletURL = {
+	createURL,
+	createActionURL,
+	createRenderURL,
+	createResourceURL
+};
+
 Liferay.SideNavigation = SideNavigation;
 
 Liferay.Util.escape = escape;
 Liferay.Util.fetch = fetch;
-Liferay.Util.formatStorage = formatStorage;
 Liferay.Util.formatXML = formatXML;
 Liferay.Util.getCropRegion = getCropRegion;
 Liferay.Util.getFormElement = getFormElement;
