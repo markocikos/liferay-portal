@@ -136,7 +136,7 @@ class UserNameFields extends PortletBase {
 
 				url.setParameter('languageId', languageId);
 
-				resolve(url);
+				resolve(url.toString());
 			});
 		});
 	}

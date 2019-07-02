@@ -1652,7 +1652,7 @@ AUI.add(
 					);
 					url.setWindowState('pop_up');
 
-					return url;
+					return url.toString();
 				},
 
 				setValue: function(value) {

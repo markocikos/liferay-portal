@@ -64,7 +64,7 @@ sharingURL.setWindowState(LiferayWindowState.POP_UP);
 			sharingURL.setParameter('classNameId', classNameId);
 			sharingURL.setParameter('classPK', classPK);
 
-			showDialog(sharingURL, title, namespace, refreshOnClose);
+			showDialog(sharingURL.toString(), title, namespace, refreshOnClose);
 		},
 		['liferay-portlet-url', 'liferay-util-window']
 	);
@@ -78,7 +78,7 @@ sharingURL.setWindowState(LiferayWindowState.POP_UP);
 			manageCollaboratorsURL.setParameter('classNameId', classNameId);
 			manageCollaboratorsURL.setParameter('classPK', classPK);
 
-			showDialog(manageCollaboratorsURL, '<%= LanguageUtil.get(resourceBundle, "manage-collaborators") %>', namespace, refreshOnClose);
+			showDialog(manageCollaboratorsURL.toString(), '<%= LanguageUtil.get(resourceBundle, "manage-collaborators") %>', namespace, refreshOnClose);
 		},
 		['liferay-portlet-url', 'liferay-util-window']
 	);
