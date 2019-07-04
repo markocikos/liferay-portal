@@ -493,10 +493,6 @@
 			return String(portletId).replace(REGEX_PORTLET_ID, '$1');
 		},
 
-		getPortletNamespace: function(portletId) {
-			return '_' + portletId + '_';
-		},
-
 		getTop: function() {
 			var topWindow = Util._topWindow;
 
