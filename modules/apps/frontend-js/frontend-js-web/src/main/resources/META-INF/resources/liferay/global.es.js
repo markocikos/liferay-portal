@@ -29,6 +29,8 @@ import getCountries from './util/address/get_countries.es';
 import getCropRegion from './util/get_crop_region.es';
 import getRegions from './util/address/get_regions.es';
 import getFormElement from './util/form/get_form_element.es';
+import getStoreValue from './util/store/get_store_value.es';
+import getStoreValues from './util/store/get_store_values.es';
 import groupBy from 'lodash.groupby';
 import isEqual from 'lodash.isequal';
 import portlet from './portlet/portlet.es';
@@ -38,6 +40,8 @@ import objectToFormData from './util/form/object_to_form_data.es';
 import objectToURLSearchParams from './util/object_to_url_search_params.es';
 import postForm from './util/form/post_form.es';
 import setFormValues from './util/form/set_form_values.es';
+import setStoreValue from './util/store/set_store_value.es';
+import setStoreValues from './util/store/set_store_values.es';
 import SideNavigation from './side_navigation.es';
 import toCharCode from './util/to_char_code.es';
 import unescape from 'lodash.unescape';
@@ -80,6 +84,13 @@ Liferay.Util.openToast = (...args) => {
 			commands.openToast(...args);
 		}
 	);
+};
+
+Liferay.Util.Store = {
+	get: getStoreValue,
+	getAll: getStoreValues,
+	set: setStoreValue,
+	setAll: setStoreValues
 };
 
 Liferay.Util.unescape = unescape;
