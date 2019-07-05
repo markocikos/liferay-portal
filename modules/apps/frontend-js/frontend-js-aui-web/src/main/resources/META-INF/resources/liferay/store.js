@@ -12,137 +12,53 @@
  * details.
  */
 
-AUI.add(
-	'liferay-store',
-	function(A) {
-		var Lang = A.Lang;
+AUI.add('liferay-store', function(A) {
+	var Lang = A.Lang;
+	
+	var Store = function(key, value) {
+		var method;
 
-		var isObject = Lang.isObject;
+		if (Lang.isFunction(value)) {
+			method = 'get';
 
-		var TOKEN_SERIALIZE = 'serialize://';
-
-		var Store = function(key, value) {
-			var method;
-
-			if (Lang.isFunction(value)) {
-				method = 'get';
-
-				if (Array.isArray(key)) {
-					method = 'getAll';
-				}
-			} else {
-				method = 'set';
-
-				if (isObject(key)) {
-					method = 'setAll';
-				} else if (arguments.length == 1) {
-					method = null;
-				}
+			if (Array.isArray(key)) {
+				method = 'getAll';
 			}
+		} else {
+			method = 'set';
 
-			if (method) {
-				Store[method].apply(Store, arguments);
+			if (Lang.isObject(key)) {
+				method = 'setAll';
+			} else if (arguments.length === 1) {
+				method = null;
 			}
-		};
+		}
 
-		A.mix(Store, {
-			get: function(key, callback) {
-				var instance = this;
+		if (method) {
+			Store[method].apply(Store, arguments);
+		}
+	};
 
-				instance._getValues('get', key, callback);
-			},
+	A.mix(Store, {
+		get: function(key, callback) {
+			Liferay.Util.Store.get(key, callback);
+		},
 
-			getAll: function(keys, callback) {
-				var instance = this;
+		getAll: function(keys, callback) {
+			Liferay.Util.Store.getAll(keys, callback);
+		},
 
-				instance._getValues('getAll', keys, callback);
-			},
+		set: function(key, value) {
+			Liferay.Util.Store.set(key, value);
+		},
 
-			set: function(key, value) {
-				var instance = this;
+		setAll: function(obj) {
+			Liferay.Util.Store.setAll(obj);
+		}
+	});
 
-				var obj = {};
+	Liferay.Store = Store;
 
-				if (isObject(value)) {
-					value = TOKEN_SERIALIZE + JSON.stringify(value);
-				}
-
-				obj[key] = value;
-
-				instance._setValues(obj);
-			},
-
-			setAll: function(obj) {
-				var instance = this;
-
-				instance._setValues(obj);
-			},
-
-			_getValues: function(cmd, key, callback) {
-				var instance = this;
-
-				var config = {
-					after: {
-						success: function(event) {
-							var responseData = this.get('responseData');
-
-							if (
-								Lang.isString(responseData) &&
-								responseData.indexOf(TOKEN_SERIALIZE) === 0
-							) {
-								try {
-									responseData = JSON.parse(
-										responseData.substring(
-											TOKEN_SERIALIZE.length
-										)
-									);
-								} catch (e) {}
-							}
-
-							callback(responseData);
-						}
-					},
-					data: {
-						cmd: cmd
-					}
-				};
-
-				config.data.key = key;
-
-				if (cmd == 'getAll') {
-					config.dataType = 'json';
-				}
-
-				instance._ioRequest(config);
-			},
-
-			_ioRequest: function(config) {
-				var instance = this;
-
-				config.data.p_auth = Liferay.authToken;
-
-				var doAsUserIdEncoded = themeDisplay.getDoAsUserIdEncoded();
-
-				if (doAsUserIdEncoded) {
-					config.data.doAsUserId = doAsUserIdEncoded;
-				}
-
-				A.io.request(
-					themeDisplay.getPathMain() + '/portal/session_click',
-					config
-				);
-			},
-
-			_setValues: function(data) {
-				var instance = this;
-
-				instance._ioRequest({
-					data: data
-				});
-			}
-		});
-
-		Liferay.Store = Store;
 	},
 	'',
 	{
