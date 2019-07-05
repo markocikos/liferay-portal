@@ -17,8 +17,6 @@ AUI.add(
 	function(A) {
 		var Lang = A.Lang;
 
-		var Util = Liferay.Util;
-
 		var PortletURL = function(lifecycle, params, basePortletURL) {
 			var instance = this;
 
@@ -240,43 +238,20 @@ AUI.add(
 			toString: function() {
 				var instance = this;
 
-				var options = instance.options;
+				var portletURL = Liferay.Util.PortletURL.createURL(
+					instance.options.basePortletURL,
+					instance.params
+				);
 
-				var reservedParams = instance.reservedParams;
-
-				var resultURL = new A.Url(options.basePortletURL);
-
-				var portletId = reservedParams.p_p_id;
-
-				if (!portletId) {
-					portletId = resultURL.getParameter('p_p_id');
+				if (instance.options.escapeXML) {
+					portletURL = Lang.String.escapeHTML(portletURL);
 				}
 
-				var namespacePrefix = Util.getPortletNamespace(portletId);
-
-				A.each(reservedParams, function(item, index) {
-					if (Lang.isValue(item)) {
-						resultURL.setParameter(index, item);
-					}
-				});
-
-				A.each(instance.params, function(item, index) {
-					if (Lang.isValue(item)) {
-						resultURL.setParameter(namespacePrefix + index, item);
-					}
-				});
-
-				if (options.secure) {
-					resultURL.setProtocol('https');
+				if (instance.options.secure) {
+					portletURL = portletURL.replace(/^http/, 'https');
 				}
 
-				var value = resultURL.toString();
-
-				if (options.escapeXML) {
-					value = Lang.String.escapeHTML(value);
-				}
-
-				return value;
+				return portletURL;
 			},
 
 			_isReservedParam: function(paramName) {
