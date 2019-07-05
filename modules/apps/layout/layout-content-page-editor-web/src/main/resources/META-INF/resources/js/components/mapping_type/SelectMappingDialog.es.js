@@ -12,10 +12,9 @@
  * details.
  */
 
-/* eslint no-unused-vars: "warn" */
-
+import 'frontend-js-web/liferay/compat/modal/Modal';
 import {Config} from 'metal-state';
-import {Modal, PortletBase} from 'frontend-js-web';
+import {PortletBase} from 'frontend-js-web';
 import Soy from 'metal-soy';
 
 import {COMPATIBLE_TYPES} from '../../utils/constants';
