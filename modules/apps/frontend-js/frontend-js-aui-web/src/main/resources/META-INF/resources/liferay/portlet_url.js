@@ -300,11 +300,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: [
-			'aui-base',
-			'aui-io-request',
-			'aui-url',
-			'querystring-stringify-simple'
-		]
+		requires: ['aui-base']
 	}
 );
