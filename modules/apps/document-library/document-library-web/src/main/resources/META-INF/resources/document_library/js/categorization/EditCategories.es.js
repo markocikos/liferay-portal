@@ -12,15 +12,14 @@
  * details.
  */
 
-/* eslint no-unused-vars: "warn" */
-
+import 'asset-taglib/asset_categories_selector/AssetCategoriesSelector.es';
 import 'clay-multi-select';
 import 'clay-radio';
+import 'frontend-js-web/liferay/compat/modal/Modal.es';
 import Component from 'metal-component';
-import {Config} from 'metal-state';
 import Soy from 'metal-soy';
-import {Modal} from 'frontend-js-web';
-import 'asset-taglib/asset_categories_selector/AssetCategoriesSelector.es';
+import {Config} from 'metal-state';
+
 import templates from './EditCategories.soy';
 
 /**
@@ -144,7 +143,7 @@ class EditCategories extends Component {
 
 		return fetch(this.pathModule + url, request)
 			.then(response => response.json())
-			.catch(xhr => {
+			.catch(_xhr => {
 				this.close();
 			});
 	}
@@ -305,7 +304,7 @@ class EditCategories extends Component {
 					taxonomyCategoryIdsToAdd: addedCategories,
 					taxonomyCategoryIdsToRemove: removedCategories
 				}
-			).then(response => {
+			).then(_response => {
 				instance.close();
 
 				if (instance._bulkStatusComponent) {
