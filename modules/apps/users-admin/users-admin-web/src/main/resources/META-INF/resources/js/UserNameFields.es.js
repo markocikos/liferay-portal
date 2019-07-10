@@ -12,10 +12,6 @@
  * details.
  */
 
-/* eslint no-console: "warn" */
-/* eslint no-for-of-loops/no-for-of-loops: "warn" */
-/* eslint no-unused-vars: "warn" */
-
 import dom from 'metal-dom';
 import {EventHandler} from 'metal-events';
 import {Config} from 'metal-state';
@@ -85,9 +81,9 @@ class UserNameFields extends PortletBase {
 	 * @protected
 	 */
 	_cacheData() {
-		for (const [name, value] of new FormData(this.formNode)) {
+		new FormData(this.formNode).forEach((value,name) => {
 			const field = this.userNameFieldsNode.querySelector('#' + name);
-
+			
 			if (field) {
 				this._formDataCache[name] = value;
 
@@ -97,7 +93,7 @@ class UserNameFields extends PortletBase {
 					);
 				}
 			}
-		}
+		});
 	}
 
 	/**
@@ -131,7 +127,7 @@ class UserNameFields extends PortletBase {
 	 */
 	_getURL(languageId) {
 		return new Promise(resolve => {
-			AUI().use('liferay-portlet-url', A => {
+			AUI().use('liferay-portlet-url', function() {
 				const url = Liferay.PortletURL.createURL(this.baseURL);
 
 				url.setParameter('languageId', languageId);
@@ -148,6 +144,7 @@ class UserNameFields extends PortletBase {
 	 * @protected
 	 */
 	_handleError(error) {
+		// eslint-disable-next-line no-console
 		console.error(error);
 
 		this._removeLoadingIndicator();
@@ -191,7 +188,7 @@ class UserNameFields extends PortletBase {
 	 * @protected
 	 */
 	_populateData() {
-		for (const [name, value] of Object.entries(this._formDataCache)) {
+		Object.entries(this._formDataCache).forEach((value,name) => {
 			const newField = this.userNameFieldsNode.querySelector('#' + name);
 
 			if (newField) {
@@ -204,7 +201,7 @@ class UserNameFields extends PortletBase {
 					);
 				}
 			}
-		}
+		})
 	}
 
 	/**
