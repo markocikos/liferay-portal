@@ -12,14 +12,12 @@
  * details.
  */
 
-/* eslint no-unused-vars: "warn" */
-
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 import {core} from 'metal';
 
 import componentTemplates from './ResizeComponent.soy';
-import controlsTemplates from './ResizeControls.soy';
+import './ResizeControls.soy';
 
 /**
  * Creates a Resize component.
@@ -114,7 +112,7 @@ class ResizeComponent extends Component {
 	 *
 	 * @param  {MouseEvent} event
 	 */
-	toggleLockProportions(event) {
+	toggleLockProportions() {
 		this.lockProportions = !this.lockProportions;
 	}
 }
