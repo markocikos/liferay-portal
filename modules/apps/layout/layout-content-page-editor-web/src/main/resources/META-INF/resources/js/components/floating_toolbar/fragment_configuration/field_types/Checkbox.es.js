@@ -15,6 +15,7 @@
 /**
  * Get data from checkbox field
  * @param {Event} event
+ * @return {{fieldName: any, fieldValue: boolean}}
  */
 export function getCheckboxData(event) {
 	const targetElement = event.delegateTarget;

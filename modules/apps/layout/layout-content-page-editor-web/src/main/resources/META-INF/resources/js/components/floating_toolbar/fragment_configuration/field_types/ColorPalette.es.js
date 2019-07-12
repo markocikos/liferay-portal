@@ -15,6 +15,7 @@
 /**
  * Get data from color palette field
  * @param {Event} event
+ * @return {{fieldName: any, fieldValue: string}}
  */
 export function getColorPaletteData(event) {
 	const targetElement = event.delegateTarget;

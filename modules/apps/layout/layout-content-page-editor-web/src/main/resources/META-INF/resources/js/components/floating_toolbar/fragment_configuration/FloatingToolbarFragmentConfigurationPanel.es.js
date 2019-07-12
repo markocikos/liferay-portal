@@ -29,12 +29,25 @@ import templates from './FloatingToolbarFragmentConfigurationPanel.soy';
 import {updateConfigurationValueAction} from '../../../actions/updateEditableValue.es';
 
 /**
- * @type { function(Event): { fieldName: string, fieldValue: any }}
+ * @type {{
+ *	checkbox: function(Event): {
+ *		fieldName: any,
+ *		fieldValue: boolean
+ *	},
+ *	colorPalette: function(Event): {
+ *		fieldName: any,
+ *		fieldValue: string
+ *	},
+ * 	select: function(Event): {
+ *		fieldName: string,
+ * 		fieldValue: any
+ * 	}
+ * }}
  */
 const GET_DATA_FUNCTIONS = {
 	checkbox: getCheckboxData,
-	select: getSelectData,
-	colorPalette: getColorPaletteData
+	colorPalette: getColorPaletteData,
+	select: getSelectData
 };
 
 /**

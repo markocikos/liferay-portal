@@ -15,6 +15,7 @@
 /**
  * Get data from select field
  * @param {Event} event
+ * @return {{fieldName: string, fieldValue: any}}
  */
 export function getSelectData(event) {
 	const targetElement = event.delegateTarget;
