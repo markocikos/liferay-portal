@@ -15,7 +15,7 @@
 /* eslint no-unused-vars: "warn" */
 
 import Component from 'metal-component';
-import {Slider} from 'frontend-js-web';
+import 'frontend-js-web';
 import Soy from 'metal-soy';
 import {debounce} from 'frontend-js-web';
 import {core} from 'metal';
@@ -96,7 +96,7 @@ class SaturationComponent extends Component {
 	 * finishes processing the image.
 	 */
 	spawnWorker_(message) {
-		return new Promise((resolve, reject) => {
+		return new Promise(resolve => {
 			const workerURI = this.modulePath + '/SaturationWorker.js';
 			const processWorker = new Worker(workerURI);
 
