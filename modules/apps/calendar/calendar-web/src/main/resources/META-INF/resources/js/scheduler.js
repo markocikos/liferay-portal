@@ -280,7 +280,7 @@ AUI.add(
 						arguments
 					);
 
-					Liferay.Store(
+					Liferay.Util.Store.set(
 						'com.liferay.calendar.web_defaultView',
 						event.newVal.get('name')
 					);
@@ -1029,7 +1029,6 @@ AUI.add(
 			'liferay-calendar-util',
 			'liferay-scheduler-event-recorder',
 			'liferay-scheduler-models',
-			'liferay-store',
 			'promise',
 			'resize-plugin'
 		]
