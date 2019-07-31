@@ -347,7 +347,7 @@ class SiteNavigationMenuEditor extends State {
 
 		formData.append(`${this.namespace}order`, data.dragOrder);
 
-		return fetch(this.editSiteNavigationMenuItemParentURL, {
+		return Liferay.Util.fetch(this.editSiteNavigationMenuItemParentURL, {
 			body: formData,
 			credentials: 'include',
 			method: 'POST'
