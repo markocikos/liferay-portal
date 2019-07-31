@@ -260,7 +260,7 @@ AUI.add(
 
 						data[handleId] = open ? 'open' : 'closed';
 
-						Liferay.Store(data);
+						Liferay.Util.Store.setAll(data);
 					}
 				},
 
@@ -284,8 +284,7 @@ AUI.add(
 			'aui-node',
 			'event-outside',
 			'event-tap',
-			'liferay-menu-filter',
-			'liferay-store'
+			'liferay-menu-filter'
 		]
 	}
 );

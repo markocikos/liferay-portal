@@ -1806,7 +1806,7 @@
 
 					Liferay._editControlsState = editControlsState;
 
-					Liferay.Store(
+					Liferay.Util.Store.set(
 						'com.liferay.frontend.js.web_toggleControls',
 						editControlsState
 					);
@@ -1818,7 +1818,7 @@
 				});
 			}
 		},
-		['event-tap', 'liferay-store']
+		['event-tap']
 	);
 
 	Liferay.provide(
