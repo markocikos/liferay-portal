@@ -13,7 +13,7 @@
  */
 
 import {Config} from 'metal-state';
-import {debounce} from 'frontend-js-web';
+import {debounce,fetch} from 'frontend-js-web';
 import {PortletBase} from 'frontend-js-web';
 import Soy from 'metal-soy';
 
@@ -160,7 +160,7 @@ class FragmentPreview extends PortletBase {
 		if (!this._loading) {
 			this._loading = true;
 
-			this.fetch(this.urls.render, {
+			fetch(this.urls.render, {
 				configuration: this.configuration,
 				css: this.css,
 				html: this.html,

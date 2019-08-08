@@ -14,7 +14,7 @@
 
 import Soy from 'metal-soy';
 import {Config} from 'metal-state';
-import {PortletBase, openToast} from 'frontend-js-web';
+import {PortletBase,fetch, openToast} from 'frontend-js-web';
 
 import templates from './FragmentEditor.soy';
 import './FragmentPreview.es';
@@ -136,11 +136,13 @@ class FragmentEditor extends PortletBase {
 	_handleSaveButtonClick(event) {
 		const content = this.getContent();
 		const status = event.delegateTarget.value;
+		
+		console.log('FRAGMENT SAVE LOG');
 
 		if (this.isHtmlValid()) {
 			this._saving = true;
 
-			this.fetch(this.urls.edit, {
+			fetch(this.urls.edit, {
 				configurationContent: content.configuration,
 				cssContent: content.css,
 				fragmentCollectionId: this.fragmentCollectionId,
