@@ -36,6 +36,7 @@ import {
 import {DragSource as dragSource, DropTarget as dropTarget} from 'react-dnd';
 import {DragTypes} from '../../utils/drag-types.es';
 import {PROPERTY_TYPES} from '../../utils/constants.es';
+import {fetch} from 'frontend-js-web';
 import {PropTypes} from 'prop-types';
 
 const acceptedDragTypes = [DragTypes.CRITERIA_ROW, DragTypes.PROPERTY];
