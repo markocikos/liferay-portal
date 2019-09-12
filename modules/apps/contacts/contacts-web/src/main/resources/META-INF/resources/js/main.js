@@ -287,8 +287,6 @@ AUI.add(
 				_deleteEntry(contact) {
 					var instance = this;
 
-					var config = instance._config;
-
 					var confirmMessageText = Lang.sub(
 						Liferay.Language.get(
 							'are-you-sure-you-want-to-delete-x-from-your-contacts'
@@ -297,21 +295,20 @@ AUI.add(
 					);
 
 					if (confirm(confirmMessageText)) {
-						var actionURL = new Liferay.PortletURL.createURL(
-							config.baseActionURL
+						var deleteEntryActionParameters = {
+							entryId: contact.entryId,
+							'javax.portlet.action': 'deleteEntry',
+							p_p_id:
+								'com_liferay_contacts_web_portlet_ContactsCenterPortlet',
+							p_p_state: 'NORMAL'
+						};
+
+						var url = Liferay.Util.PortletURL.createActionURL(
+							Liferay.ThemeDisplay.getPortalURL(),
+							deleteEntryActionParameters
 						);
 
-						actionURL.setParameter('entryId', contact.entryId);
-						actionURL.setParameter(
-							'javax.portlet.action',
-							'deleteEntry'
-						);
-						actionURL.setPortletId(
-							'com_liferay_contacts_web_portlet_ContactsCenterPortlet'
-						);
-						actionURL.setWindowState('NORMAL');
-
-						Liferay.Util.fetch(actionURL.toString())
+						Liferay.Util.fetch(url)
 							.then(response => {
 								return response.text();
 							})
@@ -327,26 +324,24 @@ AUI.add(
 				_editEntry(contact) {
 					var instance = this;
 
-					var config = instance._config;
+					var editEntryRenderParameters = {
+						entryId: contact.entryId,
+						'javax.portlet.action': 'deleteEntry',
+						mvcPath: '/contacts_center/edit_entry.jsp',
+						p_p_id:
+							'com_liferay_contacts_web_portlet_ContactsCenterPortlet',
+						p_p_state: 'EXCLUSIVE',
+						redirect: contact.redirect
+					};
 
-					var portletURL = new Liferay.PortletURL.createURL(
-						config.baseRenderURL
+					var url = Liferay.Util.PortletURL.createRenderURL(
+						Liferay.ThemeDisplay.getPortalURL(),
+						editEntryRenderParameters
 					);
-
-					portletURL.setParameter(
-						'mvcPath',
-						'/contacts_center/edit_entry.jsp'
-					);
-					portletURL.setParameter('redirect', contact.redirect);
-					portletURL.setParameter('entryId', contact.entryId);
-					portletURL.setPortletId(
-						'com_liferay_contacts_web_portlet_ContactsCenterPortlet'
-					);
-					portletURL.setWindowState('EXCLUSIVE');
 
 					instance.showPopup(
 						Liferay.Language.get('update-contact'),
-						portletURL.toString()
+						url
 					);
 				},
 
