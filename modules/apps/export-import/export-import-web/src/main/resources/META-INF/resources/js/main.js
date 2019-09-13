@@ -811,91 +811,107 @@ AUI.add(
 					var instance = this;
 
 					var cmdNode = instance.byId('cmd');
-					var portletURL;
 					var redirectNode = instance.byId('redirect');
 
 					if (cmdNode.val() === 'add' || cmdNode.val() === 'update') {
-						portletURL = Liferay.PortletURL.createURL(
-							redirectNode.val()
+						var params = {
+							cmd: cmdNode.val(),
+							exportConfigurationButtons: 'custom',
+							mvcRenderCommandName: 'editExportConfiguration',
+							publishConfigurationButtons: 'custom',
+							tabs2: 'new-export-process'
+						};
+
+						var url = Liferay.Util.PortletURL.createPortletURL(
+							redirectNode.val(),
+							{
+								cmd: params.cmd
+							}
 						);
 
-						portletURL.setParameter('cmd', cmdNode.val());
-
 						if (instance._exportLAR) {
-							portletURL.setParameter(
-								'mvcRenderCommandName',
-								'editExportConfiguration'
-							);
-							portletURL.setParameter(
-								'tabs2',
-								'new-export-process'
-							);
-							portletURL.setParameter(
-								'exportConfigurationButtons',
-								'custom'
+							url = Liferay.Util.PortletURL.createPortletURL(
+								redirectNode.val(),
+								{
+									exportConfigurationButtons:
+										params.exportConfigurationButtons,
+									mvcRenderCommandName:
+										params.mvcRenderCommandName,
+									tabs2: params.tabs2
+								}
 							);
 						} else {
-							portletURL.setParameter(
-								'mvcRenderCommandName',
-								'editPublishConfiguration'
-							);
-							portletURL.setParameter(
-								'publishConfigurationButtons',
-								'custom'
+							url = Liferay.Util.PortletURL.createPortletURL(
+								redirectNode.val(),
+								{
+									mvcRenderCommandName:
+										params.mvcRenderCommandName,
+									publishConfigurationButtons:
+										params.publishConfigurationButtons
+								}
 							);
 						}
 
 						var groupIdNode = instance.byId('groupId');
 
 						if (groupIdNode) {
-							portletURL.setParameter(
-								'groupId',
-								groupIdNode.val()
+							url = Liferay.Util.PortletURL.createPortletURL(
+								redirectNode.val(),
+								{
+									groupId: groupIdNode.val()
+								}
 							);
 						}
 
 						var liveGroupIdNode = instance.byId('liveGroupId');
 
 						if (liveGroupIdNode) {
-							portletURL.setParameter(
-								'liveGroupId',
-								liveGroupIdNode.val()
+							url = Liferay.Util.PortletURL.createPortletURL(
+								redirectNode.val(),
+								{
+									liveGroupId: liveGroupIdNode.val()
+								}
 							);
 						}
 
 						var privateLayoutNode = instance.byId('privateLayout');
 
 						if (privateLayoutNode) {
-							portletURL.setParameter(
-								'privateLayout',
-								privateLayoutNode.val()
+							url = Liferay.Util.PortletURL.createPortletURL(
+								redirectNode.val(),
+								{
+									privateLayout: privateLayoutNode.val()
+								}
 							);
 						}
 
 						var rootNodeNameNode = instance.byId('rootNodeName');
 
 						if (rootNodeNameNode) {
-							portletURL.setParameter(
-								'rootNodeName',
-								rootNodeNameNode.val()
+							url = Liferay.Util.PortletURL.createPortletURL(
+								redirectNode.val(),
+								{
+									rootNodeName: rootNodeNameNode.val()
+								}
 							);
 						}
 
-						redirectNode.val(portletURL.toString());
+						redirectNode.val(url.toString());
 					}
 
 					if (cmdNode) {
 						var form = instance.get('form');
 
-						portletURL = Liferay.PortletURL.createURL(
-							form.get('action')
+						url = Liferay.Util.PortletURL.createPortletURL(
+							form.get('action'),
+							{
+								p_p_lifecycle: 0
+							}
 						);
 
-						portletURL.setParameter('p_p_lifecycle', '0');
+						instance._setDisabledCheckboxParameters(url);
 
-						instance._setDisabledCheckboxParameters(portletURL);
-
-						form.set('action', portletURL.toString());
+						form.set('action', url.toString());
 
 						var currentURL = instance.byId('currentURL');
 
