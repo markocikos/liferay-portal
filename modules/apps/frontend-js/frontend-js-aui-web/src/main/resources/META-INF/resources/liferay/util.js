@@ -362,6 +362,9 @@
 			}
 		},
 
+		/*
+		 * @deprecated since 7.3, unused
+		 */
 		disableElements(el) {
 			var currentElement = $(el)[0];
 
@@ -1071,6 +1074,9 @@
 			instance.setSelectionRange(el, position, position);
 		},
 
+		/*
+		 * @deprecated since 7.3, unused
+		 */
 		setSelectionRange(el, selectionStart, selectionEnd) {
 			el = Util.getDOM(el);
 
@@ -1149,6 +1155,9 @@
 			form.submit();
 		},
 
+		/*
+		 * @deprecated since 7.3, unused
+		 */
 		toNumber(value) {
 			return parseInt(value, 10) || 0;
 		},
@@ -1230,6 +1239,9 @@
 			});
 		},
 
+		/*
+		 * @deprecated since 7.3, unused
+		 */
 		toggleSearchContainerButton(
 			buttonId,
 			searchContainerId,
