@@ -125,7 +125,8 @@ const Sharing = ({
 
 			if (isEmailAddressValid(newestItemValue)) {
 				fetch(sharingVerifyEmailAddressURL, {
-					emailAddress: newestItemValue
+					body: objectToFormData({[`${portletNamespace}emailAddress`]: newestItemValue}),
+					method: 'POST'
 				})
 					.then(response => response.json())
 					.then(result => {
