@@ -16,7 +16,6 @@ import Icon from '../../shared/components/Icon.es';
 import QuickActionKebab from '../../shared/components/quick-action-kebab/QuickActionKebab.es';
 import moment from '../../shared/util/moment.es';
 import {ModalContext} from './modal/ModalContext.es';
-import {InstanceListContext} from './store/InstanceListPageStore.es';
 
 const getStatusIcon = status => {
 	if (status === 'OnTime') {
@@ -53,12 +52,12 @@ const Item = ({
 	creatorUser,
 	dateCreated,
 	id,
+	openItemDetailsModal,
 	slaStatus,
 	status,
 	taskNames = []
 }) => {
 	const completed = status === 'Completed';
-	const {setInstanceId} = useContext(InstanceListContext);
 	const statusIcon = getStatusIcon(slaStatus);
 
 	const taskItem = {
@@ -72,8 +71,6 @@ const Item = ({
 		status,
 		taskNames
 	};
-
-	const updateInstanceId = () => setInstanceId(id);
 
 	const formattedAssignees = !completed
 		? assigneeUsers && assigneeUsers.length
@@ -104,7 +101,9 @@ const Item = ({
 					data-target="#instanceDetailModal"
 					data-testid="instanceIdLink"
 					data-toggle="modal"
-					onClick={updateInstanceId}
+					onClick={() => {
+						openItemDetailsModal({itemId: id});
+					}}
 					tabIndex="-1"
 				>
 					<strong>{id}</strong>

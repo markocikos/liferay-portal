@@ -20,8 +20,8 @@ import PromisesResolver from '../../shared/components/request/PromisesResolver.e
 import Request from '../../shared/components/request/Request.es';
 import {useProcessTitle} from '../../shared/hooks/useProcessTitle.es';
 import {Filters} from './InstanceListPageFilters.es';
-import {ItemDetail} from './InstanceListPageItemDetail.es';
 import {Table} from './InstanceListPageTable.es';
+import {ItemDetailsModal} from './modal/ItemDetailsModal.es';
 import {ModalContext} from './modal/ModalContext.es';
 import {SingleReassignModal} from './modal/single-reassign/SingleReassignModal.es';
 import {InstanceFiltersProvider} from './store/InstanceListPageFiltersStore.es';
@@ -83,9 +83,30 @@ const InstanceListPage = ({page, pageSize, processId, query}) => {
 };
 
 const Body = ({page, pageSize, processId, query, singleModal}) => {
-	const {fetchInstances, items, searching, totalCount} = useContext(
-		InstanceListContext
-	);
+	const {
+		fetchInstances,
+		items,
+		searching,
+		setInstanceId,
+		totalCount
+	} = useContext(InstanceListContext);
+
+	const [itemDetailsModalProps, setItemDetailsModalProps] = useState({
+		closeItemDetailsModal: () => {
+			setItemDetailsModalProps({
+				...itemDetailsModalProps,
+				visible: false
+			});
+		},
+		processId: processId,
+		visible: false
+	});
+
+	const openItemDetailsModal = ({itemId}) => {
+		setInstanceId(itemId);
+
+		setItemDetailsModalProps({...itemDetailsModalProps, visible: true});
+	};
 
 	const emptyMessageText = searching
 		? Liferay.Language.get('no-results-were-found')
@@ -116,7 +137,10 @@ const Body = ({page, pageSize, processId, query, singleModal}) => {
 					<PromisesResolver.Resolved>
 						{items && items.length ? (
 							<>
-								<InstanceListPage.Body.Table items={items} />
+								<InstanceListPage.Body.Table
+									items={items}
+									openItemDetailsModal={openItemDetailsModal}
+								/>
 
 								<PaginationBar
 									page={page}
@@ -148,7 +172,7 @@ const Body = ({page, pageSize, processId, query, singleModal}) => {
 				</PromisesResolver>
 			</div>
 			<InstanceListPage.SingleReassignModal />
-			<ItemDetail processId={processId} />
+			<ItemDetailsModal {...itemDetailsModalProps} />
 		</>
 	);
 };

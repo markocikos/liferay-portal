@@ -14,7 +14,7 @@ import React from 'react';
 
 import {Item} from './InstanceListPageItem.es';
 
-const Table = ({items}) => {
+const Table = ({items, openItemDetailsModal}) => {
 	return (
 		<ClayTable>
 			<ClayTable.Head>
@@ -52,7 +52,11 @@ const Table = ({items}) => {
 
 			<ClayTable.Body>
 				{items.map((item, index) => (
-					<Table.Item {...item} key={index} />
+					<Table.Item
+						{...item}
+						key={index}
+						openItemDetailsModal={openItemDetailsModal}
+					/>
 				))}
 			</ClayTable.Body>
 		</ClayTable>
