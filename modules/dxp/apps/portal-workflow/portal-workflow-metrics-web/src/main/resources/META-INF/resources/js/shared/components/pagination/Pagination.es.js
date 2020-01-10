@@ -60,7 +60,7 @@ class Pagination extends React.Component {
 				<a
 					className="dropdown-toggle page-link"
 					data-senna-off
-					data-toggle="dropdown"
+					data-toggle="liferay-dropdown"
 					href="javascript:;"
 				>
 					<span aria-hidden="true">{'...'}</span>

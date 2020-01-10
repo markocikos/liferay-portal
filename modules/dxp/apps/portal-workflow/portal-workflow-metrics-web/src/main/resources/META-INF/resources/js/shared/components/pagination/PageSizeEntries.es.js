@@ -30,7 +30,7 @@ class PageSizeEntries extends React.Component {
 					aria-expanded="false"
 					aria-haspopup="true"
 					className="dropdown-toggle"
-					data-toggle="dropdown"
+					data-toggle="liferay-dropdown"
 					href="#1"
 					role="button"
 				>
