@@ -12,8 +12,7 @@
  * details.
  */
 
-import CKEditor from 'ckeditor4-react';
-import {ClayInput} from '@clayui/form';
+import {Editor} from 'frontend-editor-ckeditor-web';
 import React, {useEffect, useState} from 'react';
 
 import getConnectedReactComponentAdapter from '../util/ReactComponentAdapter.es';
@@ -56,12 +55,9 @@ const Rich = ({dispatch, inputValue, name, readOnly}) => {
 		<>
 			{!readOnly && (
 				<>
-					<CKEditor
+					<Editor
 						config={CKEDITOR_CONFIG}
 						data={value}
-						onBeforeLoad={CKEDITOR =>
-							(CKEDITOR.disableAutoInline = true)
-						}
 						onBlur={_handleEditorBlur}
 						onChange={_handleEditorChange}
 						readOnly={readOnly}
