@@ -73,21 +73,15 @@
 <c:if test="<%= fragmentDisplayContext.hasUpdatePermission() %>">
 	<aui:script>
 		var openImportCollectionView = function() {
-			Liferay.Util.openWindow({
-				dialog: {
-					after: {
-						destroy: function(event) {
-							window.location.reload();
-						},
-					},
-					destroyOnHide: true,
-				},
-				dialogIframe: {
-					bodyCssClass: 'dialog-with-footer',
-				},
+			Liferay.Modal.open({
 				id: '<portlet:namespace />openImportCollectionView',
+				iframeBodyCssClass: 'dialog-with-footer',
+				onClose: function() {
+					window.location.reload();
+				},
+				// size: 'full-screen',
 				title: '<liferay-ui:message key="import" />',
-				uri:
+				url:
 					'<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcRenderCommandName" value="/fragment/view_import" /><portlet:param name="fragmentCollectionId" value="<%= String.valueOf(fragmentDisplayContext.getFragmentCollectionId()) %>" /></portlet:renderURL>',
 			});
 		};

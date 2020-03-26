@@ -83,6 +83,17 @@ Liferay.LayoutExporter = {
 	selected: showLayoutPane,
 };
 
+Liferay.Modal = {
+	open: (...args) => {
+		Liferay.Loader.require(
+			'frontend-js-web/liferay/modal/Modal.es',
+			commands => {
+				commands.openModal(...args);
+			}
+		);
+	},
+};
+
 Liferay.Portal = {
 	Tabs: {
 		show: showTab,

@@ -15,7 +15,10 @@
 import ClayModal, {useModal} from '@clayui/modal';
 import {render} from 'frontend-js-react-web';
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+
+// this import does not work :(
+import './Modal.scss';
 
 const openModal = props => {
 	// Mount in detached node; Clay will take care of appending to `document.body`.
@@ -23,12 +26,16 @@ const openModal = props => {
 	render(Modal, props, document.createElement('div'));
 };
 
-const Modal = ({id, size, title, url}) => {
+const Modal = ({id, iframeBodyCssClass, onClose, size, title, url}) => {
 	const [visible, setVisible] = useState(true);
 
 	const {observer} = useModal({
 		onClose: () => {
 			setVisible(false);
+
+			if (onClose) {
+				onClose();
+			}
 		},
 	});
 
@@ -41,10 +48,13 @@ const Modal = ({id, size, title, url}) => {
 
 		const namespace = iframeURL.searchParams.get('p_p_id');
 
-		iframeURL.searchParams.set(
-			`_${namespace}_bodyCssClass`,
-			'dialog-iframe-popup'
-		);
+		let bodyCssClass = 'dialog-iframe-popup';
+
+		if (iframeBodyCssClass) {
+			bodyCssClass = `${bodyCssClass} ${iframeBodyCssClass}`;
+		}
+
+		iframeURL.searchParams.set(`_${namespace}_bodyCssClass`, bodyCssClass);
 
 		return iframeURL.toString();
 	};
@@ -52,7 +62,12 @@ const Modal = ({id, size, title, url}) => {
 	return (
 		<>
 			{visible && (
-				<ClayModal id={id} observer={observer} size={size}>
+				<ClayModal
+					className="liferay-modal"
+					id={id}
+					observer={observer}
+					size={size}
+				>
 					<ClayModal.Header>{title}</ClayModal.Header>
 					<ClayModal.Body url={getIframeUrl()} />
 				</ClayModal>
