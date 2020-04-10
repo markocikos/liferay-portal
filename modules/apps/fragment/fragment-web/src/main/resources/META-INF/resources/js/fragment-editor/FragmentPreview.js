@@ -23,7 +23,7 @@ import {cancelDebounce, debounce, fetch} from 'frontend-js-web';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 
 /**
- * Defined ratios for preview sizing.
+ * Defined ratios for preview sizing..
  */
 const SIZE_RATIOS = {
 	desktop: {

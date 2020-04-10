@@ -18,7 +18,7 @@ import createPortletURL from '../util/portlet_url/create_portlet_url.es';
 import register from './register.es';
 
 /**
- * Minimizes portlet
+ * Minimizes portlet.
  * @param {String} portletSelector Portlet container selector
  * @param {HTMLElement} trigger Trigger element
  * @param {Object} options Additional options
