@@ -26,6 +26,9 @@ definition {
 		}
 	}
 
+	//Ignore test due to ticket LRQA-57901
+
+	@ignore = "true"
 	@description = "This ensures that an organization can be added and removed in the membership of an asset library."
 	@priority = "5"
 	test AddAndRemoveOrganization {
