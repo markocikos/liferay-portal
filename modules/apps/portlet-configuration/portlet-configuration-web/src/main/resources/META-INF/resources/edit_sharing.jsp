@@ -30,6 +30,8 @@ portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("portletResource", portletResource);
 
 String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
+
+System.out.println("in backend for configuration");
 %>
 
 <portlet:actionURL name="editSharing" var="editSharingURL">
