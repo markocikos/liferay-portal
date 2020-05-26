@@ -19,7 +19,7 @@ import classNames from 'classnames';
 import {render} from 'frontend-js-react-web';
 import dom from 'metal-dom';
 import PropTypes from 'prop-types';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
 import './Modal.scss';
 
@@ -106,8 +106,10 @@ const Modal = ({
 	id,
 	iframeBodyCssClass,
 	onClose,
+	onOpen,
 	onSelect,
 	selectEventName,
+	selectedData,
 	size,
 	title,
 	url,
@@ -115,9 +117,30 @@ const Modal = ({
 	const [loading, setLoading] = useState(true);
 	const [visible, setVisible] = useState(true);
 
+	const eventHandlersRef = useRef([]);
+
 	const {observer} = useModal({
 		onClose: () => processClose(),
 	});
+
+	const disableSelectedItems = ({container}) => {
+		if (!selectedData) {
+			return;
+		}
+
+		const selectedDataSet = new Set(selectedData);
+
+		const itemElements = container.querySelectorAll('.selector-button');
+
+		itemElements.forEach((itemElement) => {
+			const itemId =
+				itemElement.dataset.entityid || itemElement.dataset.entityname;
+
+			if (selectedDataSet.has(itemId)) {
+				itemElement.disabled = true;
+			}
+		});
+	};
 
 	const onButtonClick = ({formId, type}) => {
 		if (type === 'cancel') {
@@ -152,13 +175,21 @@ const Modal = ({
 		}
 	};
 
-	const processClose = () => {
+	const processClose = useCallback(() => {
 		setVisible(false);
+
+		const eventHandlers = eventHandlersRef.current;
+
+		eventHandlers.forEach((eventHandler) => {
+			eventHandler.detach();
+		});
+
+		eventHandlers.splice(0, eventHandlers.length);
 
 		if (onClose) {
 			onClose();
 		}
-	};
+	}, [eventHandlersRef, onClose]);
 
 	const Body = ({html}) => {
 		const bodyRef = useRef();
@@ -168,9 +199,15 @@ const Modal = ({
 				.createRange()
 				.createContextualFragment(html);
 
+			disableSelectedItems({container: fragment});
+
 			bodyRef.current.innerHTML = '';
 
 			bodyRef.current.appendChild(fragment);
+
+			if (onOpen) {
+				onOpen();
+			}
 		}, [html]);
 
 		return <div ref={bodyRef}></div>;
@@ -178,25 +215,33 @@ const Modal = ({
 
 	useEffect(() => {
 		let eventHandler;
+		const eventHandlers = eventHandlersRef.current;
 
 		if (onSelect && selectEventName) {
 			eventHandler = Liferay.on(selectEventName, (selectedItem) => {
 				onSelect(selectedItem);
 
-				setVisible(false);
-
-				if (onClose) {
-					onClose();
-				}
+				processClose();
 			});
+
+			eventHandlers.push(eventHandler);
 		}
 
 		return () => {
-			if (eventHandler) {
+			eventHandlers.forEach((eventHandler) => {
 				eventHandler.detach();
-			}
+			});
+
+			eventHandlers.splice(0, eventHandlers.length);
 		};
-	}, [onClose, onSelect, selectEventName]);
+	}, [
+		eventHandlersRef,
+		onClose,
+		onOpen,
+		onSelect,
+		processClose,
+		selectEventName,
+	]);
 
 	return (
 		<>
@@ -227,7 +272,9 @@ const Modal = ({
 							<>
 								{loading && <ClayLoadingIndicator />}
 								<Iframe
+									disableSelectedItems={disableSelectedItems}
 									iframeBodyCssClass={iframeBodyCssClass}
+									onOpen={onOpen}
 									processClose={processClose}
 									updateLoading={(loading) => {
 										setLoading(loading);
@@ -310,6 +357,10 @@ class Iframe extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (!this.state.loading && prevState.loading) {
 			Liferay.fire('modalIframeLoaded', {src: this.state.src});
+
+			if (this.props.onOpen) {
+				this.props.onOpen();
+			}
 		}
 	}
 
@@ -345,6 +396,10 @@ class Iframe extends React.Component {
 				}
 			);
 		}
+
+		this.props.disableSelectedItems({
+			container: iframeWindow.document.body,
+		});
 
 		this.props.updateLoading(false);
 
@@ -391,8 +446,10 @@ Modal.propTypes = {
 	headerHTML: PropTypes.string,
 	id: PropTypes.string,
 	onClose: PropTypes.func,
+	onOpen: PropTypes.func,
 	onSelect: PropTypes.func,
 	selectEventName: PropTypes.string,
+	selectedData: PropTypes.array,
 	size: PropTypes.oneOf(['full-screen', 'lg', 'sm']),
 	title: PropTypes.string,
 	url: PropTypes.string,
