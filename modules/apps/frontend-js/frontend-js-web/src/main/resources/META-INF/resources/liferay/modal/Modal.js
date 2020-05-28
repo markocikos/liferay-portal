@@ -64,8 +64,7 @@ const openPortletModal = ({
 				if (titleTextElement) {
 					title = `${titleTextElement.outerHTML} - ${title}`;
 				}
-			}
-			else {
+			} else {
 				title = `${titleElement.textContent} - ${title}`;
 			}
 		}
@@ -145,8 +144,7 @@ const Modal = ({
 	const onButtonClick = ({formId, type}) => {
 		if (type === 'cancel') {
 			processClose();
-		}
-		else if (url && type === 'submit') {
+		} else if (url && type === 'submit') {
 			const iframe = document.querySelector('.liferay-modal iframe');
 
 			if (iframe) {
@@ -167,8 +165,7 @@ const Modal = ({
 					if (form) {
 						form.submit();
 					}
-				}
-				else if (forms.length >= 1) {
+				} else if (forms.length >= 1) {
 					forms[0].submit();
 				}
 			}
@@ -273,9 +270,11 @@ const Modal = ({
 								{loading && <ClayLoadingIndicator />}
 								<Iframe
 									disableSelectedItems={disableSelectedItems}
+									id={id}
 									iframeBodyCssClass={iframeBodyCssClass}
 									onOpen={onOpen}
 									processClose={processClose}
+									title={title}
 									updateLoading={(loading) => {
 										setLoading(loading);
 									}}
@@ -351,7 +350,12 @@ class Iframe extends React.Component {
 
 		iframeURL.searchParams.set(`_${namespace}_bodyCssClass`, bodyCssClass);
 
-		this.state = {loading: true, src: iframeURL.toString()};
+		this.state = {
+			id: props.id,
+			loading: true,
+			src: iframeURL.toString(),
+			title: props.title,
+		};
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -418,10 +422,11 @@ class Iframe extends React.Component {
 				className={classNames({
 					hide: this.state.loading,
 				})}
+				id={this.state.id}
 				onLoad={this.onLoadHandler}
 				ref={this.iframeRef}
 				src={this.state.src}
-				title={this.state.src}
+				title={this.state.title}
 			/>
 		);
 	}
