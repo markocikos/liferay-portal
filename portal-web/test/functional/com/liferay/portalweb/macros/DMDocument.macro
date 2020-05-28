@@ -1186,7 +1186,7 @@ definition {
 			attributeValue = "dialog-iframe-popup",
 			eventName = "modalIframeLoaded");
 
-		SelectFrame(locator1 = "DocumentsAndMediaSelectFolder#SELECT_FOLDER_IFRAME");
+		SelectFrame(locator1 = "IFrame#MODAL_IFRAME");
 
 		if ("${dmFolderName}" == "Home") {
 			if (IsElementPresent(locator1 = "//div[contains(@class,'portlet-body')]//form//ol[contains(@class,'breadcrumb')]//a[contains(.,'Home')]")) {
@@ -1307,7 +1307,7 @@ definition {
 			attributeValue = "dialog-iframe-popup",
 			eventName = "modalIframeLoaded");
 
-		SelectFrame(locator1 = "DocumentsAndMediaSelectFolder#SELECT_FOLDER_IFRAME");
+		SelectFrame(locator1 = "IFrame#MODAL_IFRAME");
 
 		var key_dmFolderName = "${dmSubFolderName}";
 
