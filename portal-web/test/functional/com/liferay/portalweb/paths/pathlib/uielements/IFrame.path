@@ -125,7 +125,7 @@
 </tr>
 <tr>
 	<td>SELECT_FOLDER</td>
-	<td>//iframe[contains(@id,'selectFolder_iframe')]</td>
+	<td>//iframe[contains(@id,'selectFolder')]</td>
 	<td></td>
 </tr>
 <tr>
