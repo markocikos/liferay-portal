@@ -31,7 +31,7 @@ const getToolbarSet = (toolbarSet) => {
 };
 
 const ClassicEditor = ({
-	contents = '',
+	contents = 'bar',
 	cssClass,
 	editorConfig,
 	initialToolbarSet,
