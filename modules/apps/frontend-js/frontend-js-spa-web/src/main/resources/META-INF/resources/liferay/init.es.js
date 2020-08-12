@@ -15,7 +15,7 @@
 'use strict';
 
 import {async} from 'metal';
-import {match} from 'metal-dom';
+import {delegate, match} from 'metal-dom';
 import {utils, version} from 'senna';
 import globals from 'senna/lib/globals/globals';
 
@@ -123,6 +123,22 @@ const initSPA = function () {
 			}
 		});
 	};
+
+	delegate(document, 'click', 'a', (event) => {
+		console.log('click ' + event.detail);
+
+		const url = event.delegateTarget.href;
+
+		if (event.detail > 1 && app.canNavigate(url)) {
+			console.log('preventing default for click ' + event.detail);
+
+			event.preventDefault();
+		}
+	});
+
+	delegate(document, 'dblclick', 'a', (event) => {
+		console.log('raw double click event');
+	});
 
 	Liferay.initComponentCache();
 

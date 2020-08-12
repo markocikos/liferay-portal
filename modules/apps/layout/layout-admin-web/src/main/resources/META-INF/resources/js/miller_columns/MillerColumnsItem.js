@@ -393,6 +393,9 @@ const MillerColumnsItem = ({
 						displayType="secondary"
 						href={action.url}
 						monospaced
+						onDoubleClick={() => {
+							console.log('react onDoubleClick event');
+						}}
 						outline
 					>
 						<ClayIcon symbol={action.icon} />
