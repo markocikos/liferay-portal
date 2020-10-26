@@ -51,7 +51,7 @@ SelectLayoutPageTemplateEntryDisplayContext selectLayoutPageTemplateEntryDisplay
 			%>
 
 				<li class="card-page-item col-md-4 col-sm-6">
-					<clay:horizontal-card-v2
+					<clay:horizontal-card
 						horizontalCard="<%= new SelectBasicTemplatesHorizontalCard(type, renderRequest, renderResponse) %>"
 					/>
 				</li>

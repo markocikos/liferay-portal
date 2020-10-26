@@ -112,6 +112,11 @@ public class SelectBasicTemplatesHorizontalCard implements HorizontalCard {
 	}
 
 	@Override
+	public boolean isInteractive() {
+		return true;
+	}
+
+	@Override
 	public boolean isSelectable() {
 		return false;
 	}
