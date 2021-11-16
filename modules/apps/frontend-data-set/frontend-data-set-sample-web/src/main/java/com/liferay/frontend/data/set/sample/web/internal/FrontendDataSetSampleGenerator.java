@@ -54,7 +54,9 @@ public class FrontendDataSetSampleGenerator {
 		}
 	}
 
-	private void _generateFrontendDataSetSample(long companyId) {
+	private void _generateFrontendDataSetSample(long companyId)
+		throws Exception {
+
 		if (_isFrontendDataSetSampleGenerated(companyId)) {
 			return;
 		}
@@ -88,19 +90,16 @@ public class FrontendDataSetSampleGenerator {
 							true, false, null, "Description", "description",
 							false, "String"),
 						ObjectFieldUtil.createObjectField(
-							true, false, null, "Date", "date", false,
-							"Date")));
+							true, false, null, "Date", "date", false, "Date")));
 
 			objectDefinition =
 				_objectDefinitionLocalService.publishCustomObjectDefinition(
-					user.getUserId(),
-					objectDefinition.getObjectDefinitionId());
+					user.getUserId(), objectDefinition.getObjectDefinitionId());
 		}
 
 		for (int i = 1; i <= 100; i++) {
 			_objectEntryLocalService.addObjectEntry(
-				user.getUserId(), 0,
-				objectDefinition.getObjectDefinitionId(),
+				user.getUserId(), 0, objectDefinition.getObjectDefinitionId(),
 				HashMapBuilder.<String, Serializable>put(
 					"date", new Date()
 				).put(
