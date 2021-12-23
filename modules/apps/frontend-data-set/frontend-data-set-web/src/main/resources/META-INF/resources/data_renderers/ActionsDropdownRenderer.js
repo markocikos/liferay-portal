@@ -29,34 +29,28 @@ import {openPermissionsModal, resolveModalSize} from '../utils/modals/index';
 
 const {MODAL_PERMISSIONS} = ACTION_ITEM_TARGETS;
 
-export function isLink(target, onClick) {
-	return !(target && target !== 'link') && !onClick;
-}
-
 export function handleAction(
-	{
-		confirmationMessage,
-		event,
-		itemId,
-		method,
-		onClick,
-		setLoading,
-		size,
-		successMessage,
-		target,
-		title,
-		url,
-	},
+	{action, event, itemId, method, onClick, setLoading, size, title, url},
 	{
 		executeAsyncItemAction,
 		highlightItems,
+		onActionDropdownItemClick,
 		openModal,
 		openSidePanel,
 		toggleItemInlineEdit,
 	}
 ) {
+	const {data, target} = action;
+
+	const confirmationMessage = data?.confirmationMessage;
+	const successMessage = data?.successMessage;
+
 	if (confirmationMessage && !confirm(confirmationMessage)) {
 		return;
+	}
+
+	if (onActionDropdownItemClick) {
+		onActionDropdownItemClick({action, event});
 	}
 
 	if (target?.includes('modal')) {
@@ -121,36 +115,32 @@ export function handleAction(
 }
 
 function ActionItem({
+	action,
 	closeMenu,
-	data,
 	handleAction,
-	href,
-	icon,
 	itemId,
-	label,
 	method,
 	onClick,
 	setLoading,
 	size,
-	target,
 	title,
 }) {
 	const context = useContext(DataSetContext);
+
+	const {href, icon, label, target} = action;
 
 	function handleClickOnLink(event) {
 		event.preventDefault();
 
 		handleAction(
 			{
-				confirmationMessage: data?.confirmationMessage,
+				action,
 				event,
 				itemId,
 				method,
 				onClick,
 				setLoading,
 				size: size || 'lg',
-				successMessage: data?.successMessage,
-				target,
 				title,
 				url: href,
 			},
@@ -160,7 +150,7 @@ function ActionItem({
 		closeMenu();
 	}
 
-	const link = isLink(target, onClick);
+	const link = target === 'link';
 
 	return (
 		<ClayDropDown.Item
@@ -292,7 +282,7 @@ function ActionsDropdownRenderer({actions, itemData, itemId}) {
 			action.label
 		);
 
-		return isLink(action.target, action.onClick) ? (
+		return action.target === 'link' ? (
 			<ClayLink
 				className="btn btn-secondary btn-sm"
 				href={formatActionURL(action.href, itemData)}
@@ -309,13 +299,12 @@ function ActionsDropdownRenderer({actions, itemData, itemId}) {
 				onClick={(event) => {
 					handleAction(
 						{
+							action,
 							event,
 							itemId,
 							method: action.method ?? actionData?.method,
 							setLoading,
-							successMessage: actionData?.successMessage,
 							url: formatActionURL(action.href, itemData),
-							...action,
 						},
 						context
 					);
@@ -348,7 +337,7 @@ function ActionsDropdownRenderer({actions, itemData, itemId}) {
 
 			return (
 				<ActionItem
-					{...item}
+					action={item}
 					closeMenu={() => setMenuActive(false)}
 					handleAction={handleAction}
 					href={item.href && formatActionURL(item.href, itemData)}
