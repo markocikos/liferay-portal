@@ -12,11 +12,16 @@
  * details.
  */
 
-import {DataSet} from '@liferay/frontend-data-set-web';
-import React from 'react';
-
-const FDSTag = (props) => {
-	return <DataSet {...props} />;
-};
-
-export default FDSTag;
+export default function propsTransformer({
+	additionalProps: {sampleMessage},
+	...otherProps
+}) {
+	return {
+		...otherProps,
+		onActionDropdownItemClick({action}) {
+			if (action.data.id === 'sampleMessage') {
+				alert(sampleMessage);
+			}
+		},
+	};
+}
