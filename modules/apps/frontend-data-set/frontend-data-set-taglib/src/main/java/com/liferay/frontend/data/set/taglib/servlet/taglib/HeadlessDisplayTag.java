@@ -342,8 +342,6 @@ public class HeadlessDisplayTag extends BaseDisplayTag {
 
 		props.put("portletId", PortalUtil.getPortletId(getRequest()));
 
-		System.out.println(PortalUtil.getPortletId(getRequest()));
-
 		props.put("portletURL", _portletURL.toString());
 		props.put("selectedItems", getSelectedItems());
 
