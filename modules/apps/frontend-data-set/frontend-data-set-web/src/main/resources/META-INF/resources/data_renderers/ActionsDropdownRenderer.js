@@ -30,7 +30,18 @@ import {openPermissionsModal, resolveModalSize} from '../utils/modals/index';
 const {MODAL_PERMISSIONS} = ACTION_ITEM_TARGETS;
 
 export function handleAction(
-	{action, event, itemId, method, onClick, setLoading, size, title, url},
+	{
+		action,
+		event,
+		itemData,
+		itemId,
+		method,
+		onClick,
+		setLoading,
+		size,
+		title,
+		url,
+	},
 	{
 		executeAsyncItemAction,
 		highlightItems,
@@ -50,7 +61,7 @@ export function handleAction(
 	}
 
 	if (onActionDropdownItemClick) {
-		onActionDropdownItemClick({action, event});
+		onActionDropdownItemClick({action, event, itemData, url});
 	}
 
 	if (target?.includes('modal')) {
@@ -118,6 +129,8 @@ function ActionItem({
 	action,
 	closeMenu,
 	handleAction,
+	href,
+	itemData,
 	itemId,
 	method,
 	onClick,
@@ -127,7 +140,7 @@ function ActionItem({
 }) {
 	const context = useContext(DataSetContext);
 
-	const {href, icon, label, target} = action;
+	const {icon, label, target} = action;
 
 	function handleClickOnLink(event) {
 		event.preventDefault();
@@ -136,6 +149,7 @@ function ActionItem({
 			{
 				action,
 				event,
+				itemData,
 				itemId,
 				method,
 				onClick,
@@ -301,6 +315,7 @@ function ActionsDropdownRenderer({actions, itemData, itemId}) {
 						{
 							action,
 							event,
+							itemData,
 							itemId,
 							method: action.method ?? actionData?.method,
 							setLoading,
@@ -341,6 +356,7 @@ function ActionsDropdownRenderer({actions, itemData, itemId}) {
 					closeMenu={() => setMenuActive(false)}
 					handleAction={handleAction}
 					href={item.href && formatActionURL(item.href, itemData)}
+					itemData={itemData}
 					itemId={itemId}
 					key={i}
 					method={item.method ?? item.data?.method}
