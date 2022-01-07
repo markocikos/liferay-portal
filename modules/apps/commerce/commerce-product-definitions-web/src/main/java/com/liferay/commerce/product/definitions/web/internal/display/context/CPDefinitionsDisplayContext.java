@@ -156,7 +156,7 @@ public class CPDefinitionsDisplayContext
 				).buildString(),
 				"trash", "delete", "delete",
 				LanguageUtil.get(httpServletRequest, "delete"), "delete",
-				null));
+				"link"));
 	}
 
 	public String getChannelItemSelectorUrl() throws PortalException {
@@ -224,7 +224,7 @@ public class CPDefinitionsDisplayContext
 					CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS
 				).buildString(),
 				"view", "view", LanguageUtil.get(httpServletRequest, "view"),
-				"get", null, null),
+				"get", null, "link"),
 			new ClayDataSetActionDropdownItem(
 				"/o/headless-commerce-admin-catalog/v1.0/products/{productId}",
 				"trash", "delete",

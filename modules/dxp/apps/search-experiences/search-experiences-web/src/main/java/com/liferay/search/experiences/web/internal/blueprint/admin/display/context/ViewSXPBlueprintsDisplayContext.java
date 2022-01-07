@@ -86,7 +86,7 @@ public class ViewSXPBlueprintsDisplayContext {
 				).buildString(),
 				"pencil", "edit",
 				LanguageUtil.get(_sxpRequestHelper.getRequest(), "edit"), "get",
-				null, null),
+				null, "link"),
 			new FDSActionDropdownItem(
 				getAPIURL() + "/{id}/export", "download", "export",
 				LanguageUtil.get(_sxpRequestHelper.getRequest(), "export"),

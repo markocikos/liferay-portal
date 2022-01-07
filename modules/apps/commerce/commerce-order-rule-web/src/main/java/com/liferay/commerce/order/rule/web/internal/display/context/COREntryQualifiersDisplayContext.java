@@ -207,7 +207,7 @@ public class COREntryQualifiersDisplayContext extends COREntryDisplayContext {
 			new ClayDataSetActionDropdownItem(
 				portletURL, "pencil", "edit",
 				LanguageUtil.get(httpServletRequest, "edit"), "get", null,
-				null);
+				"link");
 
 		if (sidePanel) {
 			clayDataSetActionDropdownItem.setTarget("sidePanel");
@@ -235,7 +235,7 @@ public class COREntryQualifiersDisplayContext extends COREntryDisplayContext {
 			new ClayDataSetActionDropdownItem(
 				portletURL, "pencil", "edit",
 				LanguageUtil.get(httpServletRequest, "edit"), "get", null,
-				null);
+				"link");
 
 		if (sidePanel) {
 			clayDataSetActionDropdownItem.setTarget("sidePanel");

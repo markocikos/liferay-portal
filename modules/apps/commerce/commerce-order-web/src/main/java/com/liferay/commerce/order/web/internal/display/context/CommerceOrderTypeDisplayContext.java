@@ -110,7 +110,7 @@ public class CommerceOrderTypeDisplayContext {
 					"commerceOrderTypeId", "{id}"
 				).buildString(),
 				"pencil", "edit", LanguageUtil.get(httpServletRequest, "edit"),
-				"get", null, null),
+				"get", null, "link"),
 			new ClayDataSetActionDropdownItem(
 				null, "trash", "delete",
 				LanguageUtil.get(httpServletRequest, "delete"), "delete",

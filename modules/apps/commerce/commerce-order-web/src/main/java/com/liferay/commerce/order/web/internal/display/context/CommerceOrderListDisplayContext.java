@@ -86,7 +86,7 @@ public class CommerceOrderListDisplayContext {
 				"trash", "delete", "delete",
 				LanguageUtil.get(
 					_commerceOrderRequestHelper.getRequest(), "delete"),
-				"delete", null));
+				"delete", "link"));
 	}
 
 	public List<ClayDataSetActionDropdownItem>
@@ -108,7 +108,7 @@ public class CommerceOrderListDisplayContext {
 				"view", "view",
 				LanguageUtil.get(
 					_commerceOrderRequestHelper.getRequest(), "view"),
-				"get", null, null),
+				"get", null, "link"),
 			new ClayDataSetActionDropdownItem(
 				"/o/headless-commerce-admin-order/v1.0/orders/{id}", "trash",
 				"delete",

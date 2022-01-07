@@ -267,7 +267,7 @@ public class CommerceDiscountDisplayContext extends BasePricingDisplayContext {
 					"usePercentage", "{usePercentage}"
 				).buildString(),
 				"pencil", "edit", LanguageUtil.get(httpServletRequest, "edit"),
-				"get", null, null),
+				"get", null, "link"),
 			new ClayDataSetActionDropdownItem(
 				null, "trash", "delete",
 				LanguageUtil.get(httpServletRequest, "delete"), "delete",
@@ -644,7 +644,7 @@ public class CommerceDiscountDisplayContext extends BasePricingDisplayContext {
 			new ClayDataSetActionDropdownItem(
 				portletURL, "pencil", "edit",
 				LanguageUtil.get(httpServletRequest, "edit"), "get", null,
-				null);
+				"link");
 
 		if (sidePanel) {
 			clayDataSetActionDropdownItem.setTarget("sidePanel");

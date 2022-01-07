@@ -96,7 +96,7 @@ public class ViewObjectEntriesDisplayContext {
 				).buildString(),
 				"view", "view",
 				LanguageUtil.get(_objectRequestHelper.getRequest(), "view"),
-				"get", null, null),
+				"get", null, "link"),
 			new ClayDataSetActionDropdownItem(
 				LanguageUtil.get(
 					_objectRequestHelper.getRequest(),

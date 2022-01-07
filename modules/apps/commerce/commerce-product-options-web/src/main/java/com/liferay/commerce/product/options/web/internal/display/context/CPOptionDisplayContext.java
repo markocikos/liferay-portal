@@ -267,7 +267,7 @@ public class CPOptionDisplayContext {
 			new ClayDataSetActionDropdownItem(
 				portletURL, "pencil", "edit",
 				LanguageUtil.get(cpRequestHelper.getRequest(), "edit"), "get",
-				null, null);
+				null, "link");
 
 		if (sidePanel) {
 			clayDataSetActionDropdownItem.setTarget("sidePanel");

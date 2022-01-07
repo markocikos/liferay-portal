@@ -88,7 +88,7 @@ public class ViewObjectDefinitionsDisplayContext {
 				).buildString(),
 				"view", "view",
 				LanguageUtil.get(_objectRequestHelper.getRequest(), "view"),
-				"get", null, null));
+				"get", null, "link"));
 
 		if (_ffExportImportObjectDefinitionTypeConfigurationActivator.
 				enabled()) {
@@ -98,7 +98,7 @@ public class ViewObjectDefinitionsDisplayContext {
 					resourceURL.toString(), "export", "export",
 					LanguageUtil.get(
 						_objectRequestHelper.getRequest(), "export-as-json"),
-					"get", null, null));
+					"get", null, "link"));
 		}
 
 		clayDataSetActionDropdownItems.add(

@@ -102,7 +102,7 @@ public class CommerceOrderTypeQualifiersDisplayContext
 			new ClayDataSetActionDropdownItem(
 				portletURL, "pencil", "edit",
 				LanguageUtil.get(httpServletRequest, "edit"), "get", null,
-				null);
+				"link");
 
 		if (sidePanel) {
 			clayDataSetActionDropdownItem.setTarget("sidePanel");
