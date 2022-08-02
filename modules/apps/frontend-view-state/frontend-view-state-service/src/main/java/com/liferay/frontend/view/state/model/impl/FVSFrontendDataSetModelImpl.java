@@ -22,6 +22,7 @@ import com.liferay.frontend.view.state.model.FVSFrontendDataSetModel;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.User;
@@ -60,6 +61,7 @@ import java.util.function.Function;
  * @see FVSFrontendDataSetImpl
  * @generated
  */
+@JSON(strict = true)
 public class FVSFrontendDataSetModelImpl
 	extends BaseModelImpl<FVSFrontendDataSet>
 	implements FVSFrontendDataSetModel {
@@ -353,6 +355,7 @@ public class FVSFrontendDataSetModelImpl
 			(Map)attributeSetterBiConsumers);
 	}
 
+	@JSON
 	@Override
 	public long getMvccVersion() {
 		return _mvccVersion;
@@ -367,6 +370,7 @@ public class FVSFrontendDataSetModelImpl
 		_mvccVersion = mvccVersion;
 	}
 
+	@JSON
 	@Override
 	public String getUuid() {
 		if (_uuid == null) {
@@ -395,6 +399,7 @@ public class FVSFrontendDataSetModelImpl
 		return getColumnOriginalValue("uuid_");
 	}
 
+	@JSON
 	@Override
 	public long getFVSFrontendDataSetId() {
 		return _fvsFrontendDataSetId;
@@ -409,6 +414,7 @@ public class FVSFrontendDataSetModelImpl
 		_fvsFrontendDataSetId = fvsFrontendDataSetId;
 	}
 
+	@JSON
 	@Override
 	public long getCompanyId() {
 		return _companyId;
@@ -433,6 +439,7 @@ public class FVSFrontendDataSetModelImpl
 			this.<Long>getColumnOriginalValue("companyId"));
 	}
 
+	@JSON
 	@Override
 	public long getUserId() {
 		return _userId;
@@ -472,6 +479,7 @@ public class FVSFrontendDataSetModelImpl
 		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("userId"));
 	}
 
+	@JSON
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
@@ -491,6 +499,7 @@ public class FVSFrontendDataSetModelImpl
 		_userName = userName;
 	}
 
+	@JSON
 	@Override
 	public Date getCreateDate() {
 		return _createDate;
@@ -505,6 +514,7 @@ public class FVSFrontendDataSetModelImpl
 		_createDate = createDate;
 	}
 
+	@JSON
 	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
@@ -525,6 +535,7 @@ public class FVSFrontendDataSetModelImpl
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	@Override
 	public long getFVSEntryId() {
 		return _fvsEntryId;
@@ -539,6 +550,7 @@ public class FVSFrontendDataSetModelImpl
 		_fvsEntryId = fvsEntryId;
 	}
 
+	@JSON
 	@Override
 	public String getFDSName() {
 		if (_fdsName == null) {
@@ -567,6 +579,7 @@ public class FVSFrontendDataSetModelImpl
 		return getColumnOriginalValue("fdsName");
 	}
 
+	@JSON
 	@Override
 	public String getName() {
 		if (_name == null) {
@@ -586,6 +599,7 @@ public class FVSFrontendDataSetModelImpl
 		_name = name;
 	}
 
+	@JSON
 	@Override
 	public long getPlid() {
 		return _plid;
@@ -609,6 +623,7 @@ public class FVSFrontendDataSetModelImpl
 		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("plid"));
 	}
 
+	@JSON
 	@Override
 	public String getPortletId() {
 		if (_portletId == null) {
