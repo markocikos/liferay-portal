@@ -21,7 +21,7 @@
 
 		<column name="viewState" type="String" />
 	</entity>
-	<entity local-service="true" name="FVSFrontendDataSet" remote-service="false" trash-enabled="false" uuid="true">
+	<entity local-service="true" name="FVSFrontendDataSet" remote-service="true" trash-enabled="false" uuid="true">
 
 		<!-- PK fields -->
 
