@@ -21,11 +21,11 @@
 
 		<column name="viewState" type="String" />
 	</entity>
-	<entity local-service="true" name="FVSFrontendDataSetEntry" remote-service="false" trash-enabled="false" uuid="true">
+	<entity local-service="true" name="FVSFrontendDataSet" remote-service="false" trash-enabled="false" uuid="true">
 
 		<!-- PK fields -->
 
-		<column container-model="true" name="fvsFrontendDataSetEntryId" primary="true" type="long" />
+		<column container-model="true" name="fvsFrontendDataSetId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
