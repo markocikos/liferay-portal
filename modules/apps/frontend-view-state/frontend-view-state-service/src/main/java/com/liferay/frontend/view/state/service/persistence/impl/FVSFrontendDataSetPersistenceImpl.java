@@ -14,13 +14,13 @@
 
 package com.liferay.frontend.view.state.service.persistence.impl;
 
-import com.liferay.frontend.view.state.exception.NoSuchFVSFrontendDataSetEntryException;
-import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntry;
-import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntryTable;
-import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryImpl;
-import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryModelImpl;
-import com.liferay.frontend.view.state.service.persistence.FVSFrontendDataSetEntryPersistence;
-import com.liferay.frontend.view.state.service.persistence.FVSFrontendDataSetEntryUtil;
+import com.liferay.frontend.view.state.exception.NoSuchFVSFrontendDataSetException;
+import com.liferay.frontend.view.state.model.FVSFrontendDataSet;
+import com.liferay.frontend.view.state.model.FVSFrontendDataSetTable;
+import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetImpl;
+import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetModelImpl;
+import com.liferay.frontend.view.state.service.persistence.FVSFrontendDataSetPersistence;
+import com.liferay.frontend.view.state.service.persistence.FVSFrontendDataSetUtil;
 import com.liferay.frontend.view.state.service.persistence.impl.constants.FVSPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -68,7 +68,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * The persistence implementation for the fvs frontend data set entry service.
+ * The persistence implementation for the fvs frontend data set service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -78,19 +78,19 @@ import org.osgi.service.component.annotations.Reference;
  * @generated
  */
 @Component(
-	service = {FVSFrontendDataSetEntryPersistence.class, BasePersistence.class}
+	service = {FVSFrontendDataSetPersistence.class, BasePersistence.class}
 )
-public class FVSFrontendDataSetEntryPersistenceImpl
-	extends BasePersistenceImpl<FVSFrontendDataSetEntry>
-	implements FVSFrontendDataSetEntryPersistence {
+public class FVSFrontendDataSetPersistenceImpl
+	extends BasePersistenceImpl<FVSFrontendDataSet>
+	implements FVSFrontendDataSetPersistence {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use <code>FVSFrontendDataSetEntryUtil</code> to access the fvs frontend data set entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>FVSFrontendDataSetUtil</code> to access the fvs frontend data set persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY =
-		FVSFrontendDataSetEntryImpl.class.getName();
+		FVSFrontendDataSetImpl.class.getName();
 
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
 		FINDER_CLASS_NAME_ENTITY + ".List1";
@@ -106,74 +106,74 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	private FinderPath _finderPathCountByUuid;
 
 	/**
-	 * Returns all the fvs frontend data set entries where uuid = &#63;.
+	 * Returns all the fvs frontend data sets where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the matching fvs frontend data set entries
+	 * @return the matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid(String uuid) {
+	public List<FVSFrontendDataSet> findByUuid(String uuid) {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the fvs frontend data set entries where uuid = &#63;.
+	 * Returns a range of all the fvs frontend data sets where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
-	 * @return the range of matching fvs frontend data set entries
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
+	 * @return the range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid(
+	public List<FVSFrontendDataSet> findByUuid(
 		String uuid, int start, int end) {
 
 		return findByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries where uuid = &#63;.
+	 * Returns an ordered range of all the fvs frontend data sets where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching fvs frontend data set entries
+	 * @return the ordered range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid(
+	public List<FVSFrontendDataSet> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		return findByUuid(uuid, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries where uuid = &#63;.
+	 * Returns an ordered range of all the fvs frontend data sets where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching fvs frontend data set entries
+	 * @return the ordered range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid(
+	public List<FVSFrontendDataSet> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+		OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
@@ -194,15 +194,15 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
-		List<FVSFrontendDataSetEntry> list = null;
+		List<FVSFrontendDataSet> list = null;
 
 		if (useFinderCache) {
-			list = (List<FVSFrontendDataSetEntry>)finderCache.getResult(
+			list = (List<FVSFrontendDataSet>)finderCache.getResult(
 				finderPath, finderArgs);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry : list) {
-					if (!uuid.equals(fvsFrontendDataSetEntry.getUuid())) {
+				for (FVSFrontendDataSet fvsFrontendDataSet : list) {
+					if (!uuid.equals(fvsFrontendDataSet.getUuid())) {
 						list = null;
 
 						break;
@@ -222,7 +222,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				sb = new StringBundler(3);
 			}
 
-			sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE);
+			sb.append(_SQL_SELECT_FVSFRONTENDDATASET_WHERE);
 
 			boolean bindUuid = false;
 
@@ -240,7 +240,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
 			else {
-				sb.append(FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+				sb.append(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = sb.toString();
@@ -258,7 +258,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 					queryPos.add(uuid);
 				}
 
-				list = (List<FVSFrontendDataSetEntry>)QueryUtil.list(
+				list = (List<FVSFrontendDataSet>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -279,24 +279,24 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first fvs frontend data set entry in the ordered set where uuid = &#63;.
+	 * Returns the first fvs frontend data set in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @return the first matching fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByUuid_First(
+	public FVSFrontendDataSet findByUuid_First(
 			String uuid,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_First(
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByUuid_First(
 			uuid, orderByComparator);
 
-		if (fvsFrontendDataSetEntry != null) {
-			return fvsFrontendDataSetEntry;
+		if (fvsFrontendDataSet != null) {
+			return fvsFrontendDataSet;
 		}
 
 		StringBundler sb = new StringBundler(4);
@@ -308,22 +308,21 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetException(sb.toString());
 	}
 
 	/**
-	 * Returns the first fvs frontend data set entry in the ordered set where uuid = &#63;.
+	 * Returns the first fvs frontend data set in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching fvs frontend data set entry, or <code>null</code> if a matching fvs frontend data set entry could not be found
+	 * @return the first matching fvs frontend data set, or <code>null</code> if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByUuid_First(
-		String uuid,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+	public FVSFrontendDataSet fetchByUuid_First(
+		String uuid, OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
-		List<FVSFrontendDataSetEntry> list = findByUuid(
+		List<FVSFrontendDataSet> list = findByUuid(
 			uuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -334,24 +333,24 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last fvs frontend data set entry in the ordered set where uuid = &#63;.
+	 * Returns the last fvs frontend data set in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @return the last matching fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByUuid_Last(
+	public FVSFrontendDataSet findByUuid_Last(
 			String uuid,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_Last(
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByUuid_Last(
 			uuid, orderByComparator);
 
-		if (fvsFrontendDataSetEntry != null) {
-			return fvsFrontendDataSetEntry;
+		if (fvsFrontendDataSet != null) {
+			return fvsFrontendDataSet;
 		}
 
 		StringBundler sb = new StringBundler(4);
@@ -363,20 +362,19 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetException(sb.toString());
 	}
 
 	/**
-	 * Returns the last fvs frontend data set entry in the ordered set where uuid = &#63;.
+	 * Returns the last fvs frontend data set in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching fvs frontend data set entry, or <code>null</code> if a matching fvs frontend data set entry could not be found
+	 * @return the last matching fvs frontend data set, or <code>null</code> if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByUuid_Last(
-		String uuid,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+	public FVSFrontendDataSet fetchByUuid_Last(
+		String uuid, OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		int count = countByUuid(uuid);
 
@@ -384,7 +382,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			return null;
 		}
 
-		List<FVSFrontendDataSetEntry> list = findByUuid(
+		List<FVSFrontendDataSet> list = findByUuid(
 			uuid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -395,42 +393,39 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the fvs frontend data set entries before and after the current fvs frontend data set entry in the ordered set where uuid = &#63;.
+	 * Returns the fvs frontend data sets before and after the current fvs frontend data set in the ordered set where uuid = &#63;.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key of the current fvs frontend data set entry
+	 * @param fvsFrontendDataSetId the primary key of the current fvs frontend data set
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @return the previous, current, and next fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry[] findByUuid_PrevAndNext(
-			long fvsFrontendDataSetEntryId, String uuid,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet[] findByUuid_PrevAndNext(
+			long fvsFrontendDataSetId, String uuid,
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
 		uuid = Objects.toString(uuid, "");
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = findByPrimaryKey(
-			fvsFrontendDataSetEntryId);
+		FVSFrontendDataSet fvsFrontendDataSet = findByPrimaryKey(
+			fvsFrontendDataSetId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			FVSFrontendDataSetEntry[] array =
-				new FVSFrontendDataSetEntryImpl[3];
+			FVSFrontendDataSet[] array = new FVSFrontendDataSetImpl[3];
 
 			array[0] = getByUuid_PrevAndNext(
-				session, fvsFrontendDataSetEntry, uuid, orderByComparator,
-				true);
+				session, fvsFrontendDataSet, uuid, orderByComparator, true);
 
-			array[1] = fvsFrontendDataSetEntry;
+			array[1] = fvsFrontendDataSet;
 
 			array[2] = getByUuid_PrevAndNext(
-				session, fvsFrontendDataSetEntry, uuid, orderByComparator,
-				false);
+				session, fvsFrontendDataSet, uuid, orderByComparator, false);
 
 			return array;
 		}
@@ -442,10 +437,9 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		}
 	}
 
-	protected FVSFrontendDataSetEntry getByUuid_PrevAndNext(
-		Session session, FVSFrontendDataSetEntry fvsFrontendDataSetEntry,
-		String uuid,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+	protected FVSFrontendDataSet getByUuid_PrevAndNext(
+		Session session, FVSFrontendDataSet fvsFrontendDataSet, String uuid,
+		OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean previous) {
 
 		StringBundler sb = null;
@@ -459,7 +453,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			sb = new StringBundler(3);
 		}
 
-		sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE);
+		sb.append(_SQL_SELECT_FVSFRONTENDDATASET_WHERE);
 
 		boolean bindUuid = false;
 
@@ -529,7 +523,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			}
 		}
 		else {
-			sb.append(FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+			sb.append(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = sb.toString();
@@ -548,13 +542,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
 					orderByComparator.getOrderByConditionValues(
-						fvsFrontendDataSetEntry)) {
+						fvsFrontendDataSet)) {
 
 				queryPos.add(orderByConditionValue);
 			}
 		}
 
-		List<FVSFrontendDataSetEntry> list = query.list();
+		List<FVSFrontendDataSet> list = query.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -565,24 +559,24 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the fvs frontend data set entries where uuid = &#63; from the database.
+	 * Removes all the fvs frontend data sets where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 */
 	@Override
 	public void removeByUuid(String uuid) {
-		for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry :
+		for (FVSFrontendDataSet fvsFrontendDataSet :
 				findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
-			remove(fvsFrontendDataSetEntry);
+			remove(fvsFrontendDataSet);
 		}
 	}
 
 	/**
-	 * Returns the number of fvs frontend data set entries where uuid = &#63;.
+	 * Returns the number of fvs frontend data sets where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the number of matching fvs frontend data set entries
+	 * @return the number of matching fvs frontend data sets
 	 */
 	@Override
 	public int countByUuid(String uuid) {
@@ -597,7 +591,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		if (count == null) {
 			StringBundler sb = new StringBundler(2);
 
-			sb.append(_SQL_COUNT_FVSFRONTENDDATASETENTRY_WHERE);
+			sb.append(_SQL_COUNT_FVSFRONTENDDATASET_WHERE);
 
 			boolean bindUuid = false;
 
@@ -641,92 +635,90 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_UUID_UUID_2 =
-		"fvsFrontendDataSetEntry.uuid = ?";
+		"fvsFrontendDataSet.uuid = ?";
 
 	private static final String _FINDER_COLUMN_UUID_UUID_3 =
-		"(fvsFrontendDataSetEntry.uuid IS NULL OR fvsFrontendDataSetEntry.uuid = '')";
+		"(fvsFrontendDataSet.uuid IS NULL OR fvsFrontendDataSet.uuid = '')";
 
 	private FinderPath _finderPathWithPaginationFindByUuid_C;
 	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
 	private FinderPath _finderPathCountByUuid_C;
 
 	/**
-	 * Returns all the fvs frontend data set entries where uuid = &#63; and companyId = &#63;.
+	 * Returns all the fvs frontend data sets where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the matching fvs frontend data set entries
+	 * @return the matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid_C(
-		String uuid, long companyId) {
-
+	public List<FVSFrontendDataSet> findByUuid_C(String uuid, long companyId) {
 		return findByUuid_C(
 			uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the fvs frontend data set entries where uuid = &#63; and companyId = &#63;.
+	 * Returns a range of all the fvs frontend data sets where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
-	 * @return the range of matching fvs frontend data set entries
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
+	 * @return the range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid_C(
+	public List<FVSFrontendDataSet> findByUuid_C(
 		String uuid, long companyId, int start, int end) {
 
 		return findByUuid_C(uuid, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the fvs frontend data sets where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching fvs frontend data set entries
+	 * @return the ordered range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid_C(
+	public List<FVSFrontendDataSet> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		return findByUuid_C(
 			uuid, companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the fvs frontend data sets where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching fvs frontend data set entries
+	 * @return the ordered range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByUuid_C(
+	public List<FVSFrontendDataSet> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+		OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
@@ -749,16 +741,16 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			};
 		}
 
-		List<FVSFrontendDataSetEntry> list = null;
+		List<FVSFrontendDataSet> list = null;
 
 		if (useFinderCache) {
-			list = (List<FVSFrontendDataSetEntry>)finderCache.getResult(
+			list = (List<FVSFrontendDataSet>)finderCache.getResult(
 				finderPath, finderArgs);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry : list) {
-					if (!uuid.equals(fvsFrontendDataSetEntry.getUuid()) ||
-						(companyId != fvsFrontendDataSetEntry.getCompanyId())) {
+				for (FVSFrontendDataSet fvsFrontendDataSet : list) {
+					if (!uuid.equals(fvsFrontendDataSet.getUuid()) ||
+						(companyId != fvsFrontendDataSet.getCompanyId())) {
 
 						list = null;
 
@@ -779,7 +771,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				sb = new StringBundler(4);
 			}
 
-			sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE);
+			sb.append(_SQL_SELECT_FVSFRONTENDDATASET_WHERE);
 
 			boolean bindUuid = false;
 
@@ -799,7 +791,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
 			else {
-				sb.append(FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+				sb.append(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = sb.toString();
@@ -819,7 +811,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 				queryPos.add(companyId);
 
-				list = (List<FVSFrontendDataSetEntry>)QueryUtil.list(
+				list = (List<FVSFrontendDataSet>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -840,25 +832,25 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first fvs frontend data set in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @return the first matching fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByUuid_C_First(
+	public FVSFrontendDataSet findByUuid_C_First(
 			String uuid, long companyId,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_C_First(
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByUuid_C_First(
 			uuid, companyId, orderByComparator);
 
-		if (fvsFrontendDataSetEntry != null) {
-			return fvsFrontendDataSetEntry;
+		if (fvsFrontendDataSet != null) {
+			return fvsFrontendDataSet;
 		}
 
 		StringBundler sb = new StringBundler(6);
@@ -873,23 +865,23 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetException(sb.toString());
 	}
 
 	/**
-	 * Returns the first fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first fvs frontend data set in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching fvs frontend data set entry, or <code>null</code> if a matching fvs frontend data set entry could not be found
+	 * @return the first matching fvs frontend data set, or <code>null</code> if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByUuid_C_First(
+	public FVSFrontendDataSet fetchByUuid_C_First(
 		String uuid, long companyId,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
-		List<FVSFrontendDataSetEntry> list = findByUuid_C(
+		List<FVSFrontendDataSet> list = findByUuid_C(
 			uuid, companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -900,25 +892,25 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last fvs frontend data set in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @return the last matching fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByUuid_C_Last(
+	public FVSFrontendDataSet findByUuid_C_Last(
 			String uuid, long companyId,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_C_Last(
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByUuid_C_Last(
 			uuid, companyId, orderByComparator);
 
-		if (fvsFrontendDataSetEntry != null) {
-			return fvsFrontendDataSetEntry;
+		if (fvsFrontendDataSet != null) {
+			return fvsFrontendDataSet;
 		}
 
 		StringBundler sb = new StringBundler(6);
@@ -933,21 +925,21 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetException(sb.toString());
 	}
 
 	/**
-	 * Returns the last fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last fvs frontend data set in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching fvs frontend data set entry, or <code>null</code> if a matching fvs frontend data set entry could not be found
+	 * @return the last matching fvs frontend data set, or <code>null</code> if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByUuid_C_Last(
+	public FVSFrontendDataSet fetchByUuid_C_Last(
 		String uuid, long companyId,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		int count = countByUuid_C(uuid, companyId);
 
@@ -955,7 +947,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			return null;
 		}
 
-		List<FVSFrontendDataSetEntry> list = findByUuid_C(
+		List<FVSFrontendDataSet> list = findByUuid_C(
 			uuid, companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -966,43 +958,42 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the fvs frontend data set entries before and after the current fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the fvs frontend data sets before and after the current fvs frontend data set in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key of the current fvs frontend data set entry
+	 * @param fvsFrontendDataSetId the primary key of the current fvs frontend data set
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @return the previous, current, and next fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry[] findByUuid_C_PrevAndNext(
-			long fvsFrontendDataSetEntryId, String uuid, long companyId,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet[] findByUuid_C_PrevAndNext(
+			long fvsFrontendDataSetId, String uuid, long companyId,
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
 		uuid = Objects.toString(uuid, "");
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = findByPrimaryKey(
-			fvsFrontendDataSetEntryId);
+		FVSFrontendDataSet fvsFrontendDataSet = findByPrimaryKey(
+			fvsFrontendDataSetId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			FVSFrontendDataSetEntry[] array =
-				new FVSFrontendDataSetEntryImpl[3];
+			FVSFrontendDataSet[] array = new FVSFrontendDataSetImpl[3];
 
 			array[0] = getByUuid_C_PrevAndNext(
-				session, fvsFrontendDataSetEntry, uuid, companyId,
-				orderByComparator, true);
+				session, fvsFrontendDataSet, uuid, companyId, orderByComparator,
+				true);
 
-			array[1] = fvsFrontendDataSetEntry;
+			array[1] = fvsFrontendDataSet;
 
 			array[2] = getByUuid_C_PrevAndNext(
-				session, fvsFrontendDataSetEntry, uuid, companyId,
-				orderByComparator, false);
+				session, fvsFrontendDataSet, uuid, companyId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -1014,10 +1005,9 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		}
 	}
 
-	protected FVSFrontendDataSetEntry getByUuid_C_PrevAndNext(
-		Session session, FVSFrontendDataSetEntry fvsFrontendDataSetEntry,
-		String uuid, long companyId,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+	protected FVSFrontendDataSet getByUuid_C_PrevAndNext(
+		Session session, FVSFrontendDataSet fvsFrontendDataSet, String uuid,
+		long companyId, OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean previous) {
 
 		StringBundler sb = null;
@@ -1031,7 +1021,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			sb = new StringBundler(4);
 		}
 
-		sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE);
+		sb.append(_SQL_SELECT_FVSFRONTENDDATASET_WHERE);
 
 		boolean bindUuid = false;
 
@@ -1103,7 +1093,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			}
 		}
 		else {
-			sb.append(FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+			sb.append(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = sb.toString();
@@ -1124,13 +1114,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
 					orderByComparator.getOrderByConditionValues(
-						fvsFrontendDataSetEntry)) {
+						fvsFrontendDataSet)) {
 
 				queryPos.add(orderByConditionValue);
 			}
 		}
 
-		List<FVSFrontendDataSetEntry> list = query.list();
+		List<FVSFrontendDataSet> list = query.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1141,28 +1131,28 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the fvs frontend data set entries where uuid = &#63; and companyId = &#63; from the database.
+	 * Removes all the fvs frontend data sets where uuid = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 */
 	@Override
 	public void removeByUuid_C(String uuid, long companyId) {
-		for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry :
+		for (FVSFrontendDataSet fvsFrontendDataSet :
 				findByUuid_C(
 					uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 					null)) {
 
-			remove(fvsFrontendDataSetEntry);
+			remove(fvsFrontendDataSet);
 		}
 	}
 
 	/**
-	 * Returns the number of fvs frontend data set entries where uuid = &#63; and companyId = &#63;.
+	 * Returns the number of fvs frontend data sets where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the number of matching fvs frontend data set entries
+	 * @return the number of matching fvs frontend data sets
 	 */
 	@Override
 	public int countByUuid_C(String uuid, long companyId) {
@@ -1177,7 +1167,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		if (count == null) {
 			StringBundler sb = new StringBundler(3);
 
-			sb.append(_SQL_COUNT_FVSFRONTENDDATASETENTRY_WHERE);
+			sb.append(_SQL_COUNT_FVSFRONTENDDATASET_WHERE);
 
 			boolean bindUuid = false;
 
@@ -1225,29 +1215,29 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 =
-		"fvsFrontendDataSetEntry.uuid = ? AND ";
+		"fvsFrontendDataSet.uuid = ? AND ";
 
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 =
-		"(fvsFrontendDataSetEntry.uuid IS NULL OR fvsFrontendDataSetEntry.uuid = '') AND ";
+		"(fvsFrontendDataSet.uuid IS NULL OR fvsFrontendDataSet.uuid = '') AND ";
 
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 =
-		"fvsFrontendDataSetEntry.companyId = ?";
+		"fvsFrontendDataSet.companyId = ?";
 
 	private FinderPath _finderPathWithPaginationFindByU_F_P_P;
 	private FinderPath _finderPathWithoutPaginationFindByU_F_P_P;
 	private FinderPath _finderPathCountByU_F_P_P;
 
 	/**
-	 * Returns all the fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns all the fvs frontend data sets where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
-	 * @return the matching fvs frontend data set entries
+	 * @return the matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByU_F_P_P(
+	public List<FVSFrontendDataSet> findByU_F_P_P(
 		long userId, String fdsName, long plid, String portletId) {
 
 		return findByU_F_P_P(
@@ -1256,22 +1246,22 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns a range of all the fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns a range of all the fvs frontend data sets where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
-	 * @return the range of matching fvs frontend data set entries
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
+	 * @return the range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByU_F_P_P(
+	public List<FVSFrontendDataSet> findByU_F_P_P(
 		long userId, String fdsName, long plid, String portletId, int start,
 		int end) {
 
@@ -1280,25 +1270,25 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns an ordered range of all the fvs frontend data sets where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching fvs frontend data set entries
+	 * @return the ordered range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByU_F_P_P(
+	public List<FVSFrontendDataSet> findByU_F_P_P(
 		long userId, String fdsName, long plid, String portletId, int start,
-		int end, OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		int end, OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		return findByU_F_P_P(
 			userId, fdsName, plid, portletId, start, end, orderByComparator,
@@ -1306,26 +1296,26 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns an ordered range of all the fvs frontend data sets where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching fvs frontend data set entries
+	 * @return the ordered range of matching fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findByU_F_P_P(
+	public List<FVSFrontendDataSet> findByU_F_P_P(
 		long userId, String fdsName, long plid, String portletId, int start,
-		int end, OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+		int end, OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean useFinderCache) {
 
 		fdsName = Objects.toString(fdsName, "");
@@ -1349,19 +1339,18 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			};
 		}
 
-		List<FVSFrontendDataSetEntry> list = null;
+		List<FVSFrontendDataSet> list = null;
 
 		if (useFinderCache) {
-			list = (List<FVSFrontendDataSetEntry>)finderCache.getResult(
+			list = (List<FVSFrontendDataSet>)finderCache.getResult(
 				finderPath, finderArgs);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry : list) {
-					if ((userId != fvsFrontendDataSetEntry.getUserId()) ||
-						!fdsName.equals(fvsFrontendDataSetEntry.getFdsName()) ||
-						(plid != fvsFrontendDataSetEntry.getPlid()) ||
-						!portletId.equals(
-							fvsFrontendDataSetEntry.getPortletId())) {
+				for (FVSFrontendDataSet fvsFrontendDataSet : list) {
+					if ((userId != fvsFrontendDataSet.getUserId()) ||
+						!fdsName.equals(fvsFrontendDataSet.getFdsName()) ||
+						(plid != fvsFrontendDataSet.getPlid()) ||
+						!portletId.equals(fvsFrontendDataSet.getPortletId())) {
 
 						list = null;
 
@@ -1382,7 +1371,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				sb = new StringBundler(6);
 			}
 
-			sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE);
+			sb.append(_SQL_SELECT_FVSFRONTENDDATASET_WHERE);
 
 			sb.append(_FINDER_COLUMN_U_F_P_P_USERID_2);
 
@@ -1415,7 +1404,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
 			else {
-				sb.append(FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+				sb.append(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = sb.toString();
@@ -1441,7 +1430,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 					queryPos.add(portletId);
 				}
 
-				list = (List<FVSFrontendDataSetEntry>)QueryUtil.list(
+				list = (List<FVSFrontendDataSet>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -1462,27 +1451,27 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns the first fvs frontend data set in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @return the first matching fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByU_F_P_P_First(
+	public FVSFrontendDataSet findByU_F_P_P_First(
 			long userId, String fdsName, long plid, String portletId,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByU_F_P_P_First(
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByU_F_P_P_First(
 			userId, fdsName, plid, portletId, orderByComparator);
 
-		if (fvsFrontendDataSetEntry != null) {
-			return fvsFrontendDataSetEntry;
+		if (fvsFrontendDataSet != null) {
+			return fvsFrontendDataSet;
 		}
 
 		StringBundler sb = new StringBundler(10);
@@ -1503,25 +1492,25 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetException(sb.toString());
 	}
 
 	/**
-	 * Returns the first fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns the first fvs frontend data set in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching fvs frontend data set entry, or <code>null</code> if a matching fvs frontend data set entry could not be found
+	 * @return the first matching fvs frontend data set, or <code>null</code> if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByU_F_P_P_First(
+	public FVSFrontendDataSet fetchByU_F_P_P_First(
 		long userId, String fdsName, long plid, String portletId,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
-		List<FVSFrontendDataSetEntry> list = findByU_F_P_P(
+		List<FVSFrontendDataSet> list = findByU_F_P_P(
 			userId, fdsName, plid, portletId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1532,27 +1521,27 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns the last fvs frontend data set in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @return the last matching fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByU_F_P_P_Last(
+	public FVSFrontendDataSet findByU_F_P_P_Last(
 			long userId, String fdsName, long plid, String portletId,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByU_F_P_P_Last(
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByU_F_P_P_Last(
 			userId, fdsName, plid, portletId, orderByComparator);
 
-		if (fvsFrontendDataSetEntry != null) {
-			return fvsFrontendDataSetEntry;
+		if (fvsFrontendDataSet != null) {
+			return fvsFrontendDataSet;
 		}
 
 		StringBundler sb = new StringBundler(10);
@@ -1573,23 +1562,23 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetException(sb.toString());
 	}
 
 	/**
-	 * Returns the last fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns the last fvs frontend data set in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching fvs frontend data set entry, or <code>null</code> if a matching fvs frontend data set entry could not be found
+	 * @return the last matching fvs frontend data set, or <code>null</code> if a matching fvs frontend data set could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByU_F_P_P_Last(
+	public FVSFrontendDataSet fetchByU_F_P_P_Last(
 		long userId, String fdsName, long plid, String portletId,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		int count = countByU_F_P_P(userId, fdsName, plid, portletId);
 
@@ -1597,7 +1586,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			return null;
 		}
 
-		List<FVSFrontendDataSetEntry> list = findByU_F_P_P(
+		List<FVSFrontendDataSet> list = findByU_F_P_P(
 			userId, fdsName, plid, portletId, count - 1, count,
 			orderByComparator);
 
@@ -1609,47 +1598,46 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the fvs frontend data set entries before and after the current fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns the fvs frontend data sets before and after the current fvs frontend data set in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key of the current fvs frontend data set entry
+	 * @param fvsFrontendDataSetId the primary key of the current fvs frontend data set
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @return the previous, current, and next fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry[] findByU_F_P_P_PrevAndNext(
-			long fvsFrontendDataSetEntryId, long userId, String fdsName,
-			long plid, String portletId,
-			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet[] findByU_F_P_P_PrevAndNext(
+			long fvsFrontendDataSetId, long userId, String fdsName, long plid,
+			String portletId,
+			OrderByComparator<FVSFrontendDataSet> orderByComparator)
+		throws NoSuchFVSFrontendDataSetException {
 
 		fdsName = Objects.toString(fdsName, "");
 		portletId = Objects.toString(portletId, "");
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = findByPrimaryKey(
-			fvsFrontendDataSetEntryId);
+		FVSFrontendDataSet fvsFrontendDataSet = findByPrimaryKey(
+			fvsFrontendDataSetId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			FVSFrontendDataSetEntry[] array =
-				new FVSFrontendDataSetEntryImpl[3];
+			FVSFrontendDataSet[] array = new FVSFrontendDataSetImpl[3];
 
 			array[0] = getByU_F_P_P_PrevAndNext(
-				session, fvsFrontendDataSetEntry, userId, fdsName, plid,
-				portletId, orderByComparator, true);
+				session, fvsFrontendDataSet, userId, fdsName, plid, portletId,
+				orderByComparator, true);
 
-			array[1] = fvsFrontendDataSetEntry;
+			array[1] = fvsFrontendDataSet;
 
 			array[2] = getByU_F_P_P_PrevAndNext(
-				session, fvsFrontendDataSetEntry, userId, fdsName, plid,
-				portletId, orderByComparator, false);
+				session, fvsFrontendDataSet, userId, fdsName, plid, portletId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1661,10 +1649,10 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		}
 	}
 
-	protected FVSFrontendDataSetEntry getByU_F_P_P_PrevAndNext(
-		Session session, FVSFrontendDataSetEntry fvsFrontendDataSetEntry,
-		long userId, String fdsName, long plid, String portletId,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+	protected FVSFrontendDataSet getByU_F_P_P_PrevAndNext(
+		Session session, FVSFrontendDataSet fvsFrontendDataSet, long userId,
+		String fdsName, long plid, String portletId,
+		OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean previous) {
 
 		StringBundler sb = null;
@@ -1678,7 +1666,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			sb = new StringBundler(6);
 		}
 
-		sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE);
+		sb.append(_SQL_SELECT_FVSFRONTENDDATASET_WHERE);
 
 		sb.append(_FINDER_COLUMN_U_F_P_P_USERID_2);
 
@@ -1763,7 +1751,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			}
 		}
 		else {
-			sb.append(FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+			sb.append(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = sb.toString();
@@ -1790,13 +1778,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
 					orderByComparator.getOrderByConditionValues(
-						fvsFrontendDataSetEntry)) {
+						fvsFrontendDataSet)) {
 
 				queryPos.add(orderByConditionValue);
 			}
 		}
 
-		List<FVSFrontendDataSetEntry> list = query.list();
+		List<FVSFrontendDataSet> list = query.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1807,7 +1795,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63; from the database.
+	 * Removes all the fvs frontend data sets where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63; from the database.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
@@ -1818,23 +1806,23 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	public void removeByU_F_P_P(
 		long userId, String fdsName, long plid, String portletId) {
 
-		for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry :
+		for (FVSFrontendDataSet fvsFrontendDataSet :
 				findByU_F_P_P(
 					userId, fdsName, plid, portletId, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null)) {
 
-			remove(fvsFrontendDataSetEntry);
+			remove(fvsFrontendDataSet);
 		}
 	}
 
 	/**
-	 * Returns the number of fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
+	 * Returns the number of fvs frontend data sets where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param fdsName the fds name
 	 * @param plid the plid
 	 * @param portletId the portlet ID
-	 * @return the number of matching fvs frontend data set entries
+	 * @return the number of matching fvs frontend data sets
 	 */
 	@Override
 	public int countByU_F_P_P(
@@ -1852,7 +1840,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		if (count == null) {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(_SQL_COUNT_FVSFRONTENDDATASETENTRY_WHERE);
+			sb.append(_SQL_COUNT_FVSFRONTENDDATASET_WHERE);
 
 			sb.append(_FINDER_COLUMN_U_F_P_P_USERID_2);
 
@@ -1919,83 +1907,79 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_U_F_P_P_USERID_2 =
-		"fvsFrontendDataSetEntry.userId = ? AND ";
+		"fvsFrontendDataSet.userId = ? AND ";
 
 	private static final String _FINDER_COLUMN_U_F_P_P_FDSNAME_2 =
-		"fvsFrontendDataSetEntry.fdsName = ? AND ";
+		"fvsFrontendDataSet.fdsName = ? AND ";
 
 	private static final String _FINDER_COLUMN_U_F_P_P_FDSNAME_3 =
-		"(fvsFrontendDataSetEntry.fdsName IS NULL OR fvsFrontendDataSetEntry.fdsName = '') AND ";
+		"(fvsFrontendDataSet.fdsName IS NULL OR fvsFrontendDataSet.fdsName = '') AND ";
 
 	private static final String _FINDER_COLUMN_U_F_P_P_PLID_2 =
-		"fvsFrontendDataSetEntry.plid = ? AND ";
+		"fvsFrontendDataSet.plid = ? AND ";
 
 	private static final String _FINDER_COLUMN_U_F_P_P_PORTLETID_2 =
-		"fvsFrontendDataSetEntry.portletId = ?";
+		"fvsFrontendDataSet.portletId = ?";
 
 	private static final String _FINDER_COLUMN_U_F_P_P_PORTLETID_3 =
-		"(fvsFrontendDataSetEntry.portletId IS NULL OR fvsFrontendDataSetEntry.portletId = '')";
+		"(fvsFrontendDataSet.portletId IS NULL OR fvsFrontendDataSet.portletId = '')";
 
-	public FVSFrontendDataSetEntryPersistenceImpl() {
+	public FVSFrontendDataSetPersistenceImpl() {
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
 
 		dbColumnNames.put("uuid", "uuid_");
 
 		setDBColumnNames(dbColumnNames);
 
-		setModelClass(FVSFrontendDataSetEntry.class);
+		setModelClass(FVSFrontendDataSet.class);
 
-		setModelImplClass(FVSFrontendDataSetEntryImpl.class);
+		setModelImplClass(FVSFrontendDataSetImpl.class);
 		setModelPKClass(long.class);
 
-		setTable(FVSFrontendDataSetEntryTable.INSTANCE);
+		setTable(FVSFrontendDataSetTable.INSTANCE);
 	}
 
 	/**
-	 * Caches the fvs frontend data set entry in the entity cache if it is enabled.
+	 * Caches the fvs frontend data set in the entity cache if it is enabled.
 	 *
-	 * @param fvsFrontendDataSetEntry the fvs frontend data set entry
+	 * @param fvsFrontendDataSet the fvs frontend data set
 	 */
 	@Override
-	public void cacheResult(FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
+	public void cacheResult(FVSFrontendDataSet fvsFrontendDataSet) {
 		entityCache.putResult(
-			FVSFrontendDataSetEntryImpl.class,
-			fvsFrontendDataSetEntry.getPrimaryKey(), fvsFrontendDataSetEntry);
+			FVSFrontendDataSetImpl.class, fvsFrontendDataSet.getPrimaryKey(),
+			fvsFrontendDataSet);
 	}
 
 	private int _valueObjectFinderCacheListThreshold;
 
 	/**
-	 * Caches the fvs frontend data set entries in the entity cache if it is enabled.
+	 * Caches the fvs frontend data sets in the entity cache if it is enabled.
 	 *
-	 * @param fvsFrontendDataSetEntries the fvs frontend data set entries
+	 * @param fvsFrontendDataSets the fvs frontend data sets
 	 */
 	@Override
-	public void cacheResult(
-		List<FVSFrontendDataSetEntry> fvsFrontendDataSetEntries) {
-
+	public void cacheResult(List<FVSFrontendDataSet> fvsFrontendDataSets) {
 		if ((_valueObjectFinderCacheListThreshold == 0) ||
 			((_valueObjectFinderCacheListThreshold > 0) &&
-			 (fvsFrontendDataSetEntries.size() >
+			 (fvsFrontendDataSets.size() >
 				 _valueObjectFinderCacheListThreshold))) {
 
 			return;
 		}
 
-		for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry :
-				fvsFrontendDataSetEntries) {
-
+		for (FVSFrontendDataSet fvsFrontendDataSet : fvsFrontendDataSets) {
 			if (entityCache.getResult(
-					FVSFrontendDataSetEntryImpl.class,
-					fvsFrontendDataSetEntry.getPrimaryKey()) == null) {
+					FVSFrontendDataSetImpl.class,
+					fvsFrontendDataSet.getPrimaryKey()) == null) {
 
-				cacheResult(fvsFrontendDataSetEntry);
+				cacheResult(fvsFrontendDataSet);
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all fvs frontend data set entries.
+	 * Clears the cache for all fvs frontend data sets.
 	 *
 	 * <p>
 	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
@@ -2003,115 +1987,109 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 */
 	@Override
 	public void clearCache() {
-		entityCache.clearCache(FVSFrontendDataSetEntryImpl.class);
+		entityCache.clearCache(FVSFrontendDataSetImpl.class);
 
-		finderCache.clearCache(FVSFrontendDataSetEntryImpl.class);
+		finderCache.clearCache(FVSFrontendDataSetImpl.class);
 	}
 
 	/**
-	 * Clears the cache for the fvs frontend data set entry.
+	 * Clears the cache for the fvs frontend data set.
 	 *
 	 * <p>
 	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
-	public void clearCache(FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
+	public void clearCache(FVSFrontendDataSet fvsFrontendDataSet) {
 		entityCache.removeResult(
-			FVSFrontendDataSetEntryImpl.class, fvsFrontendDataSetEntry);
+			FVSFrontendDataSetImpl.class, fvsFrontendDataSet);
 	}
 
 	@Override
-	public void clearCache(
-		List<FVSFrontendDataSetEntry> fvsFrontendDataSetEntries) {
-
-		for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry :
-				fvsFrontendDataSetEntries) {
-
+	public void clearCache(List<FVSFrontendDataSet> fvsFrontendDataSets) {
+		for (FVSFrontendDataSet fvsFrontendDataSet : fvsFrontendDataSets) {
 			entityCache.removeResult(
-				FVSFrontendDataSetEntryImpl.class, fvsFrontendDataSetEntry);
+				FVSFrontendDataSetImpl.class, fvsFrontendDataSet);
 		}
 	}
 
 	@Override
 	public void clearCache(Set<Serializable> primaryKeys) {
-		finderCache.clearCache(FVSFrontendDataSetEntryImpl.class);
+		finderCache.clearCache(FVSFrontendDataSetImpl.class);
 
 		for (Serializable primaryKey : primaryKeys) {
-			entityCache.removeResult(
-				FVSFrontendDataSetEntryImpl.class, primaryKey);
+			entityCache.removeResult(FVSFrontendDataSetImpl.class, primaryKey);
 		}
 	}
 
 	/**
-	 * Creates a new fvs frontend data set entry with the primary key. Does not add the fvs frontend data set entry to the database.
+	 * Creates a new fvs frontend data set with the primary key. Does not add the fvs frontend data set to the database.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key for the new fvs frontend data set entry
-	 * @return the new fvs frontend data set entry
+	 * @param fvsFrontendDataSetId the primary key for the new fvs frontend data set
+	 * @return the new fvs frontend data set
 	 */
 	@Override
-	public FVSFrontendDataSetEntry create(long fvsFrontendDataSetEntryId) {
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry =
-			new FVSFrontendDataSetEntryImpl();
+	public FVSFrontendDataSet create(long fvsFrontendDataSetId) {
+		FVSFrontendDataSet fvsFrontendDataSet = new FVSFrontendDataSetImpl();
 
-		fvsFrontendDataSetEntry.setNew(true);
-		fvsFrontendDataSetEntry.setPrimaryKey(fvsFrontendDataSetEntryId);
+		fvsFrontendDataSet.setNew(true);
+		fvsFrontendDataSet.setPrimaryKey(fvsFrontendDataSetId);
 
 		String uuid = _portalUUID.generate();
 
-		fvsFrontendDataSetEntry.setUuid(uuid);
+		fvsFrontendDataSet.setUuid(uuid);
 
-		fvsFrontendDataSetEntry.setCompanyId(CompanyThreadLocal.getCompanyId());
+		fvsFrontendDataSet.setCompanyId(CompanyThreadLocal.getCompanyId());
 
-		return fvsFrontendDataSetEntry;
+		return fvsFrontendDataSet;
 	}
 
 	/**
-	 * Removes the fvs frontend data set entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the fvs frontend data set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
-	 * @return the fvs frontend data set entry that was removed
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @param fvsFrontendDataSetId the primary key of the fvs frontend data set
+	 * @return the fvs frontend data set that was removed
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry remove(long fvsFrontendDataSetEntryId)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet remove(long fvsFrontendDataSetId)
+		throws NoSuchFVSFrontendDataSetException {
 
-		return remove((Serializable)fvsFrontendDataSetEntryId);
+		return remove((Serializable)fvsFrontendDataSetId);
 	}
 
 	/**
-	 * Removes the fvs frontend data set entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the fvs frontend data set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the fvs frontend data set entry
-	 * @return the fvs frontend data set entry that was removed
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @param primaryKey the primary key of the fvs frontend data set
+	 * @return the fvs frontend data set that was removed
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry remove(Serializable primaryKey)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet remove(Serializable primaryKey)
+		throws NoSuchFVSFrontendDataSetException {
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			FVSFrontendDataSetEntry fvsFrontendDataSetEntry =
-				(FVSFrontendDataSetEntry)session.get(
-					FVSFrontendDataSetEntryImpl.class, primaryKey);
+			FVSFrontendDataSet fvsFrontendDataSet =
+				(FVSFrontendDataSet)session.get(
+					FVSFrontendDataSetImpl.class, primaryKey);
 
-			if (fvsFrontendDataSetEntry == null) {
+			if (fvsFrontendDataSet == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchFVSFrontendDataSetEntryException(
+				throw new NoSuchFVSFrontendDataSetException(
 					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			return remove(fvsFrontendDataSetEntry);
+			return remove(fvsFrontendDataSet);
 		}
-		catch (NoSuchFVSFrontendDataSetEntryException noSuchEntityException) {
+		catch (NoSuchFVSFrontendDataSetException noSuchEntityException) {
 			throw noSuchEntityException;
 		}
 		catch (Exception exception) {
@@ -2123,22 +2101,22 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	@Override
-	protected FVSFrontendDataSetEntry removeImpl(
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
+	protected FVSFrontendDataSet removeImpl(
+		FVSFrontendDataSet fvsFrontendDataSet) {
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (!session.contains(fvsFrontendDataSetEntry)) {
-				fvsFrontendDataSetEntry = (FVSFrontendDataSetEntry)session.get(
-					FVSFrontendDataSetEntryImpl.class,
-					fvsFrontendDataSetEntry.getPrimaryKeyObj());
+			if (!session.contains(fvsFrontendDataSet)) {
+				fvsFrontendDataSet = (FVSFrontendDataSet)session.get(
+					FVSFrontendDataSetImpl.class,
+					fvsFrontendDataSet.getPrimaryKeyObj());
 			}
 
-			if (fvsFrontendDataSetEntry != null) {
-				session.delete(fvsFrontendDataSetEntry);
+			if (fvsFrontendDataSet != null) {
+				session.delete(fvsFrontendDataSet);
 			}
 		}
 		catch (Exception exception) {
@@ -2148,45 +2126,43 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			closeSession(session);
 		}
 
-		if (fvsFrontendDataSetEntry != null) {
-			clearCache(fvsFrontendDataSetEntry);
+		if (fvsFrontendDataSet != null) {
+			clearCache(fvsFrontendDataSet);
 		}
 
-		return fvsFrontendDataSetEntry;
+		return fvsFrontendDataSet;
 	}
 
 	@Override
-	public FVSFrontendDataSetEntry updateImpl(
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
+	public FVSFrontendDataSet updateImpl(
+		FVSFrontendDataSet fvsFrontendDataSet) {
 
-		boolean isNew = fvsFrontendDataSetEntry.isNew();
+		boolean isNew = fvsFrontendDataSet.isNew();
 
-		if (!(fvsFrontendDataSetEntry instanceof
-				FVSFrontendDataSetEntryModelImpl)) {
-
+		if (!(fvsFrontendDataSet instanceof FVSFrontendDataSetModelImpl)) {
 			InvocationHandler invocationHandler = null;
 
-			if (ProxyUtil.isProxyClass(fvsFrontendDataSetEntry.getClass())) {
+			if (ProxyUtil.isProxyClass(fvsFrontendDataSet.getClass())) {
 				invocationHandler = ProxyUtil.getInvocationHandler(
-					fvsFrontendDataSetEntry);
+					fvsFrontendDataSet);
 
 				throw new IllegalArgumentException(
-					"Implement ModelWrapper in fvsFrontendDataSetEntry proxy " +
+					"Implement ModelWrapper in fvsFrontendDataSet proxy " +
 						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
-				"Implement ModelWrapper in custom FVSFrontendDataSetEntry implementation " +
-					fvsFrontendDataSetEntry.getClass());
+				"Implement ModelWrapper in custom FVSFrontendDataSet implementation " +
+					fvsFrontendDataSet.getClass());
 		}
 
-		FVSFrontendDataSetEntryModelImpl fvsFrontendDataSetEntryModelImpl =
-			(FVSFrontendDataSetEntryModelImpl)fvsFrontendDataSetEntry;
+		FVSFrontendDataSetModelImpl fvsFrontendDataSetModelImpl =
+			(FVSFrontendDataSetModelImpl)fvsFrontendDataSet;
 
-		if (Validator.isNull(fvsFrontendDataSetEntry.getUuid())) {
+		if (Validator.isNull(fvsFrontendDataSet.getUuid())) {
 			String uuid = _portalUUID.generate();
 
-			fvsFrontendDataSetEntry.setUuid(uuid);
+			fvsFrontendDataSet.setUuid(uuid);
 		}
 
 		ServiceContext serviceContext =
@@ -2194,22 +2170,22 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		Date date = new Date();
 
-		if (isNew && (fvsFrontendDataSetEntry.getCreateDate() == null)) {
+		if (isNew && (fvsFrontendDataSet.getCreateDate() == null)) {
 			if (serviceContext == null) {
-				fvsFrontendDataSetEntry.setCreateDate(date);
+				fvsFrontendDataSet.setCreateDate(date);
 			}
 			else {
-				fvsFrontendDataSetEntry.setCreateDate(
+				fvsFrontendDataSet.setCreateDate(
 					serviceContext.getCreateDate(date));
 			}
 		}
 
-		if (!fvsFrontendDataSetEntryModelImpl.hasSetModifiedDate()) {
+		if (!fvsFrontendDataSetModelImpl.hasSetModifiedDate()) {
 			if (serviceContext == null) {
-				fvsFrontendDataSetEntry.setModifiedDate(date);
+				fvsFrontendDataSet.setModifiedDate(date);
 			}
 			else {
-				fvsFrontendDataSetEntry.setModifiedDate(
+				fvsFrontendDataSet.setModifiedDate(
 					serviceContext.getModifiedDate(date));
 			}
 		}
@@ -2220,12 +2196,11 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			session = openSession();
 
 			if (isNew) {
-				session.save(fvsFrontendDataSetEntry);
+				session.save(fvsFrontendDataSet);
 			}
 			else {
-				fvsFrontendDataSetEntry =
-					(FVSFrontendDataSetEntry)session.merge(
-						fvsFrontendDataSetEntry);
+				fvsFrontendDataSet = (FVSFrontendDataSet)session.merge(
+					fvsFrontendDataSet);
 			}
 		}
 		catch (Exception exception) {
@@ -2236,135 +2211,131 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 		}
 
 		entityCache.putResult(
-			FVSFrontendDataSetEntryImpl.class, fvsFrontendDataSetEntryModelImpl,
-			false, true);
+			FVSFrontendDataSetImpl.class, fvsFrontendDataSetModelImpl, false,
+			true);
 
 		if (isNew) {
-			fvsFrontendDataSetEntry.setNew(false);
+			fvsFrontendDataSet.setNew(false);
 		}
 
-		fvsFrontendDataSetEntry.resetOriginalValues();
+		fvsFrontendDataSet.resetOriginalValues();
 
-		return fvsFrontendDataSetEntry;
+		return fvsFrontendDataSet;
 	}
 
 	/**
-	 * Returns the fvs frontend data set entry with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
+	 * Returns the fvs frontend data set with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the fvs frontend data set entry
-	 * @return the fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @param primaryKey the primary key of the fvs frontend data set
+	 * @return the fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchFVSFrontendDataSetException {
 
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByPrimaryKey(
-			primaryKey);
+		FVSFrontendDataSet fvsFrontendDataSet = fetchByPrimaryKey(primaryKey);
 
-		if (fvsFrontendDataSetEntry == null) {
+		if (fvsFrontendDataSet == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchFVSFrontendDataSetEntryException(
+			throw new NoSuchFVSFrontendDataSetException(
 				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
-		return fvsFrontendDataSetEntry;
+		return fvsFrontendDataSet;
 	}
 
 	/**
-	 * Returns the fvs frontend data set entry with the primary key or throws a <code>NoSuchFVSFrontendDataSetEntryException</code> if it could not be found.
+	 * Returns the fvs frontend data set with the primary key or throws a <code>NoSuchFVSFrontendDataSetException</code> if it could not be found.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
-	 * @return the fvs frontend data set entry
-	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @param fvsFrontendDataSetId the primary key of the fvs frontend data set
+	 * @return the fvs frontend data set
+	 * @throws NoSuchFVSFrontendDataSetException if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry findByPrimaryKey(
-			long fvsFrontendDataSetEntryId)
-		throws NoSuchFVSFrontendDataSetEntryException {
+	public FVSFrontendDataSet findByPrimaryKey(long fvsFrontendDataSetId)
+		throws NoSuchFVSFrontendDataSetException {
 
-		return findByPrimaryKey((Serializable)fvsFrontendDataSetEntryId);
+		return findByPrimaryKey((Serializable)fvsFrontendDataSetId);
 	}
 
 	/**
-	 * Returns the fvs frontend data set entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the fvs frontend data set with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
-	 * @return the fvs frontend data set entry, or <code>null</code> if a fvs frontend data set entry with the primary key could not be found
+	 * @param fvsFrontendDataSetId the primary key of the fvs frontend data set
+	 * @return the fvs frontend data set, or <code>null</code> if a fvs frontend data set with the primary key could not be found
 	 */
 	@Override
-	public FVSFrontendDataSetEntry fetchByPrimaryKey(
-		long fvsFrontendDataSetEntryId) {
-
-		return fetchByPrimaryKey((Serializable)fvsFrontendDataSetEntryId);
+	public FVSFrontendDataSet fetchByPrimaryKey(long fvsFrontendDataSetId) {
+		return fetchByPrimaryKey((Serializable)fvsFrontendDataSetId);
 	}
 
 	/**
-	 * Returns all the fvs frontend data set entries.
+	 * Returns all the fvs frontend data sets.
 	 *
-	 * @return the fvs frontend data set entries
+	 * @return the fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findAll() {
+	public List<FVSFrontendDataSet> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the fvs frontend data set entries.
+	 * Returns a range of all the fvs frontend data sets.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
-	 * @return the range of fvs frontend data set entries
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
+	 * @return the range of fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findAll(int start, int end) {
+	public List<FVSFrontendDataSet> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries.
+	 * Returns an ordered range of all the fvs frontend data sets.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of fvs frontend data set entries
+	 * @return the ordered range of fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findAll(
+	public List<FVSFrontendDataSet> findAll(
 		int start, int end,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator) {
+		OrderByComparator<FVSFrontendDataSet> orderByComparator) {
 
 		return findAll(start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the fvs frontend data set entries.
+	 * Returns an ordered range of all the fvs frontend data sets.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetEntryModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>FVSFrontendDataSetModelImpl</code>.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of fvs frontend data set entries
-	 * @param end the upper bound of the range of fvs frontend data set entries (not inclusive)
+	 * @param start the lower bound of the range of fvs frontend data sets
+	 * @param end the upper bound of the range of fvs frontend data sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of fvs frontend data set entries
+	 * @return the ordered range of fvs frontend data sets
 	 */
 	@Override
-	public List<FVSFrontendDataSetEntry> findAll(
+	public List<FVSFrontendDataSet> findAll(
 		int start, int end,
-		OrderByComparator<FVSFrontendDataSetEntry> orderByComparator,
+		OrderByComparator<FVSFrontendDataSet> orderByComparator,
 		boolean useFinderCache) {
 
 		FinderPath finderPath = null;
@@ -2383,10 +2354,10 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<FVSFrontendDataSetEntry> list = null;
+		List<FVSFrontendDataSet> list = null;
 
 		if (useFinderCache) {
-			list = (List<FVSFrontendDataSetEntry>)finderCache.getResult(
+			list = (List<FVSFrontendDataSet>)finderCache.getResult(
 				finderPath, finderArgs);
 		}
 
@@ -2398,7 +2369,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				sb = new StringBundler(
 					2 + (orderByComparator.getOrderByFields().length * 2));
 
-				sb.append(_SQL_SELECT_FVSFRONTENDDATASETENTRY);
+				sb.append(_SQL_SELECT_FVSFRONTENDDATASET);
 
 				appendOrderByComparator(
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
@@ -2406,10 +2377,9 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				sql = sb.toString();
 			}
 			else {
-				sql = _SQL_SELECT_FVSFRONTENDDATASETENTRY;
+				sql = _SQL_SELECT_FVSFRONTENDDATASET;
 
-				sql = sql.concat(
-					FVSFrontendDataSetEntryModelImpl.ORDER_BY_JPQL);
+				sql = sql.concat(FVSFrontendDataSetModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2419,7 +2389,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 				Query query = session.createQuery(sql);
 
-				list = (List<FVSFrontendDataSetEntry>)QueryUtil.list(
+				list = (List<FVSFrontendDataSet>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -2440,20 +2410,20 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the fvs frontend data set entries from the database.
+	 * Removes all the fvs frontend data sets from the database.
 	 *
 	 */
 	@Override
 	public void removeAll() {
-		for (FVSFrontendDataSetEntry fvsFrontendDataSetEntry : findAll()) {
-			remove(fvsFrontendDataSetEntry);
+		for (FVSFrontendDataSet fvsFrontendDataSet : findAll()) {
+			remove(fvsFrontendDataSet);
 		}
 	}
 
 	/**
-	 * Returns the number of fvs frontend data set entries.
+	 * Returns the number of fvs frontend data sets.
 	 *
-	 * @return the number of fvs frontend data set entries
+	 * @return the number of fvs frontend data sets
 	 */
 	@Override
 	public int countAll() {
@@ -2467,7 +2437,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				session = openSession();
 
 				Query query = session.createQuery(
-					_SQL_COUNT_FVSFRONTENDDATASETENTRY);
+					_SQL_COUNT_FVSFRONTENDDATASET);
 
 				count = (Long)query.uniqueResult();
 
@@ -2497,21 +2467,21 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 	@Override
 	protected String getPKDBName() {
-		return "fvsFrontendDataSetEntryId";
+		return "fvsFrontendDataSetId";
 	}
 
 	@Override
 	protected String getSelectSQL() {
-		return _SQL_SELECT_FVSFRONTENDDATASETENTRY;
+		return _SQL_SELECT_FVSFRONTENDDATASET;
 	}
 
 	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
-		return FVSFrontendDataSetEntryModelImpl.TABLE_COLUMNS_MAP;
+		return FVSFrontendDataSetModelImpl.TABLE_COLUMNS_MAP;
 	}
 
 	/**
-	 * Initializes the fvs frontend data set entry persistence.
+	 * Initializes the fvs frontend data set persistence.
 	 */
 	@Activate
 	public void activate() {
@@ -2593,26 +2563,26 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 			},
 			new String[] {"userId", "fdsName", "plid", "portletId"}, false);
 
-		_setFVSFrontendDataSetEntryUtilPersistence(this);
+		_setFVSFrontendDataSetUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
-		_setFVSFrontendDataSetEntryUtilPersistence(null);
+		_setFVSFrontendDataSetUtilPersistence(null);
 
-		entityCache.removeCache(FVSFrontendDataSetEntryImpl.class.getName());
+		entityCache.removeCache(FVSFrontendDataSetImpl.class.getName());
 	}
 
-	private void _setFVSFrontendDataSetEntryUtilPersistence(
-		FVSFrontendDataSetEntryPersistence fvsFrontendDataSetEntryPersistence) {
+	private void _setFVSFrontendDataSetUtilPersistence(
+		FVSFrontendDataSetPersistence fvsFrontendDataSetPersistence) {
 
 		try {
-			Field field = FVSFrontendDataSetEntryUtil.class.getDeclaredField(
+			Field field = FVSFrontendDataSetUtil.class.getDeclaredField(
 				"_persistence");
 
 			field.setAccessible(true);
 
-			field.set(null, fvsFrontendDataSetEntryPersistence);
+			field.set(null, fvsFrontendDataSetPersistence);
 		}
 		catch (ReflectiveOperationException reflectiveOperationException) {
 			throw new RuntimeException(reflectiveOperationException);
@@ -2651,29 +2621,28 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	@Reference
 	protected FinderCache finderCache;
 
-	private static final String _SQL_SELECT_FVSFRONTENDDATASETENTRY =
-		"SELECT fvsFrontendDataSetEntry FROM FVSFrontendDataSetEntry fvsFrontendDataSetEntry";
+	private static final String _SQL_SELECT_FVSFRONTENDDATASET =
+		"SELECT fvsFrontendDataSet FROM FVSFrontendDataSet fvsFrontendDataSet";
 
-	private static final String _SQL_SELECT_FVSFRONTENDDATASETENTRY_WHERE =
-		"SELECT fvsFrontendDataSetEntry FROM FVSFrontendDataSetEntry fvsFrontendDataSetEntry WHERE ";
+	private static final String _SQL_SELECT_FVSFRONTENDDATASET_WHERE =
+		"SELECT fvsFrontendDataSet FROM FVSFrontendDataSet fvsFrontendDataSet WHERE ";
 
-	private static final String _SQL_COUNT_FVSFRONTENDDATASETENTRY =
-		"SELECT COUNT(fvsFrontendDataSetEntry) FROM FVSFrontendDataSetEntry fvsFrontendDataSetEntry";
+	private static final String _SQL_COUNT_FVSFRONTENDDATASET =
+		"SELECT COUNT(fvsFrontendDataSet) FROM FVSFrontendDataSet fvsFrontendDataSet";
 
-	private static final String _SQL_COUNT_FVSFRONTENDDATASETENTRY_WHERE =
-		"SELECT COUNT(fvsFrontendDataSetEntry) FROM FVSFrontendDataSetEntry fvsFrontendDataSetEntry WHERE ";
+	private static final String _SQL_COUNT_FVSFRONTENDDATASET_WHERE =
+		"SELECT COUNT(fvsFrontendDataSet) FROM FVSFrontendDataSet fvsFrontendDataSet WHERE ";
 
-	private static final String _ORDER_BY_ENTITY_ALIAS =
-		"fvsFrontendDataSetEntry.";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "fvsFrontendDataSet.";
 
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
-		"No FVSFrontendDataSetEntry exists with the primary key ";
+		"No FVSFrontendDataSet exists with the primary key ";
 
 	private static final String _NO_SUCH_ENTITY_WITH_KEY =
-		"No FVSFrontendDataSetEntry exists with the key {";
+		"No FVSFrontendDataSet exists with the key {";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		FVSFrontendDataSetEntryPersistenceImpl.class);
+		FVSFrontendDataSetPersistenceImpl.class);
 
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(
 		new String[] {"uuid"});
@@ -2687,7 +2656,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	private PortalUUID _portalUUID;
 
 	@Reference
-	private FVSFrontendDataSetEntryModelArgumentsResolver
-		_fvsFrontendDataSetEntryModelArgumentsResolver;
+	private FVSFrontendDataSetModelArgumentsResolver
+		_fvsFrontendDataSetModelArgumentsResolver;
 
 }

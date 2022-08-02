@@ -3,7 +3,7 @@
 
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="com.liferay.frontend.view.state.model.FVSEntry" />
-	<import class="com.liferay.frontend.view.state.model.FVSFrontendDataSetEntry" />
+	<import class="com.liferay.frontend.view.state.model.FVSFrontendDataSet" />
 	<class dynamic-update="true" name="com.liferay.frontend.view.state.model.impl.FVSEntryImpl" table="FVSEntry">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="fvsEntryId" type="long">
 			<generator class="assigned" />
@@ -17,8 +17,8 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="viewState" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
 	</class>
-	<class dynamic-update="true" name="com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryImpl" table="FVSFrontendDataSetEntry">
-		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="fvsFrontendDataSetEntryId" type="long">
+	<class dynamic-update="true" name="com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetImpl" table="FVSFrontendDataSet">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="fvsFrontendDataSetId" type="long">
 			<generator class="assigned" />
 		</id>
 		<version access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" name="mvccVersion" type="long" />

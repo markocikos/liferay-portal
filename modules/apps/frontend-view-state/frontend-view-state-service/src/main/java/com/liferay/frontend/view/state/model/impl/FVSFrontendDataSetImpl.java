@@ -17,6 +17,5 @@ package com.liferay.frontend.view.state.model.impl;
 /**
  * @author Brian Wing Shun Chan
  */
-public class FVSFrontendDataSetEntryImpl
-	extends FVSFrontendDataSetEntryBaseImpl {
+public class FVSFrontendDataSetImpl extends FVSFrontendDataSetBaseImpl {
 }

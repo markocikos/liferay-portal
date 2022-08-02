@@ -21,34 +21,31 @@ import com.liferay.portal.kernel.util.Accessor;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
- * The extended model interface for the FVSFrontendDataSetEntry service. Represents a row in the &quot;FVSFrontendDataSetEntry&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the FVSFrontendDataSet service. Represents a row in the &quot;FVSFrontendDataSet&quot; database table, with each column mapped to a property of this class.
  *
  * @author Brian Wing Shun Chan
- * @see FVSFrontendDataSetEntryModel
+ * @see FVSFrontendDataSetModel
  * @generated
  */
 @ImplementationClassName(
-	"com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryImpl"
+	"com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetImpl"
 )
 @ProviderType
-public interface FVSFrontendDataSetEntry
-	extends FVSFrontendDataSetEntryModel, PersistedModel {
+public interface FVSFrontendDataSet
+	extends FVSFrontendDataSetModel, PersistedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to <code>com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<FVSFrontendDataSetEntry, Long>
-		FVS_FRONTEND_DATA_SET_ENTRY_ID_ACCESSOR =
-			new Accessor<FVSFrontendDataSetEntry, Long>() {
+	public static final Accessor<FVSFrontendDataSet, Long>
+		FVS_FRONTEND_DATA_SET_ID_ACCESSOR =
+			new Accessor<FVSFrontendDataSet, Long>() {
 
 				@Override
-				public Long get(
-					FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
-
-					return fvsFrontendDataSetEntry.
-						getFvsFrontendDataSetEntryId();
+				public Long get(FVSFrontendDataSet fvsFrontendDataSet) {
+					return fvsFrontendDataSet.getFvsFrontendDataSetId();
 				}
 
 				@Override
@@ -57,8 +54,8 @@ public interface FVSFrontendDataSetEntry
 				}
 
 				@Override
-				public Class<FVSFrontendDataSetEntry> getTypeClass() {
-					return FVSFrontendDataSetEntry.class;
+				public Class<FVSFrontendDataSet> getTypeClass() {
+					return FVSFrontendDataSet.class;
 				}
 
 			};

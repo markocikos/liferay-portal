@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.view.state.model.impl;
 
-import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntry;
+import com.liferay.frontend.view.state.model.FVSFrontendDataSet;
 import com.liferay.petra.lang.HashUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.model.CacheModel;
@@ -28,13 +28,13 @@ import java.io.ObjectOutput;
 import java.util.Date;
 
 /**
- * The cache model class for representing FVSFrontendDataSetEntry in entity cache.
+ * The cache model class for representing FVSFrontendDataSet in entity cache.
  *
  * @author Brian Wing Shun Chan
  * @generated
  */
-public class FVSFrontendDataSetEntryCacheModel
-	implements CacheModel<FVSFrontendDataSetEntry>, Externalizable, MVCCModel {
+public class FVSFrontendDataSetCacheModel
+	implements CacheModel<FVSFrontendDataSet>, Externalizable, MVCCModel {
 
 	@Override
 	public boolean equals(Object object) {
@@ -42,16 +42,16 @@ public class FVSFrontendDataSetEntryCacheModel
 			return true;
 		}
 
-		if (!(object instanceof FVSFrontendDataSetEntryCacheModel)) {
+		if (!(object instanceof FVSFrontendDataSetCacheModel)) {
 			return false;
 		}
 
-		FVSFrontendDataSetEntryCacheModel fvsFrontendDataSetEntryCacheModel =
-			(FVSFrontendDataSetEntryCacheModel)object;
+		FVSFrontendDataSetCacheModel fvsFrontendDataSetCacheModel =
+			(FVSFrontendDataSetCacheModel)object;
 
-		if ((fvsFrontendDataSetEntryId ==
-				fvsFrontendDataSetEntryCacheModel.fvsFrontendDataSetEntryId) &&
-			(mvccVersion == fvsFrontendDataSetEntryCacheModel.mvccVersion)) {
+		if ((fvsFrontendDataSetId ==
+				fvsFrontendDataSetCacheModel.fvsFrontendDataSetId) &&
+			(mvccVersion == fvsFrontendDataSetCacheModel.mvccVersion)) {
 
 			return true;
 		}
@@ -61,7 +61,7 @@ public class FVSFrontendDataSetEntryCacheModel
 
 	@Override
 	public int hashCode() {
-		int hashCode = HashUtil.hash(0, fvsFrontendDataSetEntryId);
+		int hashCode = HashUtil.hash(0, fvsFrontendDataSetId);
 
 		return HashUtil.hash(hashCode, mvccVersion);
 	}
@@ -84,8 +84,8 @@ public class FVSFrontendDataSetEntryCacheModel
 		sb.append(mvccVersion);
 		sb.append(", uuid=");
 		sb.append(uuid);
-		sb.append(", fvsFrontendDataSetEntryId=");
-		sb.append(fvsFrontendDataSetEntryId);
+		sb.append(", fvsFrontendDataSetId=");
+		sb.append(fvsFrontendDataSetId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -112,73 +112,72 @@ public class FVSFrontendDataSetEntryCacheModel
 	}
 
 	@Override
-	public FVSFrontendDataSetEntry toEntityModel() {
-		FVSFrontendDataSetEntryImpl fvsFrontendDataSetEntryImpl =
-			new FVSFrontendDataSetEntryImpl();
+	public FVSFrontendDataSet toEntityModel() {
+		FVSFrontendDataSetImpl fvsFrontendDataSetImpl =
+			new FVSFrontendDataSetImpl();
 
-		fvsFrontendDataSetEntryImpl.setMvccVersion(mvccVersion);
+		fvsFrontendDataSetImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
-			fvsFrontendDataSetEntryImpl.setUuid("");
+			fvsFrontendDataSetImpl.setUuid("");
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setUuid(uuid);
+			fvsFrontendDataSetImpl.setUuid(uuid);
 		}
 
-		fvsFrontendDataSetEntryImpl.setFvsFrontendDataSetEntryId(
-			fvsFrontendDataSetEntryId);
-		fvsFrontendDataSetEntryImpl.setCompanyId(companyId);
-		fvsFrontendDataSetEntryImpl.setUserId(userId);
+		fvsFrontendDataSetImpl.setFvsFrontendDataSetId(fvsFrontendDataSetId);
+		fvsFrontendDataSetImpl.setCompanyId(companyId);
+		fvsFrontendDataSetImpl.setUserId(userId);
 
 		if (userName == null) {
-			fvsFrontendDataSetEntryImpl.setUserName("");
+			fvsFrontendDataSetImpl.setUserName("");
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setUserName(userName);
+			fvsFrontendDataSetImpl.setUserName(userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
-			fvsFrontendDataSetEntryImpl.setCreateDate(null);
+			fvsFrontendDataSetImpl.setCreateDate(null);
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setCreateDate(new Date(createDate));
+			fvsFrontendDataSetImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			fvsFrontendDataSetEntryImpl.setModifiedDate(null);
+			fvsFrontendDataSetImpl.setModifiedDate(null);
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setModifiedDate(new Date(modifiedDate));
+			fvsFrontendDataSetImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		fvsFrontendDataSetEntryImpl.setFvsEntryId(fvsEntryId);
+		fvsFrontendDataSetImpl.setFvsEntryId(fvsEntryId);
 
 		if (fdsName == null) {
-			fvsFrontendDataSetEntryImpl.setFdsName("");
+			fvsFrontendDataSetImpl.setFdsName("");
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setFdsName(fdsName);
+			fvsFrontendDataSetImpl.setFdsName(fdsName);
 		}
 
 		if (name == null) {
-			fvsFrontendDataSetEntryImpl.setName("");
+			fvsFrontendDataSetImpl.setName("");
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setName(name);
+			fvsFrontendDataSetImpl.setName(name);
 		}
 
-		fvsFrontendDataSetEntryImpl.setPlid(plid);
+		fvsFrontendDataSetImpl.setPlid(plid);
 
 		if (portletId == null) {
-			fvsFrontendDataSetEntryImpl.setPortletId("");
+			fvsFrontendDataSetImpl.setPortletId("");
 		}
 		else {
-			fvsFrontendDataSetEntryImpl.setPortletId(portletId);
+			fvsFrontendDataSetImpl.setPortletId(portletId);
 		}
 
-		fvsFrontendDataSetEntryImpl.resetOriginalValues();
+		fvsFrontendDataSetImpl.resetOriginalValues();
 
-		return fvsFrontendDataSetEntryImpl;
+		return fvsFrontendDataSetImpl;
 	}
 
 	@Override
@@ -186,7 +185,7 @@ public class FVSFrontendDataSetEntryCacheModel
 		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 
-		fvsFrontendDataSetEntryId = objectInput.readLong();
+		fvsFrontendDataSetId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
 
@@ -214,7 +213,7 @@ public class FVSFrontendDataSetEntryCacheModel
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(fvsFrontendDataSetEntryId);
+		objectOutput.writeLong(fvsFrontendDataSetId);
 
 		objectOutput.writeLong(companyId);
 
@@ -258,7 +257,7 @@ public class FVSFrontendDataSetEntryCacheModel
 
 	public long mvccVersion;
 	public String uuid;
-	public long fvsFrontendDataSetEntryId;
+	public long fvsFrontendDataSetId;
 	public long companyId;
 	public long userId;
 	public String userName;

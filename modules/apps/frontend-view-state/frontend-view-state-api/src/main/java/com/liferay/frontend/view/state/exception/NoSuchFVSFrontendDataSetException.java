@@ -18,20 +18,20 @@ import com.liferay.portal.kernel.exception.NoSuchModelException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class NoSuchFVSFrontendDataSetEntryException extends NoSuchModelException {
+public class NoSuchFVSFrontendDataSetException extends NoSuchModelException {
 
-	public NoSuchFVSFrontendDataSetEntryException() {
+	public NoSuchFVSFrontendDataSetException() {
 	}
 
-	public NoSuchFVSFrontendDataSetEntryException(String msg) {
+	public NoSuchFVSFrontendDataSetException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchFVSFrontendDataSetEntryException(String msg, Throwable throwable) {
+	public NoSuchFVSFrontendDataSetException(String msg, Throwable throwable) {
 		super(msg, throwable);
 	}
 
-	public NoSuchFVSFrontendDataSetEntryException(Throwable throwable) {
+	public NoSuchFVSFrontendDataSetException(Throwable throwable) {
 		super(throwable);
 	}
 

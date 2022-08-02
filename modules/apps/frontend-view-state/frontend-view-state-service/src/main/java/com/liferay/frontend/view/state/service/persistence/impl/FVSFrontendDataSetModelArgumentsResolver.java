@@ -14,9 +14,9 @@
 
 package com.liferay.frontend.view.state.service.persistence.impl;
 
-import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntryTable;
-import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryImpl;
-import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryModelImpl;
+import com.liferay.frontend.view.state.model.FVSFrontendDataSetTable;
+import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetImpl;
+import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetModelImpl;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.model.BaseModel;
@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * The arguments resolver class for retrieving value from FVSFrontendDataSetEntry.
+ * The arguments resolver class for retrieving value from FVSFrontendDataSet.
  *
  * @author Brian Wing Shun Chan
  * @generated
@@ -35,11 +35,10 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	service = {
-		FVSFrontendDataSetEntryModelArgumentsResolver.class,
-		ArgumentsResolver.class
+		FVSFrontendDataSetModelArgumentsResolver.class, ArgumentsResolver.class
 	}
 )
-public class FVSFrontendDataSetEntryModelArgumentsResolver
+public class FVSFrontendDataSetModelArgumentsResolver
 	implements ArgumentsResolver {
 
 	@Override
@@ -57,15 +56,14 @@ public class FVSFrontendDataSetEntryModelArgumentsResolver
 			return null;
 		}
 
-		FVSFrontendDataSetEntryModelImpl fvsFrontendDataSetEntryModelImpl =
-			(FVSFrontendDataSetEntryModelImpl)baseModel;
+		FVSFrontendDataSetModelImpl fvsFrontendDataSetModelImpl =
+			(FVSFrontendDataSetModelImpl)baseModel;
 
-		long columnBitmask =
-			fvsFrontendDataSetEntryModelImpl.getColumnBitmask();
+		long columnBitmask = fvsFrontendDataSetModelImpl.getColumnBitmask();
 
 		if (!checkColumn || (columnBitmask == 0)) {
 			return _getValue(
-				fvsFrontendDataSetEntryModelImpl, columnNames, original);
+				fvsFrontendDataSetModelImpl, columnNames, original);
 		}
 
 		Long finderPathColumnBitmask = _finderPathColumnBitmasksCache.get(
@@ -76,8 +74,7 @@ public class FVSFrontendDataSetEntryModelArgumentsResolver
 
 			for (String columnName : columnNames) {
 				finderPathColumnBitmask |=
-					fvsFrontendDataSetEntryModelImpl.getColumnBitmask(
-						columnName);
+					fvsFrontendDataSetModelImpl.getColumnBitmask(columnName);
 			}
 
 			_finderPathColumnBitmasksCache.put(
@@ -86,7 +83,7 @@ public class FVSFrontendDataSetEntryModelArgumentsResolver
 
 		if ((columnBitmask & finderPathColumnBitmask) != 0) {
 			return _getValue(
-				fvsFrontendDataSetEntryModelImpl, columnNames, original);
+				fvsFrontendDataSetModelImpl, columnNames, original);
 		}
 
 		return null;
@@ -94,16 +91,16 @@ public class FVSFrontendDataSetEntryModelArgumentsResolver
 
 	@Override
 	public String getClassName() {
-		return FVSFrontendDataSetEntryImpl.class.getName();
+		return FVSFrontendDataSetImpl.class.getName();
 	}
 
 	@Override
 	public String getTableName() {
-		return FVSFrontendDataSetEntryTable.INSTANCE.getTableName();
+		return FVSFrontendDataSetTable.INSTANCE.getTableName();
 	}
 
 	private static Object[] _getValue(
-		FVSFrontendDataSetEntryModelImpl fvsFrontendDataSetEntryModelImpl,
+		FVSFrontendDataSetModelImpl fvsFrontendDataSetModelImpl,
 		String[] columnNames, boolean original) {
 
 		Object[] arguments = new Object[columnNames.length];
@@ -113,11 +110,11 @@ public class FVSFrontendDataSetEntryModelArgumentsResolver
 
 			if (original) {
 				arguments[i] =
-					fvsFrontendDataSetEntryModelImpl.getColumnOriginalValue(
+					fvsFrontendDataSetModelImpl.getColumnOriginalValue(
 						columnName);
 			}
 			else {
-				arguments[i] = fvsFrontendDataSetEntryModelImpl.getColumnValue(
+				arguments[i] = fvsFrontendDataSetModelImpl.getColumnValue(
 					columnName);
 			}
 		}

@@ -10,18 +10,18 @@ create table FVSEntry (
 	viewState TEXT null
 );
 
-create table FVSFrontendDataSetEntry (
+create table FVSFrontendDataSet (
 	mvccVersion LONG default 0 not null,
 	uuid_ VARCHAR(75) null,
-	fvsFrontendDataSetEntryId LONG not null primary key,
+	fvsFrontendDataSetId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	fvsEntryId LONG,
-	fdsName VARCHAR(200) null,
-	name VARCHAR(200) null,
+	fdsName VARCHAR(75) null,
+	name VARCHAR(75) null,
 	plid LONG,
-	portletId VARCHAR(200) null
+	portletId VARCHAR(75) null
 );

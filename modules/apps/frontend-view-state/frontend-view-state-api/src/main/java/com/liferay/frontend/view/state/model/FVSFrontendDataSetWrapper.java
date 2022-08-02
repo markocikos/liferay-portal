@@ -24,21 +24,19 @@ import java.util.Map;
 
 /**
  * <p>
- * This class is a wrapper for {@link FVSFrontendDataSetEntry}.
+ * This class is a wrapper for {@link FVSFrontendDataSet}.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see FVSFrontendDataSetEntry
+ * @see FVSFrontendDataSet
  * @generated
  */
-public class FVSFrontendDataSetEntryWrapper
-	extends BaseModelWrapper<FVSFrontendDataSetEntry>
-	implements FVSFrontendDataSetEntry, ModelWrapper<FVSFrontendDataSetEntry> {
+public class FVSFrontendDataSetWrapper
+	extends BaseModelWrapper<FVSFrontendDataSet>
+	implements FVSFrontendDataSet, ModelWrapper<FVSFrontendDataSet> {
 
-	public FVSFrontendDataSetEntryWrapper(
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
-
-		super(fvsFrontendDataSetEntry);
+	public FVSFrontendDataSetWrapper(FVSFrontendDataSet fvsFrontendDataSet) {
+		super(fvsFrontendDataSet);
 	}
 
 	@Override
@@ -47,8 +45,7 @@ public class FVSFrontendDataSetEntryWrapper
 
 		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
-		attributes.put(
-			"fvsFrontendDataSetEntryId", getFvsFrontendDataSetEntryId());
+		attributes.put("fvsFrontendDataSetId", getFvsFrontendDataSetId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -77,11 +74,11 @@ public class FVSFrontendDataSetEntryWrapper
 			setUuid(uuid);
 		}
 
-		Long fvsFrontendDataSetEntryId = (Long)attributes.get(
-			"fvsFrontendDataSetEntryId");
+		Long fvsFrontendDataSetId = (Long)attributes.get(
+			"fvsFrontendDataSetId");
 
-		if (fvsFrontendDataSetEntryId != null) {
-			setFvsFrontendDataSetEntryId(fvsFrontendDataSetEntryId);
+		if (fvsFrontendDataSetId != null) {
+			setFvsFrontendDataSetId(fvsFrontendDataSetId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -146,14 +143,14 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	@Override
-	public FVSFrontendDataSetEntry cloneWithOriginalValues() {
+	public FVSFrontendDataSet cloneWithOriginalValues() {
 		return wrap(model.cloneWithOriginalValues());
 	}
 
 	/**
-	 * Returns the company ID of this fvs frontend data set entry.
+	 * Returns the company ID of this fvs frontend data set.
 	 *
-	 * @return the company ID of this fvs frontend data set entry
+	 * @return the company ID of this fvs frontend data set
 	 */
 	@Override
 	public long getCompanyId() {
@@ -161,9 +158,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the container model ID of this fvs frontend data set entry.
+	 * Returns the container model ID of this fvs frontend data set.
 	 *
-	 * @return the container model ID of this fvs frontend data set entry
+	 * @return the container model ID of this fvs frontend data set
 	 */
 	@Override
 	public long getContainerModelId() {
@@ -171,9 +168,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the container name of this fvs frontend data set entry.
+	 * Returns the container name of this fvs frontend data set.
 	 *
-	 * @return the container name of this fvs frontend data set entry
+	 * @return the container name of this fvs frontend data set
 	 */
 	@Override
 	public String getContainerModelName() {
@@ -181,9 +178,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the create date of this fvs frontend data set entry.
+	 * Returns the create date of this fvs frontend data set.
 	 *
-	 * @return the create date of this fvs frontend data set entry
+	 * @return the create date of this fvs frontend data set
 	 */
 	@Override
 	public Date getCreateDate() {
@@ -191,9 +188,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the fds name of this fvs frontend data set entry.
+	 * Returns the fds name of this fvs frontend data set.
 	 *
-	 * @return the fds name of this fvs frontend data set entry
+	 * @return the fds name of this fvs frontend data set
 	 */
 	@Override
 	public String getFdsName() {
@@ -201,9 +198,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the fvs entry ID of this fvs frontend data set entry.
+	 * Returns the fvs entry ID of this fvs frontend data set.
 	 *
-	 * @return the fvs entry ID of this fvs frontend data set entry
+	 * @return the fvs entry ID of this fvs frontend data set
 	 */
 	@Override
 	public long getFvsEntryId() {
@@ -211,19 +208,19 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the fvs frontend data set entry ID of this fvs frontend data set entry.
+	 * Returns the fvs frontend data set ID of this fvs frontend data set.
 	 *
-	 * @return the fvs frontend data set entry ID of this fvs frontend data set entry
+	 * @return the fvs frontend data set ID of this fvs frontend data set
 	 */
 	@Override
-	public long getFvsFrontendDataSetEntryId() {
-		return model.getFvsFrontendDataSetEntryId();
+	public long getFvsFrontendDataSetId() {
+		return model.getFvsFrontendDataSetId();
 	}
 
 	/**
-	 * Returns the modified date of this fvs frontend data set entry.
+	 * Returns the modified date of this fvs frontend data set.
 	 *
-	 * @return the modified date of this fvs frontend data set entry
+	 * @return the modified date of this fvs frontend data set
 	 */
 	@Override
 	public Date getModifiedDate() {
@@ -231,9 +228,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the mvcc version of this fvs frontend data set entry.
+	 * Returns the mvcc version of this fvs frontend data set.
 	 *
-	 * @return the mvcc version of this fvs frontend data set entry
+	 * @return the mvcc version of this fvs frontend data set
 	 */
 	@Override
 	public long getMvccVersion() {
@@ -241,9 +238,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the name of this fvs frontend data set entry.
+	 * Returns the name of this fvs frontend data set.
 	 *
-	 * @return the name of this fvs frontend data set entry
+	 * @return the name of this fvs frontend data set
 	 */
 	@Override
 	public String getName() {
@@ -251,9 +248,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the parent container model ID of this fvs frontend data set entry.
+	 * Returns the parent container model ID of this fvs frontend data set.
 	 *
-	 * @return the parent container model ID of this fvs frontend data set entry
+	 * @return the parent container model ID of this fvs frontend data set
 	 */
 	@Override
 	public long getParentContainerModelId() {
@@ -261,9 +258,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the plid of this fvs frontend data set entry.
+	 * Returns the plid of this fvs frontend data set.
 	 *
-	 * @return the plid of this fvs frontend data set entry
+	 * @return the plid of this fvs frontend data set
 	 */
 	@Override
 	public long getPlid() {
@@ -271,9 +268,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the portlet ID of this fvs frontend data set entry.
+	 * Returns the portlet ID of this fvs frontend data set.
 	 *
-	 * @return the portlet ID of this fvs frontend data set entry
+	 * @return the portlet ID of this fvs frontend data set
 	 */
 	@Override
 	public String getPortletId() {
@@ -281,9 +278,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the primary key of this fvs frontend data set entry.
+	 * Returns the primary key of this fvs frontend data set.
 	 *
-	 * @return the primary key of this fvs frontend data set entry
+	 * @return the primary key of this fvs frontend data set
 	 */
 	@Override
 	public long getPrimaryKey() {
@@ -291,9 +288,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the user ID of this fvs frontend data set entry.
+	 * Returns the user ID of this fvs frontend data set.
 	 *
-	 * @return the user ID of this fvs frontend data set entry
+	 * @return the user ID of this fvs frontend data set
 	 */
 	@Override
 	public long getUserId() {
@@ -301,9 +298,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the user name of this fvs frontend data set entry.
+	 * Returns the user name of this fvs frontend data set.
 	 *
-	 * @return the user name of this fvs frontend data set entry
+	 * @return the user name of this fvs frontend data set
 	 */
 	@Override
 	public String getUserName() {
@@ -311,9 +308,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the user uuid of this fvs frontend data set entry.
+	 * Returns the user uuid of this fvs frontend data set.
 	 *
-	 * @return the user uuid of this fvs frontend data set entry
+	 * @return the user uuid of this fvs frontend data set
 	 */
 	@Override
 	public String getUserUuid() {
@@ -321,9 +318,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Returns the uuid of this fvs frontend data set entry.
+	 * Returns the uuid of this fvs frontend data set.
 	 *
-	 * @return the uuid of this fvs frontend data set entry
+	 * @return the uuid of this fvs frontend data set
 	 */
 	@Override
 	public String getUuid() {
@@ -336,9 +333,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the company ID of this fvs frontend data set entry.
+	 * Sets the company ID of this fvs frontend data set.
 	 *
-	 * @param companyId the company ID of this fvs frontend data set entry
+	 * @param companyId the company ID of this fvs frontend data set
 	 */
 	@Override
 	public void setCompanyId(long companyId) {
@@ -346,9 +343,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the container model ID of this fvs frontend data set entry.
+	 * Sets the container model ID of this fvs frontend data set.
 	 *
-	 * @param containerModelId the container model ID of this fvs frontend data set entry
+	 * @param containerModelId the container model ID of this fvs frontend data set
 	 */
 	@Override
 	public void setContainerModelId(long containerModelId) {
@@ -356,9 +353,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the create date of this fvs frontend data set entry.
+	 * Sets the create date of this fvs frontend data set.
 	 *
-	 * @param createDate the create date of this fvs frontend data set entry
+	 * @param createDate the create date of this fvs frontend data set
 	 */
 	@Override
 	public void setCreateDate(Date createDate) {
@@ -366,9 +363,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the fds name of this fvs frontend data set entry.
+	 * Sets the fds name of this fvs frontend data set.
 	 *
-	 * @param fdsName the fds name of this fvs frontend data set entry
+	 * @param fdsName the fds name of this fvs frontend data set
 	 */
 	@Override
 	public void setFdsName(String fdsName) {
@@ -376,9 +373,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the fvs entry ID of this fvs frontend data set entry.
+	 * Sets the fvs entry ID of this fvs frontend data set.
 	 *
-	 * @param fvsEntryId the fvs entry ID of this fvs frontend data set entry
+	 * @param fvsEntryId the fvs entry ID of this fvs frontend data set
 	 */
 	@Override
 	public void setFvsEntryId(long fvsEntryId) {
@@ -386,19 +383,19 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the fvs frontend data set entry ID of this fvs frontend data set entry.
+	 * Sets the fvs frontend data set ID of this fvs frontend data set.
 	 *
-	 * @param fvsFrontendDataSetEntryId the fvs frontend data set entry ID of this fvs frontend data set entry
+	 * @param fvsFrontendDataSetId the fvs frontend data set ID of this fvs frontend data set
 	 */
 	@Override
-	public void setFvsFrontendDataSetEntryId(long fvsFrontendDataSetEntryId) {
-		model.setFvsFrontendDataSetEntryId(fvsFrontendDataSetEntryId);
+	public void setFvsFrontendDataSetId(long fvsFrontendDataSetId) {
+		model.setFvsFrontendDataSetId(fvsFrontendDataSetId);
 	}
 
 	/**
-	 * Sets the modified date of this fvs frontend data set entry.
+	 * Sets the modified date of this fvs frontend data set.
 	 *
-	 * @param modifiedDate the modified date of this fvs frontend data set entry
+	 * @param modifiedDate the modified date of this fvs frontend data set
 	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
@@ -406,9 +403,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the mvcc version of this fvs frontend data set entry.
+	 * Sets the mvcc version of this fvs frontend data set.
 	 *
-	 * @param mvccVersion the mvcc version of this fvs frontend data set entry
+	 * @param mvccVersion the mvcc version of this fvs frontend data set
 	 */
 	@Override
 	public void setMvccVersion(long mvccVersion) {
@@ -416,9 +413,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the name of this fvs frontend data set entry.
+	 * Sets the name of this fvs frontend data set.
 	 *
-	 * @param name the name of this fvs frontend data set entry
+	 * @param name the name of this fvs frontend data set
 	 */
 	@Override
 	public void setName(String name) {
@@ -426,9 +423,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the parent container model ID of this fvs frontend data set entry.
+	 * Sets the parent container model ID of this fvs frontend data set.
 	 *
-	 * @param parentContainerModelId the parent container model ID of this fvs frontend data set entry
+	 * @param parentContainerModelId the parent container model ID of this fvs frontend data set
 	 */
 	@Override
 	public void setParentContainerModelId(long parentContainerModelId) {
@@ -436,9 +433,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the plid of this fvs frontend data set entry.
+	 * Sets the plid of this fvs frontend data set.
 	 *
-	 * @param plid the plid of this fvs frontend data set entry
+	 * @param plid the plid of this fvs frontend data set
 	 */
 	@Override
 	public void setPlid(long plid) {
@@ -446,9 +443,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the portlet ID of this fvs frontend data set entry.
+	 * Sets the portlet ID of this fvs frontend data set.
 	 *
-	 * @param portletId the portlet ID of this fvs frontend data set entry
+	 * @param portletId the portlet ID of this fvs frontend data set
 	 */
 	@Override
 	public void setPortletId(String portletId) {
@@ -456,9 +453,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the primary key of this fvs frontend data set entry.
+	 * Sets the primary key of this fvs frontend data set.
 	 *
-	 * @param primaryKey the primary key of this fvs frontend data set entry
+	 * @param primaryKey the primary key of this fvs frontend data set
 	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
@@ -466,9 +463,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the user ID of this fvs frontend data set entry.
+	 * Sets the user ID of this fvs frontend data set.
 	 *
-	 * @param userId the user ID of this fvs frontend data set entry
+	 * @param userId the user ID of this fvs frontend data set
 	 */
 	@Override
 	public void setUserId(long userId) {
@@ -476,9 +473,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the user name of this fvs frontend data set entry.
+	 * Sets the user name of this fvs frontend data set.
 	 *
-	 * @param userName the user name of this fvs frontend data set entry
+	 * @param userName the user name of this fvs frontend data set
 	 */
 	@Override
 	public void setUserName(String userName) {
@@ -486,9 +483,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the user uuid of this fvs frontend data set entry.
+	 * Sets the user uuid of this fvs frontend data set.
 	 *
-	 * @param userUuid the user uuid of this fvs frontend data set entry
+	 * @param userUuid the user uuid of this fvs frontend data set
 	 */
 	@Override
 	public void setUserUuid(String userUuid) {
@@ -496,9 +493,9 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	/**
-	 * Sets the uuid of this fvs frontend data set entry.
+	 * Sets the uuid of this fvs frontend data set.
 	 *
-	 * @param uuid the uuid of this fvs frontend data set entry
+	 * @param uuid the uuid of this fvs frontend data set
 	 */
 	@Override
 	public void setUuid(String uuid) {
@@ -511,10 +508,10 @@ public class FVSFrontendDataSetEntryWrapper
 	}
 
 	@Override
-	protected FVSFrontendDataSetEntryWrapper wrap(
-		FVSFrontendDataSetEntry fvsFrontendDataSetEntry) {
+	protected FVSFrontendDataSetWrapper wrap(
+		FVSFrontendDataSet fvsFrontendDataSet) {
 
-		return new FVSFrontendDataSetEntryWrapper(fvsFrontendDataSetEntry);
+		return new FVSFrontendDataSetWrapper(fvsFrontendDataSet);
 	}
 
 }
