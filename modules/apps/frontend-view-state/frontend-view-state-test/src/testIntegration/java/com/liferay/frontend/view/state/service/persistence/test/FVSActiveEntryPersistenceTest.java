@@ -15,7 +15,7 @@
 package com.liferay.frontend.view.state.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-import com.liferay.frontend.view.state.exception.NoSuchActiveEntryException;
+import com.liferay.frontend.view.state.exception.NoSuchFVSActiveEntryException;
 import com.liferay.frontend.view.state.model.FVSActiveEntry;
 import com.liferay.frontend.view.state.service.FVSActiveEntryLocalServiceUtil;
 import com.liferay.frontend.view.state.service.persistence.FVSActiveEntryPersistence;
@@ -226,7 +226,7 @@ public class FVSActiveEntryPersistenceTest {
 		Assert.assertEquals(existingFVSActiveEntry, newFVSActiveEntry);
 	}
 
-	@Test(expected = NoSuchActiveEntryException.class)
+	@Test(expected = NoSuchFVSActiveEntryException.class)
 	public void testFindByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 

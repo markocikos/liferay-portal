@@ -11,7 +11,6 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.frontend.view.state.exception;
 
 import com.liferay.portal.kernel.exception.NoSuchModelException;
@@ -19,20 +18,20 @@ import com.liferay.portal.kernel.exception.NoSuchModelException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class NoSuchCustomEntryException extends NoSuchModelException {
+public class NoSuchFVSCustomEntryException extends NoSuchModelException {
 
-	public NoSuchCustomEntryException() {
+	public NoSuchFVSCustomEntryException() {
 	}
 
-	public NoSuchCustomEntryException(String msg) {
+	public NoSuchFVSCustomEntryException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchCustomEntryException(String msg, Throwable throwable) {
+	public NoSuchFVSCustomEntryException(String msg, Throwable throwable) {
 		super(msg, throwable);
 	}
 
-	public NoSuchCustomEntryException(Throwable throwable) {
+	public NoSuchFVSCustomEntryException(Throwable throwable) {
 		super(throwable);
 	}
 

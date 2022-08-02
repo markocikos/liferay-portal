@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.view.state.service.persistence.impl;
 
-import com.liferay.frontend.view.state.exception.NoSuchFrontendDataSetEntryException;
+import com.liferay.frontend.view.state.exception.NoSuchFVSFrontendDataSetEntryException;
 import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntry;
 import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntryTable;
 import com.liferay.frontend.view.state.model.impl.FVSFrontendDataSetEntryImpl;
@@ -284,13 +284,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByUuid_First(
 			String uuid,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_First(
 			uuid, orderByComparator);
@@ -308,7 +308,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
 	}
 
 	/**
@@ -339,13 +339,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByUuid_Last(
 			String uuid,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_Last(
 			uuid, orderByComparator);
@@ -363,7 +363,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
 	}
 
 	/**
@@ -401,13 +401,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry[] findByUuid_PrevAndNext(
 			long fvsFrontendDataSetEntryId, String uuid,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -846,13 +846,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByUuid_C_First(
 			String uuid, long companyId,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_C_First(
 			uuid, companyId, orderByComparator);
@@ -873,7 +873,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
 	}
 
 	/**
@@ -906,13 +906,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByUuid_C_Last(
 			String uuid, long companyId,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByUuid_C_Last(
 			uuid, companyId, orderByComparator);
@@ -933,7 +933,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
 	}
 
 	/**
@@ -973,13 +973,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry[] findByUuid_C_PrevAndNext(
 			long fvsFrontendDataSetEntryId, String uuid, long companyId,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -1470,13 +1470,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByU_F_P_P_First(
 			long userId, String fdsName, long plid, String portletId,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByU_F_P_P_First(
 			userId, fdsName, plid, portletId, orderByComparator);
@@ -1503,7 +1503,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
 	}
 
 	/**
@@ -1540,13 +1540,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByU_F_P_P_Last(
 			long userId, String fdsName, long plid, String portletId,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByU_F_P_P_Last(
 			userId, fdsName, plid, portletId, orderByComparator);
@@ -1573,7 +1573,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchFrontendDataSetEntryException(sb.toString());
+		throw new NoSuchFVSFrontendDataSetEntryException(sb.toString());
 	}
 
 	/**
@@ -1618,14 +1618,14 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry[] findByU_F_P_P_PrevAndNext(
 			long fvsFrontendDataSetEntryId, long userId, String fdsName,
 			long plid, String portletId,
 			OrderByComparator<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		fdsName = Objects.toString(fdsName, "");
 		portletId = Objects.toString(portletId, "");
@@ -2071,11 +2071,11 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 *
 	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
 	 * @return the fvs frontend data set entry that was removed
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry remove(long fvsFrontendDataSetEntryId)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		return remove((Serializable)fvsFrontendDataSetEntryId);
 	}
@@ -2085,11 +2085,11 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 *
 	 * @param primaryKey the primary key of the fvs frontend data set entry
 	 * @return the fvs frontend data set entry that was removed
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry remove(Serializable primaryKey)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		Session session = null;
 
@@ -2105,13 +2105,13 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchFrontendDataSetEntryException(
+				throw new NoSuchFVSFrontendDataSetEntryException(
 					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(fvsFrontendDataSetEntry);
 		}
-		catch (NoSuchFrontendDataSetEntryException noSuchEntityException) {
+		catch (NoSuchFVSFrontendDataSetEntryException noSuchEntityException) {
 			throw noSuchEntityException;
 		}
 		catch (Exception exception) {
@@ -2253,11 +2253,11 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	 *
 	 * @param primaryKey the primary key of the fvs frontend data set entry
 	 * @return the fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry = fetchByPrimaryKey(
 			primaryKey);
@@ -2267,7 +2267,7 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchFrontendDataSetEntryException(
+			throw new NoSuchFVSFrontendDataSetEntryException(
 				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
@@ -2275,16 +2275,16 @@ public class FVSFrontendDataSetEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the fvs frontend data set entry with the primary key or throws a <code>NoSuchFrontendDataSetEntryException</code> if it could not be found.
+	 * Returns the fvs frontend data set entry with the primary key or throws a <code>NoSuchFVSFrontendDataSetEntryException</code> if it could not be found.
 	 *
 	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
 	 * @return the fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	@Override
 	public FVSFrontendDataSetEntry findByPrimaryKey(
 			long fvsFrontendDataSetEntryId)
-		throws NoSuchFrontendDataSetEntryException {
+		throws NoSuchFVSFrontendDataSetEntryException {
 
 		return findByPrimaryKey((Serializable)fvsFrontendDataSetEntryId);
 	}

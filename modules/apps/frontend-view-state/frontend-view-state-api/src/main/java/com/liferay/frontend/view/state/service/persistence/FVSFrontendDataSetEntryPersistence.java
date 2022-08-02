@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.view.state.service.persistence;
 
-import com.liferay.frontend.view.state.exception.NoSuchFrontendDataSetEntryException;
+import com.liferay.frontend.view.state.exception.NoSuchFVSFrontendDataSetEntryException;
 import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntry;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
@@ -108,13 +108,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	public FVSFrontendDataSetEntry findByUuid_First(
 			String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the first fvs frontend data set entry in the ordered set where uuid = &#63;.
@@ -134,13 +134,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	public FVSFrontendDataSetEntry findByUuid_Last(
 			String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the last fvs frontend data set entry in the ordered set where uuid = &#63;.
@@ -161,13 +161,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	public FVSFrontendDataSetEntry[] findByUuid_PrevAndNext(
 			long fvsFrontendDataSetEntryId, String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Removes all the fvs frontend data set entries where uuid = &#63; from the database.
@@ -257,13 +257,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	public FVSFrontendDataSetEntry findByUuid_C_First(
 			String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the first fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -285,13 +285,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	public FVSFrontendDataSetEntry findByUuid_C_Last(
 			String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the last fvs frontend data set entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -314,13 +314,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	public FVSFrontendDataSetEntry[] findByUuid_C_PrevAndNext(
 			long fvsFrontendDataSetEntryId, String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Removes all the fvs frontend data set entries where uuid = &#63; and companyId = &#63; from the database.
@@ -425,13 +425,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	public FVSFrontendDataSetEntry findByU_F_P_P_First(
 			long userId, String fdsName, long plid, String portletId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the first fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
@@ -457,13 +457,13 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a matching fvs frontend data set entry could not be found
 	 */
 	public FVSFrontendDataSetEntry findByU_F_P_P_Last(
 			long userId, String fdsName, long plid, String portletId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the last fvs frontend data set entry in the ordered set where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63;.
@@ -490,14 +490,14 @@ public interface FVSFrontendDataSetEntryPersistence
 	 * @param portletId the portlet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	public FVSFrontendDataSetEntry[] findByU_F_P_P_PrevAndNext(
 			long fvsFrontendDataSetEntryId, long userId, String fdsName,
 			long plid, String portletId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<FVSFrontendDataSetEntry> orderByComparator)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Removes all the fvs frontend data set entries where userId = &#63; and fdsName = &#63; and plid = &#63; and portletId = &#63; from the database.
@@ -550,24 +550,24 @@ public interface FVSFrontendDataSetEntryPersistence
 	 *
 	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
 	 * @return the fvs frontend data set entry that was removed
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	public FVSFrontendDataSetEntry remove(long fvsFrontendDataSetEntryId)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	public FVSFrontendDataSetEntry updateImpl(
 		FVSFrontendDataSetEntry fvsFrontendDataSetEntry);
 
 	/**
-	 * Returns the fvs frontend data set entry with the primary key or throws a <code>NoSuchFrontendDataSetEntryException</code> if it could not be found.
+	 * Returns the fvs frontend data set entry with the primary key or throws a <code>NoSuchFVSFrontendDataSetEntryException</code> if it could not be found.
 	 *
 	 * @param fvsFrontendDataSetEntryId the primary key of the fvs frontend data set entry
 	 * @return the fvs frontend data set entry
-	 * @throws NoSuchFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
+	 * @throws NoSuchFVSFrontendDataSetEntryException if a fvs frontend data set entry with the primary key could not be found
 	 */
 	public FVSFrontendDataSetEntry findByPrimaryKey(
 			long fvsFrontendDataSetEntryId)
-		throws NoSuchFrontendDataSetEntryException;
+		throws NoSuchFVSFrontendDataSetEntryException;
 
 	/**
 	 * Returns the fvs frontend data set entry with the primary key or returns <code>null</code> if it could not be found.

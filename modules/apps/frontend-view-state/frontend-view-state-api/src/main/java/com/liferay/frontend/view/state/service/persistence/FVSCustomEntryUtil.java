@@ -196,12 +196,12 @@ public class FVSCustomEntryUtil {
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs custom entry
-	 * @throws NoSuchCustomEntryException if a matching fvs custom entry could not be found
+	 * @throws NoSuchFVSCustomEntryException if a matching fvs custom entry could not be found
 	 */
 	public static FVSCustomEntry findByUuid_First(
 			String uuid, OrderByComparator<FVSCustomEntry> orderByComparator)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
@@ -225,12 +225,12 @@ public class FVSCustomEntryUtil {
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs custom entry
-	 * @throws NoSuchCustomEntryException if a matching fvs custom entry could not be found
+	 * @throws NoSuchFVSCustomEntryException if a matching fvs custom entry could not be found
 	 */
 	public static FVSCustomEntry findByUuid_Last(
 			String uuid, OrderByComparator<FVSCustomEntry> orderByComparator)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
@@ -255,13 +255,13 @@ public class FVSCustomEntryUtil {
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs custom entry
-	 * @throws NoSuchCustomEntryException if a fvs custom entry with the primary key could not be found
+	 * @throws NoSuchFVSCustomEntryException if a fvs custom entry with the primary key could not be found
 	 */
 	public static FVSCustomEntry[] findByUuid_PrevAndNext(
 			long fvsCustomEntryId, String uuid,
 			OrderByComparator<FVSCustomEntry> orderByComparator)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByUuid_PrevAndNext(
 			fvsCustomEntryId, uuid, orderByComparator);
@@ -371,13 +371,13 @@ public class FVSCustomEntryUtil {
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs custom entry
-	 * @throws NoSuchCustomEntryException if a matching fvs custom entry could not be found
+	 * @throws NoSuchFVSCustomEntryException if a matching fvs custom entry could not be found
 	 */
 	public static FVSCustomEntry findByUuid_C_First(
 			String uuid, long companyId,
 			OrderByComparator<FVSCustomEntry> orderByComparator)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByUuid_C_First(
 			uuid, companyId, orderByComparator);
@@ -406,13 +406,13 @@ public class FVSCustomEntryUtil {
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs custom entry
-	 * @throws NoSuchCustomEntryException if a matching fvs custom entry could not be found
+	 * @throws NoSuchFVSCustomEntryException if a matching fvs custom entry could not be found
 	 */
 	public static FVSCustomEntry findByUuid_C_Last(
 			String uuid, long companyId,
 			OrderByComparator<FVSCustomEntry> orderByComparator)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByUuid_C_Last(
 			uuid, companyId, orderByComparator);
@@ -442,13 +442,13 @@ public class FVSCustomEntryUtil {
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs custom entry
-	 * @throws NoSuchCustomEntryException if a fvs custom entry with the primary key could not be found
+	 * @throws NoSuchFVSCustomEntryException if a fvs custom entry with the primary key could not be found
 	 */
 	public static FVSCustomEntry[] findByUuid_C_PrevAndNext(
 			long fvsCustomEntryId, String uuid, long companyId,
 			OrderByComparator<FVSCustomEntry> orderByComparator)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByUuid_C_PrevAndNext(
 			fvsCustomEntryId, uuid, companyId, orderByComparator);
@@ -508,11 +508,11 @@ public class FVSCustomEntryUtil {
 	 *
 	 * @param fvsCustomEntryId the primary key of the fvs custom entry
 	 * @return the fvs custom entry that was removed
-	 * @throws NoSuchCustomEntryException if a fvs custom entry with the primary key could not be found
+	 * @throws NoSuchFVSCustomEntryException if a fvs custom entry with the primary key could not be found
 	 */
 	public static FVSCustomEntry remove(long fvsCustomEntryId)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().remove(fvsCustomEntryId);
 	}
@@ -522,15 +522,15 @@ public class FVSCustomEntryUtil {
 	}
 
 	/**
-	 * Returns the fvs custom entry with the primary key or throws a <code>NoSuchCustomEntryException</code> if it could not be found.
+	 * Returns the fvs custom entry with the primary key or throws a <code>NoSuchFVSCustomEntryException</code> if it could not be found.
 	 *
 	 * @param fvsCustomEntryId the primary key of the fvs custom entry
 	 * @return the fvs custom entry
-	 * @throws NoSuchCustomEntryException if a fvs custom entry with the primary key could not be found
+	 * @throws NoSuchFVSCustomEntryException if a fvs custom entry with the primary key could not be found
 	 */
 	public static FVSCustomEntry findByPrimaryKey(long fvsCustomEntryId)
 		throws com.liferay.frontend.view.state.exception.
-			NoSuchCustomEntryException {
+			NoSuchFVSCustomEntryException {
 
 		return getPersistence().findByPrimaryKey(fvsCustomEntryId);
 	}

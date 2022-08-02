@@ -15,7 +15,7 @@
 package com.liferay.frontend.view.state.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-import com.liferay.frontend.view.state.exception.NoSuchFrontendDataSetEntryException;
+import com.liferay.frontend.view.state.exception.NoSuchFVSFrontendDataSetEntryException;
 import com.liferay.frontend.view.state.model.FVSFrontendDataSetEntry;
 import com.liferay.frontend.view.state.service.FVSFrontendDataSetEntryLocalServiceUtil;
 import com.liferay.frontend.view.state.service.persistence.FVSFrontendDataSetEntryPersistence;
@@ -244,7 +244,7 @@ public class FVSFrontendDataSetEntryPersistenceTest {
 			existingFVSFrontendDataSetEntry, newFVSFrontendDataSetEntry);
 	}
 
-	@Test(expected = NoSuchFrontendDataSetEntryException.class)
+	@Test(expected = NoSuchFVSFrontendDataSetEntryException.class)
 	public void testFindByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 

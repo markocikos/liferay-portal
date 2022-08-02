@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.view.state.service.persistence;
 
-import com.liferay.frontend.view.state.exception.NoSuchActiveEntryException;
+import com.liferay.frontend.view.state.exception.NoSuchFVSActiveEntryException;
 import com.liferay.frontend.view.state.model.FVSActiveEntry;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
@@ -108,13 +108,13 @@ public interface FVSActiveEntryPersistence
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	public FVSActiveEntry findByUuid_First(
 			String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator<FVSActiveEntry>
 				orderByComparator)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the first fvs active entry in the ordered set where uuid = &#63;.
@@ -134,13 +134,13 @@ public interface FVSActiveEntryPersistence
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	public FVSActiveEntry findByUuid_Last(
 			String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator<FVSActiveEntry>
 				orderByComparator)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the last fvs active entry in the ordered set where uuid = &#63;.
@@ -161,13 +161,13 @@ public interface FVSActiveEntryPersistence
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	public FVSActiveEntry[] findByUuid_PrevAndNext(
 			long fvsActiveEntryId, String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator<FVSActiveEntry>
 				orderByComparator)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Removes all the fvs active entries where uuid = &#63; from the database.
@@ -257,13 +257,13 @@ public interface FVSActiveEntryPersistence
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	public FVSActiveEntry findByUuid_C_First(
 			String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<FVSActiveEntry>
 				orderByComparator)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the first fvs active entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -285,13 +285,13 @@ public interface FVSActiveEntryPersistence
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	public FVSActiveEntry findByUuid_C_Last(
 			String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<FVSActiveEntry>
 				orderByComparator)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the last fvs active entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -314,13 +314,13 @@ public interface FVSActiveEntryPersistence
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	public FVSActiveEntry[] findByUuid_C_PrevAndNext(
 			long fvsActiveEntryId, String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<FVSActiveEntry>
 				orderByComparator)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Removes all the fvs active entries where uuid = &#63; and companyId = &#63; from the database.
@@ -340,19 +340,19 @@ public interface FVSActiveEntryPersistence
 	public int countByUuid_C(String uuid, long companyId);
 
 	/**
-	 * Returns the fvs active entry where userId = &#63; and clayDataSetDisplayId = &#63; and plid = &#63; and portletId = &#63; or throws a <code>NoSuchActiveEntryException</code> if it could not be found.
+	 * Returns the fvs active entry where userId = &#63; and clayDataSetDisplayId = &#63; and plid = &#63; and portletId = &#63; or throws a <code>NoSuchFVSActiveEntryException</code> if it could not be found.
 	 *
 	 * @param userId the user ID
 	 * @param clayDataSetDisplayId the clay data set display ID
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @return the matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	public FVSActiveEntry findByU_CDSDI_P_P(
 			long userId, String clayDataSetDisplayId, long plid,
 			String portletId)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the fvs active entry where userId = &#63; and clayDataSetDisplayId = &#63; and plid = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
@@ -392,7 +392,7 @@ public interface FVSActiveEntryPersistence
 	public FVSActiveEntry removeByU_CDSDI_P_P(
 			long userId, String clayDataSetDisplayId, long plid,
 			String portletId)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the number of fvs active entries where userId = &#63; and clayDataSetDisplayId = &#63; and plid = &#63; and portletId = &#63;.
@@ -433,22 +433,22 @@ public interface FVSActiveEntryPersistence
 	 *
 	 * @param fvsActiveEntryId the primary key of the fvs active entry
 	 * @return the fvs active entry that was removed
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	public FVSActiveEntry remove(long fvsActiveEntryId)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	public FVSActiveEntry updateImpl(FVSActiveEntry fvsActiveEntry);
 
 	/**
-	 * Returns the fvs active entry with the primary key or throws a <code>NoSuchActiveEntryException</code> if it could not be found.
+	 * Returns the fvs active entry with the primary key or throws a <code>NoSuchFVSActiveEntryException</code> if it could not be found.
 	 *
 	 * @param fvsActiveEntryId the primary key of the fvs active entry
 	 * @return the fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	public FVSActiveEntry findByPrimaryKey(long fvsActiveEntryId)
-		throws NoSuchActiveEntryException;
+		throws NoSuchFVSActiveEntryException;
 
 	/**
 	 * Returns the fvs active entry with the primary key or returns <code>null</code> if it could not be found.

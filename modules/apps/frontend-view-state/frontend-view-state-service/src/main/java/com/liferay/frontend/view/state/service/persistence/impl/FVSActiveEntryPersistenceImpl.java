@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.view.state.service.persistence.impl;
 
-import com.liferay.frontend.view.state.exception.NoSuchActiveEntryException;
+import com.liferay.frontend.view.state.exception.NoSuchFVSActiveEntryException;
 import com.liferay.frontend.view.state.model.FVSActiveEntry;
 import com.liferay.frontend.view.state.model.FVSActiveEntryTable;
 import com.liferay.frontend.view.state.model.impl.FVSActiveEntryImpl;
@@ -280,12 +280,12 @@ public class FVSActiveEntryPersistenceImpl
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByUuid_First(
 			String uuid, OrderByComparator<FVSActiveEntry> orderByComparator)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = fetchByUuid_First(
 			uuid, orderByComparator);
@@ -303,7 +303,7 @@ public class FVSActiveEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchActiveEntryException(sb.toString());
+		throw new NoSuchFVSActiveEntryException(sb.toString());
 	}
 
 	/**
@@ -332,12 +332,12 @@ public class FVSActiveEntryPersistenceImpl
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByUuid_Last(
 			String uuid, OrderByComparator<FVSActiveEntry> orderByComparator)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = fetchByUuid_Last(
 			uuid, orderByComparator);
@@ -355,7 +355,7 @@ public class FVSActiveEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchActiveEntryException(sb.toString());
+		throw new NoSuchFVSActiveEntryException(sb.toString());
 	}
 
 	/**
@@ -392,13 +392,13 @@ public class FVSActiveEntryPersistenceImpl
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	@Override
 	public FVSActiveEntry[] findByUuid_PrevAndNext(
 			long fvsActiveEntryId, String uuid,
 			OrderByComparator<FVSActiveEntry> orderByComparator)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -829,13 +829,13 @@ public class FVSActiveEntryPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByUuid_C_First(
 			String uuid, long companyId,
 			OrderByComparator<FVSActiveEntry> orderByComparator)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = fetchByUuid_C_First(
 			uuid, companyId, orderByComparator);
@@ -856,7 +856,7 @@ public class FVSActiveEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchActiveEntryException(sb.toString());
+		throw new NoSuchFVSActiveEntryException(sb.toString());
 	}
 
 	/**
@@ -889,13 +889,13 @@ public class FVSActiveEntryPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByUuid_C_Last(
 			String uuid, long companyId,
 			OrderByComparator<FVSActiveEntry> orderByComparator)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = fetchByUuid_C_Last(
 			uuid, companyId, orderByComparator);
@@ -916,7 +916,7 @@ public class FVSActiveEntryPersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchActiveEntryException(sb.toString());
+		throw new NoSuchFVSActiveEntryException(sb.toString());
 	}
 
 	/**
@@ -956,13 +956,13 @@ public class FVSActiveEntryPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	@Override
 	public FVSActiveEntry[] findByUuid_C_PrevAndNext(
 			long fvsActiveEntryId, String uuid, long companyId,
 			OrderByComparator<FVSActiveEntry> orderByComparator)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -1217,20 +1217,20 @@ public class FVSActiveEntryPersistenceImpl
 	private FinderPath _finderPathCountByU_CDSDI_P_P;
 
 	/**
-	 * Returns the fvs active entry where userId = &#63; and clayDataSetDisplayId = &#63; and plid = &#63; and portletId = &#63; or throws a <code>NoSuchActiveEntryException</code> if it could not be found.
+	 * Returns the fvs active entry where userId = &#63; and clayDataSetDisplayId = &#63; and plid = &#63; and portletId = &#63; or throws a <code>NoSuchFVSActiveEntryException</code> if it could not be found.
 	 *
 	 * @param userId the user ID
 	 * @param clayDataSetDisplayId the clay data set display ID
 	 * @param plid the plid
 	 * @param portletId the portlet ID
 	 * @return the matching fvs active entry
-	 * @throws NoSuchActiveEntryException if a matching fvs active entry could not be found
+	 * @throws NoSuchFVSActiveEntryException if a matching fvs active entry could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByU_CDSDI_P_P(
 			long userId, String clayDataSetDisplayId, long plid,
 			String portletId)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = fetchByU_CDSDI_P_P(
 			userId, clayDataSetDisplayId, plid, portletId);
@@ -1258,7 +1258,7 @@ public class FVSActiveEntryPersistenceImpl
 				_log.debug(sb.toString());
 			}
 
-			throw new NoSuchActiveEntryException(sb.toString());
+			throw new NoSuchFVSActiveEntryException(sb.toString());
 		}
 
 		return fvsActiveEntry;
@@ -1427,7 +1427,7 @@ public class FVSActiveEntryPersistenceImpl
 	public FVSActiveEntry removeByU_CDSDI_P_P(
 			long userId, String clayDataSetDisplayId, long plid,
 			String portletId)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = findByU_CDSDI_P_P(
 			userId, clayDataSetDisplayId, plid, portletId);
@@ -1696,11 +1696,11 @@ public class FVSActiveEntryPersistenceImpl
 	 *
 	 * @param fvsActiveEntryId the primary key of the fvs active entry
 	 * @return the fvs active entry that was removed
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	@Override
 	public FVSActiveEntry remove(long fvsActiveEntryId)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		return remove((Serializable)fvsActiveEntryId);
 	}
@@ -1710,11 +1710,11 @@ public class FVSActiveEntryPersistenceImpl
 	 *
 	 * @param primaryKey the primary key of the fvs active entry
 	 * @return the fvs active entry that was removed
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	@Override
 	public FVSActiveEntry remove(Serializable primaryKey)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		Session session = null;
 
@@ -1729,13 +1729,13 @@ public class FVSActiveEntryPersistenceImpl
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchActiveEntryException(
+				throw new NoSuchFVSActiveEntryException(
 					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(fvsActiveEntry);
 		}
-		catch (NoSuchActiveEntryException noSuchEntityException) {
+		catch (NoSuchFVSActiveEntryException noSuchEntityException) {
 			throw noSuchEntityException;
 		}
 		catch (Exception exception) {
@@ -1870,11 +1870,11 @@ public class FVSActiveEntryPersistenceImpl
 	 *
 	 * @param primaryKey the primary key of the fvs active entry
 	 * @return the fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		FVSActiveEntry fvsActiveEntry = fetchByPrimaryKey(primaryKey);
 
@@ -1883,7 +1883,7 @@ public class FVSActiveEntryPersistenceImpl
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchActiveEntryException(
+			throw new NoSuchFVSActiveEntryException(
 				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
@@ -1891,15 +1891,15 @@ public class FVSActiveEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the fvs active entry with the primary key or throws a <code>NoSuchActiveEntryException</code> if it could not be found.
+	 * Returns the fvs active entry with the primary key or throws a <code>NoSuchFVSActiveEntryException</code> if it could not be found.
 	 *
 	 * @param fvsActiveEntryId the primary key of the fvs active entry
 	 * @return the fvs active entry
-	 * @throws NoSuchActiveEntryException if a fvs active entry with the primary key could not be found
+	 * @throws NoSuchFVSActiveEntryException if a fvs active entry with the primary key could not be found
 	 */
 	@Override
 	public FVSActiveEntry findByPrimaryKey(long fvsActiveEntryId)
-		throws NoSuchActiveEntryException {
+		throws NoSuchFVSActiveEntryException {
 
 		return findByPrimaryKey((Serializable)fvsActiveEntryId);
 	}
