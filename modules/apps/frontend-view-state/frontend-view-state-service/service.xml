@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column container-model="true" name="fvsEntryId" primary="true" type="long" />
+		<column container-model="true" method-name="FVSEntryId" name="fvsEntryId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -25,7 +25,7 @@
 
 		<!-- PK fields -->
 
-		<column container-model="true" name="fvsFrontendDataSetId" primary="true" type="long" />
+		<column container-model="true" method-name="FVSFrontendDataSetId" name="fvsFrontendDataSetId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -37,8 +37,8 @@
 
 		<!-- Other fields -->
 
-		<column name="fvsEntryId" type="long" />
-		<column name="fdsName" type="String" />
+		<column method-name="FVSEntryId" name="fvsEntryId" type="long" />
+		<column method-name="FDSName" name="fdsName" type="String" />
 		<column name="name" type="String" />
 		<column name="plid" type="long" />
 		<column name="portletId" type="String" />
