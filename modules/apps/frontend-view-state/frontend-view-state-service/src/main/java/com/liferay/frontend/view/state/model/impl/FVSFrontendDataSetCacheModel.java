@@ -125,7 +125,7 @@ public class FVSFrontendDataSetCacheModel
 			fvsFrontendDataSetImpl.setUuid(uuid);
 		}
 
-		fvsFrontendDataSetImpl.setFvsFrontendDataSetId(fvsFrontendDataSetId);
+		fvsFrontendDataSetImpl.setFVSFrontendDataSetId(fvsFrontendDataSetId);
 		fvsFrontendDataSetImpl.setCompanyId(companyId);
 		fvsFrontendDataSetImpl.setUserId(userId);
 
@@ -150,13 +150,13 @@ public class FVSFrontendDataSetCacheModel
 			fvsFrontendDataSetImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		fvsFrontendDataSetImpl.setFvsEntryId(fvsEntryId);
+		fvsFrontendDataSetImpl.setFVSEntryId(fvsEntryId);
 
 		if (fdsName == null) {
-			fvsFrontendDataSetImpl.setFdsName("");
+			fvsFrontendDataSetImpl.setFDSName("");
 		}
 		else {
-			fvsFrontendDataSetImpl.setFdsName(fdsName);
+			fvsFrontendDataSetImpl.setFDSName(fdsName);
 		}
 
 		if (name == null) {

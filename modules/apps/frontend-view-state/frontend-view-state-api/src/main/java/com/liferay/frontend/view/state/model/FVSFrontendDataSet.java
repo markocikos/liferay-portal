@@ -45,7 +45,7 @@ public interface FVSFrontendDataSet
 
 				@Override
 				public Long get(FVSFrontendDataSet fvsFrontendDataSet) {
-					return fvsFrontendDataSet.getFvsFrontendDataSetId();
+					return fvsFrontendDataSet.getFVSFrontendDataSetId();
 				}
 
 				@Override

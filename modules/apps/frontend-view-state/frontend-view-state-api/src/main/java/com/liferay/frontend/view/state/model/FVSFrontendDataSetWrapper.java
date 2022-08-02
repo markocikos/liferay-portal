@@ -45,14 +45,14 @@ public class FVSFrontendDataSetWrapper
 
 		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
-		attributes.put("fvsFrontendDataSetId", getFvsFrontendDataSetId());
+		attributes.put("fvsFrontendDataSetId", getFVSFrontendDataSetId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("fvsEntryId", getFvsEntryId());
-		attributes.put("fdsName", getFdsName());
+		attributes.put("fvsEntryId", getFVSEntryId());
+		attributes.put("fdsName", getFDSName());
 		attributes.put("name", getName());
 		attributes.put("plid", getPlid());
 		attributes.put("portletId", getPortletId());
@@ -78,7 +78,7 @@ public class FVSFrontendDataSetWrapper
 			"fvsFrontendDataSetId");
 
 		if (fvsFrontendDataSetId != null) {
-			setFvsFrontendDataSetId(fvsFrontendDataSetId);
+			setFVSFrontendDataSetId(fvsFrontendDataSetId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -114,13 +114,13 @@ public class FVSFrontendDataSetWrapper
 		Long fvsEntryId = (Long)attributes.get("fvsEntryId");
 
 		if (fvsEntryId != null) {
-			setFvsEntryId(fvsEntryId);
+			setFVSEntryId(fvsEntryId);
 		}
 
 		String fdsName = (String)attributes.get("fdsName");
 
 		if (fdsName != null) {
-			setFdsName(fdsName);
+			setFDSName(fdsName);
 		}
 
 		String name = (String)attributes.get("name");
@@ -193,8 +193,8 @@ public class FVSFrontendDataSetWrapper
 	 * @return the fds name of this fvs frontend data set
 	 */
 	@Override
-	public String getFdsName() {
-		return model.getFdsName();
+	public String getFDSName() {
+		return model.getFDSName();
 	}
 
 	/**
@@ -203,8 +203,8 @@ public class FVSFrontendDataSetWrapper
 	 * @return the fvs entry ID of this fvs frontend data set
 	 */
 	@Override
-	public long getFvsEntryId() {
-		return model.getFvsEntryId();
+	public long getFVSEntryId() {
+		return model.getFVSEntryId();
 	}
 
 	/**
@@ -213,8 +213,8 @@ public class FVSFrontendDataSetWrapper
 	 * @return the fvs frontend data set ID of this fvs frontend data set
 	 */
 	@Override
-	public long getFvsFrontendDataSetId() {
-		return model.getFvsFrontendDataSetId();
+	public long getFVSFrontendDataSetId() {
+		return model.getFVSFrontendDataSetId();
 	}
 
 	/**
@@ -368,8 +368,8 @@ public class FVSFrontendDataSetWrapper
 	 * @param fdsName the fds name of this fvs frontend data set
 	 */
 	@Override
-	public void setFdsName(String fdsName) {
-		model.setFdsName(fdsName);
+	public void setFDSName(String fdsName) {
+		model.setFDSName(fdsName);
 	}
 
 	/**
@@ -378,8 +378,8 @@ public class FVSFrontendDataSetWrapper
 	 * @param fvsEntryId the fvs entry ID of this fvs frontend data set
 	 */
 	@Override
-	public void setFvsEntryId(long fvsEntryId) {
-		model.setFvsEntryId(fvsEntryId);
+	public void setFVSEntryId(long fvsEntryId) {
+		model.setFVSEntryId(fvsEntryId);
 	}
 
 	/**
@@ -388,8 +388,8 @@ public class FVSFrontendDataSetWrapper
 	 * @param fvsFrontendDataSetId the fvs frontend data set ID of this fvs frontend data set
 	 */
 	@Override
-	public void setFvsFrontendDataSetId(long fvsFrontendDataSetId) {
-		model.setFvsFrontendDataSetId(fvsFrontendDataSetId);
+	public void setFVSFrontendDataSetId(long fvsFrontendDataSetId) {
+		model.setFVSFrontendDataSetId(fvsFrontendDataSetId);
 	}
 
 	/**

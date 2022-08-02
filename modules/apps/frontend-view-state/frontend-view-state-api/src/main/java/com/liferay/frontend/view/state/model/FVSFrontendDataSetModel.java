@@ -99,14 +99,14 @@ public interface FVSFrontendDataSetModel
 	 *
 	 * @return the fvs frontend data set ID of this fvs frontend data set
 	 */
-	public long getFvsFrontendDataSetId();
+	public long getFVSFrontendDataSetId();
 
 	/**
 	 * Sets the fvs frontend data set ID of this fvs frontend data set.
 	 *
 	 * @param fvsFrontendDataSetId the fvs frontend data set ID of this fvs frontend data set
 	 */
-	public void setFvsFrontendDataSetId(long fvsFrontendDataSetId);
+	public void setFVSFrontendDataSetId(long fvsFrontendDataSetId);
 
 	/**
 	 * Returns the company ID of this fvs frontend data set.
@@ -210,14 +210,14 @@ public interface FVSFrontendDataSetModel
 	 *
 	 * @return the fvs entry ID of this fvs frontend data set
 	 */
-	public long getFvsEntryId();
+	public long getFVSEntryId();
 
 	/**
 	 * Sets the fvs entry ID of this fvs frontend data set.
 	 *
 	 * @param fvsEntryId the fvs entry ID of this fvs frontend data set
 	 */
-	public void setFvsEntryId(long fvsEntryId);
+	public void setFVSEntryId(long fvsEntryId);
 
 	/**
 	 * Returns the fds name of this fvs frontend data set.
@@ -225,14 +225,14 @@ public interface FVSFrontendDataSetModel
 	 * @return the fds name of this fvs frontend data set
 	 */
 	@AutoEscape
-	public String getFdsName();
+	public String getFDSName();
 
 	/**
 	 * Sets the fds name of this fvs frontend data set.
 	 *
 	 * @param fdsName the fds name of this fvs frontend data set
 	 */
-	public void setFdsName(String fdsName);
+	public void setFDSName(String fdsName);
 
 	/**
 	 * Returns the name of this fvs frontend data set.

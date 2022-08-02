@@ -1348,7 +1348,7 @@ public class FVSFrontendDataSetPersistenceImpl
 			if ((list != null) && !list.isEmpty()) {
 				for (FVSFrontendDataSet fvsFrontendDataSet : list) {
 					if ((userId != fvsFrontendDataSet.getUserId()) ||
-						!fdsName.equals(fvsFrontendDataSet.getFdsName()) ||
+						!fdsName.equals(fvsFrontendDataSet.getFDSName()) ||
 						(plid != fvsFrontendDataSet.getPlid()) ||
 						!portletId.equals(fvsFrontendDataSet.getPortletId())) {
 
@@ -1375,13 +1375,13 @@ public class FVSFrontendDataSetPersistenceImpl
 
 			sb.append(_FINDER_COLUMN_U_F_P_P_USERID_2);
 
-			boolean bindFdsName = false;
+			boolean bindFDSName = false;
 
 			if (fdsName.isEmpty()) {
 				sb.append(_FINDER_COLUMN_U_F_P_P_FDSNAME_3);
 			}
 			else {
-				bindFdsName = true;
+				bindFDSName = true;
 
 				sb.append(_FINDER_COLUMN_U_F_P_P_FDSNAME_2);
 			}
@@ -1420,7 +1420,7 @@ public class FVSFrontendDataSetPersistenceImpl
 
 				queryPos.add(userId);
 
-				if (bindFdsName) {
+				if (bindFDSName) {
 					queryPos.add(fdsName);
 				}
 
@@ -1670,13 +1670,13 @@ public class FVSFrontendDataSetPersistenceImpl
 
 		sb.append(_FINDER_COLUMN_U_F_P_P_USERID_2);
 
-		boolean bindFdsName = false;
+		boolean bindFDSName = false;
 
 		if (fdsName.isEmpty()) {
 			sb.append(_FINDER_COLUMN_U_F_P_P_FDSNAME_3);
 		}
 		else {
-			bindFdsName = true;
+			bindFDSName = true;
 
 			sb.append(_FINDER_COLUMN_U_F_P_P_FDSNAME_2);
 		}
@@ -1765,7 +1765,7 @@ public class FVSFrontendDataSetPersistenceImpl
 
 		queryPos.add(userId);
 
-		if (bindFdsName) {
+		if (bindFDSName) {
 			queryPos.add(fdsName);
 		}
 
@@ -1844,13 +1844,13 @@ public class FVSFrontendDataSetPersistenceImpl
 
 			sb.append(_FINDER_COLUMN_U_F_P_P_USERID_2);
 
-			boolean bindFdsName = false;
+			boolean bindFDSName = false;
 
 			if (fdsName.isEmpty()) {
 				sb.append(_FINDER_COLUMN_U_F_P_P_FDSNAME_3);
 			}
 			else {
-				bindFdsName = true;
+				bindFDSName = true;
 
 				sb.append(_FINDER_COLUMN_U_F_P_P_FDSNAME_2);
 			}
@@ -1881,7 +1881,7 @@ public class FVSFrontendDataSetPersistenceImpl
 
 				queryPos.add(userId);
 
-				if (bindFdsName) {
+				if (bindFDSName) {
 					queryPos.add(fdsName);
 				}
 

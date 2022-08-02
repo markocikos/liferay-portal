@@ -184,7 +184,7 @@ public class FVSFrontendDataSetModelImpl
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setFvsFrontendDataSetId(primaryKey);
+		setFVSFrontendDataSetId(primaryKey);
 	}
 
 	@Override
@@ -286,11 +286,11 @@ public class FVSFrontendDataSetModelImpl
 				FVSFrontendDataSet::setUuid);
 		attributeGetterFunctions.put(
 			"fvsFrontendDataSetId",
-			FVSFrontendDataSet::getFvsFrontendDataSetId);
+			FVSFrontendDataSet::getFVSFrontendDataSetId);
 		attributeSetterBiConsumers.put(
 			"fvsFrontendDataSetId",
 			(BiConsumer<FVSFrontendDataSet, Long>)
-				FVSFrontendDataSet::setFvsFrontendDataSetId);
+				FVSFrontendDataSet::setFVSFrontendDataSetId);
 		attributeGetterFunctions.put(
 			"companyId", FVSFrontendDataSet::getCompanyId);
 		attributeSetterBiConsumers.put(
@@ -321,16 +321,16 @@ public class FVSFrontendDataSetModelImpl
 			(BiConsumer<FVSFrontendDataSet, Date>)
 				FVSFrontendDataSet::setModifiedDate);
 		attributeGetterFunctions.put(
-			"fvsEntryId", FVSFrontendDataSet::getFvsEntryId);
+			"fvsEntryId", FVSFrontendDataSet::getFVSEntryId);
 		attributeSetterBiConsumers.put(
 			"fvsEntryId",
 			(BiConsumer<FVSFrontendDataSet, Long>)
-				FVSFrontendDataSet::setFvsEntryId);
-		attributeGetterFunctions.put("fdsName", FVSFrontendDataSet::getFdsName);
+				FVSFrontendDataSet::setFVSEntryId);
+		attributeGetterFunctions.put("fdsName", FVSFrontendDataSet::getFDSName);
 		attributeSetterBiConsumers.put(
 			"fdsName",
 			(BiConsumer<FVSFrontendDataSet, String>)
-				FVSFrontendDataSet::setFdsName);
+				FVSFrontendDataSet::setFDSName);
 		attributeGetterFunctions.put("name", FVSFrontendDataSet::getName);
 		attributeSetterBiConsumers.put(
 			"name",
@@ -396,12 +396,12 @@ public class FVSFrontendDataSetModelImpl
 	}
 
 	@Override
-	public long getFvsFrontendDataSetId() {
+	public long getFVSFrontendDataSetId() {
 		return _fvsFrontendDataSetId;
 	}
 
 	@Override
-	public void setFvsFrontendDataSetId(long fvsFrontendDataSetId) {
+	public void setFVSFrontendDataSetId(long fvsFrontendDataSetId) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -526,12 +526,12 @@ public class FVSFrontendDataSetModelImpl
 	}
 
 	@Override
-	public long getFvsEntryId() {
+	public long getFVSEntryId() {
 		return _fvsEntryId;
 	}
 
 	@Override
-	public void setFvsEntryId(long fvsEntryId) {
+	public void setFVSEntryId(long fvsEntryId) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -540,7 +540,7 @@ public class FVSFrontendDataSetModelImpl
 	}
 
 	@Override
-	public String getFdsName() {
+	public String getFDSName() {
 		if (_fdsName == null) {
 			return "";
 		}
@@ -550,7 +550,7 @@ public class FVSFrontendDataSetModelImpl
 	}
 
 	@Override
-	public void setFdsName(String fdsName) {
+	public void setFDSName(String fdsName) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -563,7 +563,7 @@ public class FVSFrontendDataSetModelImpl
 	 *             #getColumnOriginalValue(String)}
 	 */
 	@Deprecated
-	public String getOriginalFdsName() {
+	public String getOriginalFDSName() {
 		return getColumnOriginalValue("fdsName");
 	}
 
@@ -639,7 +639,7 @@ public class FVSFrontendDataSetModelImpl
 
 	@Override
 	public long getContainerModelId() {
-		return getFvsFrontendDataSetId();
+		return getFVSFrontendDataSetId();
 	}
 
 	@Override
@@ -727,15 +727,15 @@ public class FVSFrontendDataSetModelImpl
 
 		fvsFrontendDataSetImpl.setMvccVersion(getMvccVersion());
 		fvsFrontendDataSetImpl.setUuid(getUuid());
-		fvsFrontendDataSetImpl.setFvsFrontendDataSetId(
-			getFvsFrontendDataSetId());
+		fvsFrontendDataSetImpl.setFVSFrontendDataSetId(
+			getFVSFrontendDataSetId());
 		fvsFrontendDataSetImpl.setCompanyId(getCompanyId());
 		fvsFrontendDataSetImpl.setUserId(getUserId());
 		fvsFrontendDataSetImpl.setUserName(getUserName());
 		fvsFrontendDataSetImpl.setCreateDate(getCreateDate());
 		fvsFrontendDataSetImpl.setModifiedDate(getModifiedDate());
-		fvsFrontendDataSetImpl.setFvsEntryId(getFvsEntryId());
-		fvsFrontendDataSetImpl.setFdsName(getFdsName());
+		fvsFrontendDataSetImpl.setFVSEntryId(getFVSEntryId());
+		fvsFrontendDataSetImpl.setFDSName(getFDSName());
 		fvsFrontendDataSetImpl.setName(getName());
 		fvsFrontendDataSetImpl.setPlid(getPlid());
 		fvsFrontendDataSetImpl.setPortletId(getPortletId());
@@ -754,7 +754,7 @@ public class FVSFrontendDataSetModelImpl
 			this.<Long>getColumnOriginalValue("mvccVersion"));
 		fvsFrontendDataSetImpl.setUuid(
 			this.<String>getColumnOriginalValue("uuid_"));
-		fvsFrontendDataSetImpl.setFvsFrontendDataSetId(
+		fvsFrontendDataSetImpl.setFVSFrontendDataSetId(
 			this.<Long>getColumnOriginalValue("fvsFrontendDataSetId"));
 		fvsFrontendDataSetImpl.setCompanyId(
 			this.<Long>getColumnOriginalValue("companyId"));
@@ -766,9 +766,9 @@ public class FVSFrontendDataSetModelImpl
 			this.<Date>getColumnOriginalValue("createDate"));
 		fvsFrontendDataSetImpl.setModifiedDate(
 			this.<Date>getColumnOriginalValue("modifiedDate"));
-		fvsFrontendDataSetImpl.setFvsEntryId(
+		fvsFrontendDataSetImpl.setFVSEntryId(
 			this.<Long>getColumnOriginalValue("fvsEntryId"));
-		fvsFrontendDataSetImpl.setFdsName(
+		fvsFrontendDataSetImpl.setFDSName(
 			this.<String>getColumnOriginalValue("fdsName"));
 		fvsFrontendDataSetImpl.setName(
 			this.<String>getColumnOriginalValue("name"));
@@ -865,7 +865,7 @@ public class FVSFrontendDataSetModelImpl
 		}
 
 		fvsFrontendDataSetCacheModel.fvsFrontendDataSetId =
-			getFvsFrontendDataSetId();
+			getFVSFrontendDataSetId();
 
 		fvsFrontendDataSetCacheModel.companyId = getCompanyId();
 
@@ -897,9 +897,9 @@ public class FVSFrontendDataSetModelImpl
 			fvsFrontendDataSetCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		fvsFrontendDataSetCacheModel.fvsEntryId = getFvsEntryId();
+		fvsFrontendDataSetCacheModel.fvsEntryId = getFVSEntryId();
 
-		fvsFrontendDataSetCacheModel.fdsName = getFdsName();
+		fvsFrontendDataSetCacheModel.fdsName = getFDSName();
 
 		String fdsName = fvsFrontendDataSetCacheModel.fdsName;
 

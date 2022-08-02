@@ -138,9 +138,9 @@ public class FVSFrontendDataSetPersistenceTest {
 
 		newFVSFrontendDataSet.setModifiedDate(RandomTestUtil.nextDate());
 
-		newFVSFrontendDataSet.setFvsEntryId(RandomTestUtil.nextLong());
+		newFVSFrontendDataSet.setFVSEntryId(RandomTestUtil.nextLong());
 
-		newFVSFrontendDataSet.setFdsName(RandomTestUtil.randomString());
+		newFVSFrontendDataSet.setFDSName(RandomTestUtil.randomString());
 
 		newFVSFrontendDataSet.setName(RandomTestUtil.randomString());
 
@@ -161,8 +161,8 @@ public class FVSFrontendDataSetPersistenceTest {
 			existingFVSFrontendDataSet.getUuid(),
 			newFVSFrontendDataSet.getUuid());
 		Assert.assertEquals(
-			existingFVSFrontendDataSet.getFvsFrontendDataSetId(),
-			newFVSFrontendDataSet.getFvsFrontendDataSetId());
+			existingFVSFrontendDataSet.getFVSFrontendDataSetId(),
+			newFVSFrontendDataSet.getFVSFrontendDataSetId());
 		Assert.assertEquals(
 			existingFVSFrontendDataSet.getCompanyId(),
 			newFVSFrontendDataSet.getCompanyId());
@@ -180,11 +180,11 @@ public class FVSFrontendDataSetPersistenceTest {
 				existingFVSFrontendDataSet.getModifiedDate()),
 			Time.getShortTimestamp(newFVSFrontendDataSet.getModifiedDate()));
 		Assert.assertEquals(
-			existingFVSFrontendDataSet.getFvsEntryId(),
-			newFVSFrontendDataSet.getFvsEntryId());
+			existingFVSFrontendDataSet.getFVSEntryId(),
+			newFVSFrontendDataSet.getFVSEntryId());
 		Assert.assertEquals(
-			existingFVSFrontendDataSet.getFdsName(),
-			newFVSFrontendDataSet.getFdsName());
+			existingFVSFrontendDataSet.getFDSName(),
+			newFVSFrontendDataSet.getFDSName());
 		Assert.assertEquals(
 			existingFVSFrontendDataSet.getName(),
 			newFVSFrontendDataSet.getName());
@@ -407,7 +407,7 @@ public class FVSFrontendDataSetPersistenceTest {
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.eq(
 				"fvsFrontendDataSetId",
-				newFVSFrontendDataSet.getFvsFrontendDataSetId()));
+				newFVSFrontendDataSet.getFVSFrontendDataSetId()));
 
 		List<FVSFrontendDataSet> result = _persistence.findWithDynamicQuery(
 			dynamicQuery);
@@ -444,22 +444,22 @@ public class FVSFrontendDataSetPersistenceTest {
 		dynamicQuery.setProjection(
 			ProjectionFactoryUtil.property("fvsFrontendDataSetId"));
 
-		Object newFvsFrontendDataSetId =
-			newFVSFrontendDataSet.getFvsFrontendDataSetId();
+		Object newFVSFrontendDataSetId =
+			newFVSFrontendDataSet.getFVSFrontendDataSetId();
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.in(
 				"fvsFrontendDataSetId",
-				new Object[] {newFvsFrontendDataSetId}));
+				new Object[] {newFVSFrontendDataSetId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingFvsFrontendDataSetId = result.get(0);
+		Object existingFVSFrontendDataSetId = result.get(0);
 
 		Assert.assertEquals(
-			existingFvsFrontendDataSetId, newFvsFrontendDataSetId);
+			existingFVSFrontendDataSetId, newFVSFrontendDataSetId);
 	}
 
 	@Test
@@ -499,9 +499,9 @@ public class FVSFrontendDataSetPersistenceTest {
 
 		fvsFrontendDataSet.setModifiedDate(RandomTestUtil.nextDate());
 
-		fvsFrontendDataSet.setFvsEntryId(RandomTestUtil.nextLong());
+		fvsFrontendDataSet.setFVSEntryId(RandomTestUtil.nextLong());
 
-		fvsFrontendDataSet.setFdsName(RandomTestUtil.randomString());
+		fvsFrontendDataSet.setFDSName(RandomTestUtil.randomString());
 
 		fvsFrontendDataSet.setName(RandomTestUtil.randomString());
 

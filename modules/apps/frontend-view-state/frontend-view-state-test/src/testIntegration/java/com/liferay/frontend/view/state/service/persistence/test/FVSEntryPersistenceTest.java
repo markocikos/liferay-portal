@@ -148,7 +148,7 @@ public class FVSEntryPersistenceTest {
 			existingFVSEntry.getMvccVersion(), newFVSEntry.getMvccVersion());
 		Assert.assertEquals(existingFVSEntry.getUuid(), newFVSEntry.getUuid());
 		Assert.assertEquals(
-			existingFVSEntry.getFvsEntryId(), newFVSEntry.getFvsEntryId());
+			existingFVSEntry.getFVSEntryId(), newFVSEntry.getFVSEntryId());
 		Assert.assertEquals(
 			existingFVSEntry.getCompanyId(), newFVSEntry.getCompanyId());
 		Assert.assertEquals(
@@ -353,7 +353,7 @@ public class FVSEntryPersistenceTest {
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.eq(
-				"fvsEntryId", newFVSEntry.getFvsEntryId()));
+				"fvsEntryId", newFVSEntry.getFVSEntryId()));
 
 		List<FVSEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -388,19 +388,19 @@ public class FVSEntryPersistenceTest {
 		dynamicQuery.setProjection(
 			ProjectionFactoryUtil.property("fvsEntryId"));
 
-		Object newFvsEntryId = newFVSEntry.getFvsEntryId();
+		Object newFVSEntryId = newFVSEntry.getFVSEntryId();
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.in(
-				"fvsEntryId", new Object[] {newFvsEntryId}));
+				"fvsEntryId", new Object[] {newFVSEntryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingFvsEntryId = result.get(0);
+		Object existingFVSEntryId = result.get(0);
 
-		Assert.assertEquals(existingFvsEntryId, newFvsEntryId);
+		Assert.assertEquals(existingFVSEntryId, newFVSEntryId);
 	}
 
 	@Test
