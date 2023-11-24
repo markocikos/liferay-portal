@@ -38,6 +38,7 @@ const ClassicEditor = forwardRef(
 					contents={contents}
 					name={name}
 					onBeforeLoad={(CKEDITOR) => {
+						CKEDITOR.config.removePlugins = 'scayt,wsc';
 						CKEDITOR.disableAutoInline = true;
 						CKEDITOR.dtd.$removeEmpty.i = 0;
 						CKEDITOR.dtd.$removeEmpty.span = 0;
@@ -46,6 +47,20 @@ const ClassicEditor = forwardRef(
 							return CKEDITOR.dialog._.currentZIndex
 								? CKEDITOR.dialog._.currentZIndex + 10
 								: Liferay.zIndex.WINDOW + 10;
+						};
+
+						WEBSPELLCHECKER_CONFIG = {
+							autoSearch: true,
+							autoDestroy: true,
+							autocorrect: true,
+							autocomplete: true,
+							enforceAI: true,
+							serviceId: 'AyeCASOdoj0q70R',
+							serviceProtocol: 'https',
+							servicePort: '443',
+							serviceHost: 'svc.webspellchecker.net',
+							servicePath: 'api',
+							theme: 'gray',
 						};
 					}}
 					onDrop={(event) => {
@@ -72,6 +87,12 @@ const ClassicEditor = forwardRef(
 						}
 					}}
 					onInstanceReady={({editor}) => {
+						WEBSPELLCHECKER.init({
+							container: editor.window.getFrame()
+								? editor.window.getFrame().$
+								: editor.element.$,
+						});
+
 						editor.setData(contents, {
 							callback: () => {
 								editor.resetUndo();
