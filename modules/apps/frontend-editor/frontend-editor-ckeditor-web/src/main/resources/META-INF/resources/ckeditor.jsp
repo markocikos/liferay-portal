@@ -120,10 +120,27 @@ if (inlineEdit && Validator.isNotNull(inlineEditSaveURL)) {
 	};
 
 	CKEDITOR.disableAutoInline = true;
+	CKEDITOR.config.removePlugins = 'scayt,wsc';
 
 	CKEDITOR.dtd.$removeEmpty.i = 0;
 	CKEDITOR.dtd.$removeEmpty.span = 0;
+
+	WEBSPELLCHECKER_CONFIG = {
+		"autoSearch": true,
+		"autoDestroy": true,
+		"autocorrect": true,
+		"autocomplete": true,
+		"enforceAI": true,
+		"serviceId": "nY1Guce9SK1Ug6O",
+		"serviceProtocol": "https",
+		"servicePort": "443",
+		"serviceHost": "svc.webspellchecker.net",
+		"servicePath": "api",
+		"theme": "gray"
+	}
 </script>
+
+<script src="https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js"></script>
 
 <%
 name = HtmlUtil.escapeJS(name);
@@ -542,7 +559,7 @@ name = HtmlUtil.escapeJS(name);
 
 		var instanceReady = false;
 
-		ckEditor.on('instanceReady', () => {
+		ckEditor.on('instanceReady', (event) => {
 			<c:choose>
 				<c:when test="<%= useCustomDataProcessor %>">
 					instanceReady = true;
@@ -631,6 +648,12 @@ name = HtmlUtil.escapeJS(name);
 					)
 				);
 			</c:if>
+
+			var editor = event.editor;
+
+			WEBSPELLCHECKER.init({
+				container: editor.window.getFrame() ? editor.window.getFrame().$ : editor.element.$
+			})
 		});
 
 		ckEditor.on('dataReady', (event) => {

@@ -26,6 +26,8 @@ if (editorData != null) {
 }
 %>
 
+<script src="https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js"></script>
+
 <div>
 	<react:component
 		module="editor/ClassicEditor"
