@@ -16,6 +16,7 @@ import com.liferay.object.constants.ObjectRelationshipConstants;
 import com.liferay.object.field.util.ObjectFieldUtil;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectField;
+import com.liferay.object.model.ObjectRelationship;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
@@ -549,9 +550,6 @@ public class FDSViewsPortlet extends MVCPortlet {
 						_language.get(locale, "rest-schema"), "restSchema",
 						true)));
 
-		_objectDefinitionLocalService.publishSystemObjectDefinition(
-			userId, fdsEntryObjectDefinition.getObjectDefinitionId());
-
 		return fdsEntryObjectDefinition;
 	}
 
@@ -560,53 +558,7 @@ public class FDSViewsPortlet extends MVCPortlet {
 			long userId)
 		throws Exception {
 
-		ObjectDefinition fdsFieldObjectDefinition =
-			_objectDefinitionLocalService.addSystemObjectDefinition(
-				"FDSField", userId, 0, "FDSField", null, false, true,
-				LocalizedMapUtil.getLocalizedMap("FDS Field"), true, "FDSField",
-				null, null, null, null,
-				LocalizedMapUtil.getLocalizedMap("FDS Fields"), false,
-				ObjectDefinitionConstants.SCOPE_COMPANY, null, 1,
-				WorkflowConstants.STATUS_DRAFT,
-				Arrays.asList(
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
-						_language.get(locale, "name"), "name", true),
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
-						_language.get(locale, "type"), "type", true),
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
-						_language.get(locale, "renderer"), "renderer", false),
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
-						_language.get(locale, "rendererType"), "rendererType",
-						false),
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_BOOLEAN,
-						ObjectFieldConstants.DB_TYPE_BOOLEAN, true, false, null,
-						_language.get(locale, "sortable"), "sortable", false)));
 
-		_enableLocalization(fdsFieldObjectDefinition);
-
-		_addLocalizedCustomObjectField(
-			_language.get(locale, "column-label"), "label",
-			fdsFieldObjectDefinition, userId);
-
-		_objectDefinitionLocalService.publishSystemObjectDefinition(
-			userId, fdsFieldObjectDefinition.getObjectDefinitionId());
-
-		_objectRelationshipLocalService.addObjectRelationship(
-			null, userId, fdsViewObjectDefinition.getObjectDefinitionId(),
-			fdsFieldObjectDefinition.getObjectDefinitionId(), 0,
-			ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
-			LocalizedMapUtil.getLocalizedMap("FDSView FDSField Relationship"),
-			"fdsViewFDSFieldRelationship", false,
-			ObjectRelationshipConstants.TYPE_ONE_TO_MANY, null);
 	}
 
 	private void _createFDSListSectionObjectDefinition(
@@ -778,16 +730,16 @@ public class FDSViewsPortlet extends MVCPortlet {
 						_language.get(locale, "default-visualization-mode"),
 						"defaultVisualizationMode", false)));
 
-		_objectDefinitionLocalService.publishSystemObjectDefinition(
-			userId, fdsViewObjectDefinition.getObjectDefinitionId());
-
-		_objectRelationshipLocalService.addObjectRelationship(
+		ObjectRelationship relationship = _objectRelationshipLocalService.addObjectRelationship(
 			null, userId, fdsEntryObjectDefinition.getObjectDefinitionId(),
 			fdsViewObjectDefinition.getObjectDefinitionId(), 0,
 			ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
 			LocalizedMapUtil.getLocalizedMap("FDSEntry FDSView Relationship"),
 			"fdsEntryFDSViewRelationship", false,
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY, null);
+
+		_objectDefinitionLocalService.bindObjectDefinitions(
+			new long[] {relationship.getObjectRelationshipId()});
 
 		return fdsViewObjectDefinition;
 	}
@@ -814,8 +766,126 @@ public class FDSViewsPortlet extends MVCPortlet {
 			locale, userId);
 
 		ObjectDefinition fdsViewObjectDefinition =
-			_createFDSViewObjectDefinition(
-				fdsEntryObjectDefinition, locale, userId);
+			_objectDefinitionLocalService.addSystemObjectDefinition(
+				"FDSView", userId, 0, "FDSView", null, false, true,
+				LocalizedMapUtil.getLocalizedMap("FDS View"), true, "FDSView",
+				null, null, null, null,
+				LocalizedMapUtil.getLocalizedMap("FDS Views"), false,
+				ObjectDefinitionConstants.SCOPE_COMPANY, null, 1,
+				WorkflowConstants.STATUS_DRAFT,
+				Arrays.asList(
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "name"), "label", true),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "symbol"), "symbol", false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "description"), "description",
+						false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "list-of-items-per-page"),
+						"listOfItemsPerPage", true),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_INTEGER,
+						ObjectFieldConstants.DB_TYPE_INTEGER, true, false, null,
+						_language.get(locale, "default-items-per-page"),
+						"defaultItemsPerPage", true),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
+						ObjectFieldConstants.DB_TYPE_CLOB, true, false, null,
+						_language.get(locale, "creation-actions-order"),
+						"fdsCreationActionsOrder", false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
+						ObjectFieldConstants.DB_TYPE_CLOB, true, false, null,
+						_language.get(locale, "fields-order"), "fdsFieldsOrder",
+						false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
+						ObjectFieldConstants.DB_TYPE_CLOB, true, false, null,
+						_language.get(locale, "filters-order"),
+						"fdsFiltersOrder", false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
+						ObjectFieldConstants.DB_TYPE_CLOB, true, false, null,
+						_language.get(locale, "item-actions-order"),
+						"fdsItemActionsOrder", false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
+						ObjectFieldConstants.DB_TYPE_CLOB, true, false, null,
+						_language.get(locale, "sorts-order"), "fdsSortsOrder",
+						false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "default-visualization-mode"),
+						"defaultVisualizationMode", false)));
+
+		ObjectRelationship relationshipEV = _objectRelationshipLocalService.addObjectRelationship(
+			null, userId, fdsEntryObjectDefinition.getObjectDefinitionId(),
+			fdsViewObjectDefinition.getObjectDefinitionId(), 0,
+			ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
+			LocalizedMapUtil.getLocalizedMap("FDSEntry FDSView Relationship"),
+			"fdsEntryFDSViewRelationship", false,
+			ObjectRelationshipConstants.TYPE_ONE_TO_MANY, null);
+
+		_objectDefinitionLocalService.bindObjectDefinitions(
+			new long[] {relationshipEV.getObjectRelationshipId()});
+
+		ObjectDefinition fdsFieldObjectDefinition =
+			_objectDefinitionLocalService.addSystemObjectDefinition(
+				"FDSField", userId, 0, "FDSField", null, false, true,
+				LocalizedMapUtil.getLocalizedMap("FDS Field"), true, "FDSField",
+				null, null, null, null,
+				LocalizedMapUtil.getLocalizedMap("FDS Fields"), false,
+				ObjectDefinitionConstants.SCOPE_COMPANY, null, 1,
+				WorkflowConstants.STATUS_DRAFT,
+				Arrays.asList(
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "name"), "name", true),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "type"), "type", true),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "renderer"), "renderer", false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING, true, false, null,
+						_language.get(locale, "rendererType"), "rendererType",
+						false),
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_BOOLEAN,
+						ObjectFieldConstants.DB_TYPE_BOOLEAN, true, false, null,
+						_language.get(locale, "sortable"), "sortable", false)));
+
+		_enableLocalization(fdsFieldObjectDefinition);
+
+		_addLocalizedCustomObjectField(
+			_language.get(locale, "column-label"), "label",
+			fdsFieldObjectDefinition, userId);
+
+		ObjectRelationship relationshipVF = _objectRelationshipLocalService.addObjectRelationship(
+			null, userId, fdsViewObjectDefinition.getObjectDefinitionId(),
+			fdsFieldObjectDefinition.getObjectDefinitionId(), 0,
+			ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
+			LocalizedMapUtil.getLocalizedMap("FDSView FDSField Relationship"),
+			"fdsViewFDSFieldRelationship", false,
+			ObjectRelationshipConstants.TYPE_ONE_TO_MANY, null);
+
+		_objectDefinitionLocalService.bindObjectDefinitions(
+			new long[] {relationshipVF.getObjectRelationshipId(), relationshipEV.getObjectRelationshipId()});
 
 		_createFDSActionObjectDefintion(
 			fdsViewObjectDefinition, locale, userId);
@@ -827,11 +897,18 @@ public class FDSViewsPortlet extends MVCPortlet {
 			fdsViewObjectDefinition, locale, userId);
 		_createFDSDynamicFilterObjectDefintion(
 			fdsViewObjectDefinition, locale, userId);
-		_createFDSFieldObjectDefinition(
-			fdsViewObjectDefinition, locale, userId);
 		_createFDSListSectionObjectDefinition(
 			fdsViewObjectDefinition, locale, userId);
 		_createFDSSortObjectDefinition(fdsViewObjectDefinition, locale, userId);
+
+		_objectDefinitionLocalService.publishSystemObjectDefinition(
+			userId, fdsEntryObjectDefinition.getObjectDefinitionId());
+
+		_objectDefinitionLocalService.publishSystemObjectDefinition(
+			userId, fdsViewObjectDefinition.getObjectDefinitionId());
+
+		_objectDefinitionLocalService.publishSystemObjectDefinition(
+			userId, fdsFieldObjectDefinition.getObjectDefinitionId());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
