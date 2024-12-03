@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-import {Locator, Page, expect, mergeTests} from '@playwright/test';
+import {Locator, expect, mergeTests} from '@playwright/test';
 
 import {dataApiHelpersTest} from '../../../../fixtures/dataApiHelpersTest';
 import {featureFlagsTest} from '../../../../fixtures/featureFlagsTest';
@@ -21,6 +21,7 @@ import {actionsPageTest} from './fixtures/actionsPageTest';
 import {customDataSetsPageTest} from './fixtures/customDataSetsPageTest';
 import {filtersPageTest} from './fixtures/filtersPageTest';
 import {sortingPageTest} from './fixtures/sortingPageTest';
+import {CustomDataSetsPage} from './pages/CustomDataSetsPage';
 
 export const test = mergeTests(
 	actionsPageTest,
@@ -46,12 +47,16 @@ const blogPostsDataSetConfig = {
 	restSchema: 'BlogPosting',
 };
 
-async function openActionsDropdown({page, text}: {page: Page; text: string}) {
-	const table: Locator = page.locator('.data-set-content-wrapper');
-
-	const row = table.locator('.dnd-tbody .dnd-tr').filter({
-		has: page.getByText(text, {exact: true}).first(),
-	});
+async function openActionsDropdown({
+	customDataSetsPage,
+	text,
+}: {
+	customDataSetsPage: CustomDataSetsPage;
+	text: string;
+}) {
+	const row = customDataSetsPage.table.bodyRows
+		.filter({hasText: text})
+		.first();
 
 	const actionsButton = row.locator('.cell-item-actions button');
 
@@ -220,9 +225,7 @@ test('A user with only "View" permission', async ({
 	});
 
 	await test.step('Check that there is no actions dropdown', async () => {
-		const table: Locator = page.locator('.data-set-content-wrapper');
-
-		const row = table.locator('.dnd-tbody .dnd-tr').filter({
+		const row = customDataSetsPage.table.bodyRows.filter({
 			has: page
 				.getByText(blogPostsDataSetConfig.name, {exact: true})
 				.first(),
@@ -327,7 +330,7 @@ test('A user with "Delete" permission', async ({
 
 	await test.step('Open actions dropdown', async () => {
 		await openActionsDropdown({
-			page,
+			customDataSetsPage,
 			text: blogPostsDataSetConfig.name,
 		});
 	});
@@ -409,9 +412,7 @@ test('Check "Edit" permission', async ({
 	});
 
 	await test.step('Check that there is no actions dropdown', async () => {
-		const table: Locator = page.locator('.data-set-content-wrapper');
-
-		const row = table.locator('.dnd-tbody .dnd-tr').filter({
+		const row = customDataSetsPage.table.bodyRows.filter({
 			has: page
 				.getByText(blogPostsDataSetConfig.name, {exact: true})
 				.first(),
@@ -423,11 +424,9 @@ test('Check "Edit" permission', async ({
 	});
 
 	await test.step('Check that the user can not enter to Data Set details pages', async () => {
-		const dataSetRows = page
-			.locator('.data-set-content-wrapper .dnd-tbody .dnd-tr')
-			.filter({
-				hasText: blogPostsDataSetConfig.name,
-			});
+		const dataSetRows = customDataSetsPage.table.bodyRows.filter({
+			hasText: blogPostsDataSetConfig.name,
+		});
 
 		await dataSetRows
 			.first()
@@ -455,7 +454,7 @@ test('Check "Edit" permission', async ({
 		await customDataSetsPage.goto({checkTabVisibility: false});
 
 		await openActionsDropdown({
-			page,
+			customDataSetsPage,
 			text: blogPostsDataSetConfig.name,
 		});
 
@@ -652,13 +651,11 @@ test('A user with "Add Object Entry" permission', async ({
 		await expect(customDataSetsPage.newDataSetButton).toBeVisible();
 
 		await customDataSetsPage.createDataSet(blogPostsDataSetConfig);
-
-		await waitForAlert(page);
 	});
 
 	await test.step('Delete Data Set', async () => {
 		await openActionsDropdown({
-			page,
+			customDataSetsPage,
 			text: blogPostsDataSetConfig.name,
 		});
 
