@@ -947,7 +947,7 @@ const FrontendDataSet = ({
 					)}
 
 					<div
-						className="data-set-wrapper"
+						className={`data-set-wrapper visualization-mode-${activeView.name}`}
 						data-testid={`visualization-mode-${activeView.name}`}
 						ref={wrapperRef}
 					>
