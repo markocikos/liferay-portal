@@ -19,8 +19,7 @@ public class FDSSampleFDSNames {
 	public static final String CUSTOM_INTERNAL_VIEW =
 		FDSSamplePortletKeys.FDS_SAMPLE + "-customInternalView";
 
-	public static final String CUSTOMIZED =
-		FDSSamplePortletKeys.FDS_SAMPLE + "-customized";
+	public static final String CUSTOMIZED = "TEMPORARY, do not merge";
 
 	public static final String EMPTY =
 		FDSSamplePortletKeys.FDS_SAMPLE + "-empty";

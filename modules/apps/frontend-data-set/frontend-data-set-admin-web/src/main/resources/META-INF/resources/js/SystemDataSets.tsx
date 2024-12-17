@@ -4,15 +4,17 @@
  */
 
 import {FrontendDataSet} from '@liferay/frontend-data-set-web';
-import React from 'react';
+import React, {useState} from 'react';
 
 import '../css/DataSets.scss';
 
 import ClayButton from '@clayui/button';
 import ClayModal from '@clayui/modal';
-import {openModal} from 'frontend-js-web';
+import {fetch, openModal} from 'frontend-js-web';
 
 import {API_URL, FDS_DEFAULT_PROPS} from './utils/constants';
+import openDefaultFailureToast from './utils/openDefaultFailureToast';
+import openDefaultSuccessToast from './utils/openDefaultSuccessToast';
 
 interface ISystemDataSet {
 	additionalAPIURLParameters: string;
@@ -28,13 +30,51 @@ interface ISystemDataSet {
 
 const SelectSystemDataSetModalContent = ({
 	closeModal,
+	importSystemDataSetURL,
 	loadData,
+	namespace,
 	systemDataSets,
 }: {
 	closeModal: Function;
+	importSystemDataSetURL: string;
 	loadData: Function;
+	namespace: string;
 	systemDataSets: Array<ISystemDataSet>;
 }) => {
+	const [createButtonDisabled, setCreateButtonDisabled] = useState(false);
+	const [selectedSystemDataSet, setSelectedSystemDataSet] =
+		useState<ISystemDataSet | null>(null);
+
+	const onCreateButtonClick = async () => {
+		if (!selectedSystemDataSet) {
+			return;
+		}
+
+		setCreateButtonDisabled(true);
+
+		const formData = new FormData();
+
+		formData.append(`${namespace}name`, selectedSystemDataSet.name);
+
+		const response = await fetch(importSystemDataSetURL, {
+			body: formData,
+			method: 'POST',
+		});
+
+		if (response.ok) {
+			closeModal();
+
+			openDefaultSuccessToast();
+
+			loadData();
+		}
+		else {
+			openDefaultFailureToast();
+
+			setCreateButtonDisabled(false);
+		}
+	};
+
 	return (
 		<div className="select-system-data-set-modal-content">
 			<ClayModal.Header>
@@ -46,6 +86,13 @@ const SelectSystemDataSetModalContent = ({
 					{...FDS_DEFAULT_PROPS}
 					id="SystemDataSets"
 					items={systemDataSets}
+					onSelect={({
+						selectedItems,
+					}: {
+						selectedItems: Array<ISystemDataSet>;
+					}) => {
+						setSelectedSystemDataSet(selectedItems[0]);
+					}}
 					selectedItemsKey="name"
 					selectionType="single"
 					views={[
@@ -73,7 +120,10 @@ const SelectSystemDataSetModalContent = ({
 							{Liferay.Language.get('cancel')}
 						</ClayButton>
 
-						<ClayButton onClick={() => loadData()}>
+						<ClayButton
+							disabled={createButtonDisabled}
+							onClick={onCreateButtonClick}
+						>
 							{Liferay.Language.get('create')}
 						</ClayButton>
 					</ClayButton.Group>
@@ -84,8 +134,12 @@ const SelectSystemDataSetModalContent = ({
 };
 
 const SystemDataSets = ({
+	importSystemDataSetURL,
+	namespace,
 	systemDataSets,
 }: {
+	importSystemDataSetURL: string;
+	namespace: string;
 	systemDataSets: Array<ISystemDataSet>;
 }) => {
 	const creationMenu = {
@@ -103,7 +157,9 @@ const SystemDataSets = ({
 						}) => (
 							<SelectSystemDataSetModalContent
 								closeModal={closeModal}
+								importSystemDataSetURL={importSystemDataSetURL}
 								loadData={loadData}
+								namespace={namespace}
 								systemDataSets={systemDataSets}
 							/>
 						),
