@@ -449,8 +449,14 @@ const FrontendDataSet = ({
 		);
 	}
 
-	function selectItems(value: any) {
-		if (selectionType === 'single') {
+	function selectItems({
+		trigger,
+		value,
+	}: {
+		trigger: 'checkbox' | 'row';
+		value: any;
+	}) {
+		if (selectionType === 'single' || trigger === 'row') {
 			return setSelectedItemsValue(
 				Array.isArray(value) ? value : [value]
 			);
@@ -705,7 +711,9 @@ const FrontendDataSet = ({
 				onSelectAll={(value: boolean) =>
 					setAllItemsSelectedActive(value)
 				}
-				selectItems={(items: Array<any>) => selectItems(items)}
+				selectItems={(items: Array<any>) =>
+					selectItems({trigger: 'checkbox', value: items})
+				}
 				selectedItems={selectedItems}
 				selectedItemsKey={selectedItemsKey}
 				selectedItemsValue={selectedItemsValue}
@@ -737,7 +745,13 @@ const FrontendDataSet = ({
 						header={header}
 						items={items}
 						itemsActions={itemsActions}
-						onItemSelectionChange={(selectedItem: any) => {
+						onItemSelectionChange={({
+							item: selectedItem,
+							trigger,
+						}: {
+							item: any;
+							trigger: 'checkbox' | 'row';
+						}) => {
 							if (allItemsSelectedActive) {
 								setSelectedItemsValue(
 									items
@@ -752,7 +766,10 @@ const FrontendDataSet = ({
 								setAllItemsSelectedActive(false);
 							}
 							else {
-								selectItems(selectedItem[selectedItemsKey]);
+								selectItems({
+									trigger,
+									value: selectedItem[selectedItemsKey],
+								});
 							}
 						}}
 						style={style}

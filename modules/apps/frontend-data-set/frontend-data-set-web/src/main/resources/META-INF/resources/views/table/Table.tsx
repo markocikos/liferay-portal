@@ -159,6 +159,12 @@ const Row = ({
 		<ClayTableRow
 			className={classNames({'table-active': active})}
 			items={columns}
+			onClick={() => {
+				onItemSelectionChange({
+					item,
+					trigger: 'row',
+				});
+			}}
 		>
 			{(cell) => {
 				const cellColumnName = getCellColumnClassName(cell.fieldName);
@@ -201,7 +207,10 @@ const Row = ({
 									<SelectionComponent
 										checked={active}
 										onChange={() =>
-											onItemSelectionChange(item)
+											onItemSelectionChange({
+												item,
+												trigger: 'checkbox',
+											})
 										}
 										title={Liferay.Language.get(
 											'select-item'
