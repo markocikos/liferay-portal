@@ -6,8 +6,29 @@
 declare module '@ckeditor/ckeditor5-core/dist/index.js' {
 	export * from '@ckeditor/ckeditor5-core';
 }
+declare module '@ckeditor/ckeditor5-email/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-email';
+}
+declare module '@ckeditor/ckeditor5-export-inline-styles/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-export-inline-styles';
+}
 declare module '@ckeditor/ckeditor5-fullscreen/dist/index.js' {
 	export * from '@ckeditor/ckeditor5-fullscreen';
+}
+declare module '@ckeditor/ckeditor5-html-support/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-html-support';
+}
+declare module '@ckeditor/ckeditor5-mention/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-mention';
+}
+declare module '@ckeditor/ckeditor5-merge-fields/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-merge-fields';
+}
+declare module '@ckeditor/ckeditor5-table/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-table';
+}
+declare module '@ckeditor/ckeditor5-template/dist/index.js' {
+	export * from '@ckeditor/ckeditor5-template';
 }
 declare module '@ckeditor/ckeditor5-ui/dist/index.js' {
 	export * from '@ckeditor/ckeditor5-ui';
